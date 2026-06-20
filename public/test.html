@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test React Direct</title>
+    <script type="module">
+        import React from 'http://localhost:5177/@id/__x00__react';
+        import ReactDOM from 'http://localhost:5177/@id/__x00__react-dom/client';
+        
+        const App = () => React.createElement('div', {
+            style: { 
+                minHeight: '100vh', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontFamily: 'Arial'
+            }
+        }, React.createElement('h1', null, '✅ React fonctionne directement !'));
+        
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(App));
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>

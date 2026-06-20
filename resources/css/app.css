@@ -1,0 +1,63 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.jsx';
+@source '../**/*.js';
+
+/* ── Placeholder couleur ────────────────────────────────────── */
+input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+/* ── Neutralisation autofill navigateur ─────────────────────── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 999px #ffffff inset !important;
+    box-shadow: 0 0 0 999px #ffffff inset !important;
+    -webkit-text-fill-color: #3A3F43 !important;
+    caret-color: #3A3F43;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+/* ── Animation blob (Dashboard) ─────────────────────────────── */
+@keyframes blob {
+    0%   { transform: translate(0px, 0px) scale(1); }
+    33%  { transform: translate(30px, -50px) scale(1.1); }
+    66%  { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob {
+    animation: blob 10s infinite;
+}
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* ── Palette Urban (active) ─────────────────────────────────── */
+    --color-snow:      #EEEEEE;   /* fond page, arrière-plans clairs  */
+    --color-slate:     #666C7B;   /* texte secondaire, éléments neutres */
+    --color-dark:      #3A3F43;   /* texte principal, header, éléments forts */
+    --color-ember:     #DC5F00;   /* accent principal, CTA, highlights */
+    --color-ember-dim: #B84E00;   /* accent hover / gradient end */
+
+    /* ── Système (succès / danger) ──────────────────────────────── */
+    --color-mint:      #10B981;   /* succès */
+    --color-ruby:      #EF4444;   /* danger */
+
+    /* ── Héritage dark mode (utilisé par pages pas encore redessinées) ── */
+    --color-night:     #0F0F13;
+    --color-surface:   #1A1A2E;
+    --color-gold:      #F59E0B;
+    --color-gold-dim:  #D97706;
+    --color-fog:       #94A3B8;
+    --color-ink:       #2D2D3F;
+}
