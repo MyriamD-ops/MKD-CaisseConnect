@@ -152,15 +152,16 @@ class SaleController extends Controller
         $paiement  = $sale->moyen_paiement;
         $numero    = $sale->numero_vente ?? $sale->id_vente;
 
-        $message = "🖨 AMI 3D\nAgence de Modélisation et d'Impression\n"
+        $message = "🧾 " . config('business.name') . "\n"
+                 . (config('business.tagline') ? config('business.tagline') . "\n" : "")
                  . "--------------------------------\n"
                  . "Vente #{$numero}\n"
                  . "Total : {$montant}€\n"
                  . "Paiement : {$paiement}\n"
                  . "--------------------------------\n"
-                 . "📸 @nath.ami3d972\n"
-                 . "📞 06 96 80 29 73\n"
-                 . "Merci de votre achat !";
+                 . (config('business.social') ? "📱 " . config('business.social') . "\n" : "")
+                 . (config('business.phone') ? "📞 " . config('business.phone') . "\n" : "")
+                 . config('business.receipt_footer');
 
         // Mode test local
         if (env('VONAGE_API_KEY') === 'test_key') {

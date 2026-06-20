@@ -53,7 +53,7 @@ function FlyerTemplateModal({ onGenerate, onClose }) {
 
 // ─── Page principale ──────────────────────────────────────────────────────────
 export default function Show({ evenement }) {
-    const { auth } = usePage().props;
+    const { auth, business } = usePage().props;
     const [generating, setGenerating]       = useState(false);
     const [showModal, setShowModal]         = useState(false);
     const [flyerError, setFlyerError]       = useState('');
@@ -85,7 +85,7 @@ export default function Show({ evenement }) {
         setFlyerError('');
 
         const template = TEMPLATES.find((t) => t.id === templateId);
-        const html = template.generateHTML(evenement);
+        const html = template.generateHTML(evenement, business);
 
         const container = document.createElement('div');
         container.style.cssText =

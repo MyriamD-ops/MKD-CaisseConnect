@@ -19,8 +19,23 @@ const qrSrc = (ev) => {
     return `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${url}`;
 };
 
+const defaultBusiness = {
+    name: 'Mon Commerce',
+    tagline: '',
+    social: '',
+    phone: '',
+};
+
+const contactLine = (business) => {
+    const parts = [];
+    if (business.social) parts.push(business.social);
+    if (business.phone) parts.push(`📞 ${business.phone}`);
+    return parts.join(' &nbsp;•&nbsp; ');
+};
+
 // ─── Template 1 : Prestige ───────────────────────────────────────────────────
-function generatePrestige(ev) {
+function generatePrestige(ev, business = defaultBusiness) {
+    business = { ...defaultBusiness, ...business };
     const date = dateRange(ev);
     const src  = qrSrc(ev);
     const FOOTER_COLOR = '#0a1f12';
@@ -36,7 +51,7 @@ function generatePrestige(ev) {
             </div>
             <!-- Footer gauche même hauteur que droite -->
             <div style="height:70px;background:${FOOTER_COLOR};flex-shrink:0;display:flex;align-items:center;padding:0 30px;box-sizing:border-box;">
-                <p style="font-size:14px;color:#aad4b8;margin:0;font-family:Arial,sans-serif;">@nath.ami3d972 &nbsp;•&nbsp; 📞 06 96 80 29 73</p>
+                <p style="font-size:14px;color:#aad4b8;margin:0;font-family:Arial,sans-serif;">${contactLine(business)}</p>
             </div>
         </div>
 
@@ -45,14 +60,14 @@ function generatePrestige(ev) {
 
             <!-- Logo tout en haut, collé au bord -->
             <div style="padding-top:20px;flex-shrink:0;">
-                <img src="/images/logo.jpg" style="width:170px;height:170px;object-fit:contain;display:block;" alt="Logo AMI 3D">
+                <img src="/images/logo.jpg" style="width:170px;height:170px;object-fit:contain;display:block;" alt="Logo ${business.name}">
             </div>
 
             <!-- 3 lignes du texte, centrées -->
             <div style="flex-shrink:0;margin-top:10px;text-align:center;">
                 <p style="font-size:20px;color:#888;letter-spacing:6px;text-transform:uppercase;margin:0 0 10px;font-family:Arial,sans-serif;">OFFICIEL</p>
-                <p style="font-size:60px;font-weight:700;color:#3A3F43;letter-spacing:1px;margin:0 0 10px;font-family:Arial,sans-serif;">AMI 3D</p>
-                <p style="font-size:24px;color:#aaa;letter-spacing:2px;margin:0;font-family:Arial,sans-serif;">Modélisation•Impression</p>
+                <p style="font-size:60px;font-weight:700;color:#3A3F43;letter-spacing:1px;margin:0 0 10px;font-family:Arial,sans-serif;">${business.name}</p>
+                <p style="font-size:24px;color:#aaa;letter-spacing:2px;margin:0;font-family:Arial,sans-serif;">${business.tagline}</p>
             </div>
 
             <!-- Event : titre et date, espace augmenté au dessus -->
@@ -84,7 +99,8 @@ function generatePrestige(ev) {
 
 // ─── Template 2 : Alpinia ────────────────────────────────────────────────────
 // Copie de Simple avec bijoux.png
-function generateAlpinia(ev) {
+function generateAlpinia(ev, business = defaultBusiness) {
+    business = { ...defaultBusiness, ...business };
     const date = dateRange(ev);
     const src  = qrSrc(ev);
 
@@ -100,10 +116,10 @@ function generateAlpinia(ev) {
     return `<div style="width:1080px;height:1080px;background:#eeeeee;padding:40px;box-sizing:border-box;font-family:Arial,sans-serif;">
         <div style="width:100%;height:100%;background:#ffffff;border-radius:40px;padding:30px 50px 50px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;">
             <div style="display:flex;align-items:flex-start;gap:24px;flex-shrink:0;">
-                <img src="/images/logo.jpg" style="width:200px;height:200px;object-fit:contain;flex-shrink:0;" alt="Logo AMI 3D">
+                <img src="/images/logo.jpg" style="width:200px;height:200px;object-fit:contain;flex-shrink:0;" alt="Logo ${business.name}">
                 <div style="flex:1;text-align:center;padding-top:8px;">
-                    <p style="font-size:130px;font-weight:900;color:#3A3F43;line-height:0.9;margin:50px 0 20px;font-family:Georgia,serif;">AMI 3D</p>
-                    <p style="font-size:18px;color:#666C7B;letter-spacing:5px;text-transform:uppercase;margin:20px 0 16px;font-family:Arial,sans-serif;">Modélisation &amp; Impression 3D</p>
+                    <p style="font-size:130px;font-weight:900;color:#3A3F43;line-height:0.9;margin:50px 0 20px;font-family:Georgia,serif;">${business.name}</p>
+                    <p style="font-size:18px;color:#666C7B;letter-spacing:5px;text-transform:uppercase;margin:20px 0 16px;font-family:Arial,sans-serif;">${business.tagline}</p>
                     <div style="width:80px;height:4px;background:#DC5F00;margin:0 auto;border-radius:2px;"></div>
                 </div>
             </div>
@@ -119,14 +135,15 @@ function generateAlpinia(ev) {
                 </div>
             </div>
             <div style="margin-top:24px;padding-top:20px;border-top:2px solid #EEEEEE;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <p style="font-size:15px;color:#666C7B;margin:0;text-align:center;">@nath.ami3d972 &nbsp;•&nbsp; 📞 06 96 80 29 73</p>
+                <p style="font-size:15px;color:#666C7B;margin:0;text-align:center;">${contactLine(business)}</p>
             </div>
         </div>
     </div>`;
 }
 
 // ─── Template 3 : Simple ─────────────────────────────────────────────────────
-function generateSimple(ev) {
+function generateSimple(ev, business = defaultBusiness) {
+    business = { ...defaultBusiness, ...business };
     const date = dateRange(ev);
     const src  = qrSrc(ev);
 
@@ -144,10 +161,10 @@ function generateSimple(ev) {
 
             <!-- Header : logo haut gauche + titre/sous-titre centré à droite -->
             <div style="display:flex;align-items:flex-start;gap:24px;flex-shrink:0;">
-                <img src="/images/logo.jpg" style="width:200px;height:200px;object-fit:contain;flex-shrink:0;" alt="Logo AMI 3D">
+                <img src="/images/logo.jpg" style="width:200px;height:200px;object-fit:contain;flex-shrink:0;" alt="Logo ${business.name}">
                 <div style="flex:1;text-align:center;padding-top:8px;">
-                    <p style="font-size:130px;font-weight:900;color:#3A3F43;line-height:0.9;margin:50px 0 56px;font-family:Georgia,serif;">AMI 3D</p>
-                    <p style="font-size:18px;color:#666C7B;letter-spacing:5px;text-transform:uppercase;margin:20px 0 16px;font-family:Arial,sans-serif;">Modélisation &amp; Impression 3D</p>
+                    <p style="font-size:130px;font-weight:900;color:#3A3F43;line-height:0.9;margin:50px 0 56px;font-family:Georgia,serif;">${business.name}</p>
+                    <p style="font-size:18px;color:#666C7B;letter-spacing:5px;text-transform:uppercase;margin:20px 0 16px;font-family:Arial,sans-serif;">${business.tagline}</p>
                     <div style="width:80px;height:4px;background:#DC5F00;margin:0 auto;border-radius:2px;"></div>
                 </div>
             </div>
@@ -169,16 +186,15 @@ function generateSimple(ev) {
 
             <!-- Footer -->
             <div style="margin-top:24px;padding-top:20px;border-top:2px solid #EEEEEE;display:flex;align-items:center;flex-shrink:0;">
-                <p style="font-size:15px;color:#666C7B;margin:0;">@nath.ami3d972 &nbsp;•&nbsp; 📞 06 96 80 29 73</p>
+                <p style="font-size:15px;color:#666C7B;margin:0;">${contactLine(business)}</p>
             </div>
         </div>
     </div>`;
 }
 
 // ─── Template 4 : Géo ────────────────────────────────────────────────────────
-// Fond blanc, bande orange diagonale, titre "3D AMI" 100px,
-// event-box border-radius:80px 20px 80px 20px, address-box, photo + QR grille
-function generateGeo(ev) {
+function generateGeo(ev, business = defaultBusiness) {
+    business = { ...defaultBusiness, ...business };
     const date = dateRange(ev);
     const src  = qrSrc(ev);
 
@@ -207,10 +223,10 @@ function generateGeo(ev) {
 
             <!-- Header : logo 200px + titre centré + modélisation centré -->
             <div style="display:flex;align-items:flex-start;gap:24px;flex-shrink:0;">
-                <img src="/images/logo.jpg" style="width:200px;height:200px;object-fit:contain;flex-shrink:0;" alt="Logo AMI 3D">
+                <img src="/images/logo.jpg" style="width:200px;height:200px;object-fit:contain;flex-shrink:0;" alt="Logo ${business.name}">
                 <div style="flex:1;text-align:center;padding-top:8px;">
-                    <p style="font-size:100px;font-weight:900;color:#3A3F43;font-family:Georgia,serif;line-height:1;margin:0 0 16px;text-shadow:0 2px 8px rgba(255,255,255,0.8);">AMI 3D</p>
-                    <p style="font-size:16px;color:#aaaaaa;letter-spacing:3px;text-transform:uppercase;margin:0;font-weight:400;">Modélisation &amp; Impression</p>
+                    <p style="font-size:100px;font-weight:900;color:#3A3F43;font-family:Georgia,serif;line-height:1;margin:0 0 16px;text-shadow:0 2px 8px rgba(255,255,255,0.8);">${business.name}</p>
+                    <p style="font-size:16px;color:#aaaaaa;letter-spacing:3px;text-transform:uppercase;margin:0;font-weight:400;">${business.tagline}</p>
                 </div>
             </div>
 
@@ -236,8 +252,8 @@ function generateGeo(ev) {
                         </div>
                     </div>
                     <div style="text-align:center;width:100%;flex-shrink:0;">
-                        <p style="font-size:13px;font-weight:700;color:#3A3F43;margin:0 0 2px;">@nath.ami3d972</p>
-                        <p style="font-size:12px;color:#666C7B;margin:0;">☎ 06 96 80 29 73</p>
+                        <p style="font-size:13px;font-weight:700;color:#3A3F43;margin:0 0 2px;">${business.social}</p>
+                        <p style="font-size:12px;color:#666C7B;margin:0;">${business.phone ? `☎ ${business.phone}` : ''}</p>
                     </div>
                 </div>
             </div>

@@ -30,6 +30,9 @@ class HandleInertiaRequests
                     ? $request->session()->get('errors')->getBag('default')->getMessages()
                     : (object) [];
             },
+            'business' => function () {
+                return config('business');
+            },
         ]);
 
         return $next($request);
