@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('ventes', function (Blueprint $table) {
-            $table->text('moyen_paiement')->default('Espèces')->change();
+            $table->text('moyen_paiement')->nullable()->change();
         });
     }
 

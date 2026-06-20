@@ -62,6 +62,10 @@ class Vente extends Model
         parent::boot();
 
         static::creating(function ($vente) {
+            if (!$vente->moyen_paiement) {
+                $vente->moyen_paiement = 'Espèces';
+            }
+
             if (!$vente->numero_vente) {
                 $vente->numero_vente = 'V-' . date('Ymd') . '-' . str_pad(
                     static::whereDate('created_at', today())->count() + 1,
