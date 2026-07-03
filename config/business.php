@@ -4,7 +4,7 @@
 // client (une instance Laravel Cloud = un commerce), définies via les
 // variables d'environnement de l'instance plutôt que codées en dur.
 return [
-    'name' => env('BUSINESS_NAME', 'Mon Commerce'),
+    'name' => env('BUSINESS_NAME', 'Caisse Connect'),
     'tagline' => env('BUSINESS_TAGLINE', ''),
     'social' => env('BUSINESS_SOCIAL', ''),
     'phone' => env('BUSINESS_PHONE', ''),
