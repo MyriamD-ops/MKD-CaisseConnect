@@ -37,12 +37,11 @@ export default function Login() {
 
             <div className="relative w-full max-w-sm z-10">
                 {/* Logo et titre */}
-                <div className="text-center mb-12">
+                <div className="text-center" style={{ marginBottom: '58px' }}>
                     <img
                         src="/images/logo-mkd.png"
                         alt="MKD"
-                        className="mx-auto mb-1 w-44 h-44 object-contain"
-                        style={{ filter: 'drop-shadow(0 4px 12px rgba(30,45,61,0.3))' }}
+                        className="mx-auto w-44 h-44 object-contain" style={{ marginBottom: '-6px', filter: 'drop-shadow(0 4px 12px rgba(30,45,61,0.3))' }}
                     />
                     <h1 className="text-5xl font-bold text-dark tracking-tight">
                         {appName}
