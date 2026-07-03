@@ -44,7 +44,7 @@ export default function Login() {
                         className="mx-auto mb-4 w-44 h-44 object-contain"
                         style={{ filter: 'drop-shadow(0 4px 12px rgba(30,45,61,0.3))' }}
                     />
-                    <h1 className="text-4xl font-bold text-dark tracking-tight">
+                    <h1 className="text-5xl font-bold text-dark tracking-tight">
                         {appName}
                     </h1>
                     <p className="text-slate text-sm mt-1">Votre caisse connectée</p>
