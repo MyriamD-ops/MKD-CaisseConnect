@@ -12,28 +12,36 @@ class DemoSeeder extends Seeder
 {
     public function run(): void
     {
-        // ── Utilisateurs ──────────────────────────────────────────
-        $admin = User::create([
-            'username'       => 'demo_admin',
-            'pin_hash'       => Hash::make('1234'),
-            'role'           => 'admin',
-            'fingerprint_id' => null,
-            'last_login'     => null,
-        ]);
+        // ── Utilisateurs (idempotent : ne recrée pas si déjà présents) ──
+        $admin = User::firstOrCreate(
+            ['username' => 'demo_admin'],
+            [
+                'pin_hash'       => Hash::make('1234'),
+                'role'           => 'admin',
+                'fingerprint_id' => null,
+                'last_login'     => null,
+            ]
+        );
 
-        $caissier = User::create([
-            'username'       => 'demo_caisse',
-            'pin_hash'       => Hash::make('5678'),
-            'role'           => 'vendeur',
-            'fingerprint_id' => null,
-            'last_login'     => null,
-        ]);
+        $caissier = User::firstOrCreate(
+            ['username' => 'demo_caisse'],
+            [
+                'pin_hash'       => Hash::make('5678'),
+                'role'           => 'vendeur',
+                'fingerprint_id' => null,
+                'last_login'     => null,
+            ]
+        );
 
         echo "✅ Utilisateurs créés :\n";
         echo "   → demo_admin  / PIN : 1234 (admin)\n";
         echo "   → demo_caisse / PIN : 5678 (vendeur)\n";
 
-        // ── Catalogue : Commerce généraliste ──────────────────────
+        // ── Catalogue : Commerce généraliste (skip si déjà seedé) ──
+        if (DB::table('produits')->count() > 0) {
+            echo "⏭️  Catalogue et ventes déjà présents, skip.\n";
+            return;
+        }
         $categories = [
             'Boissons'     => '#3B82F6',
             'Épicerie'     => '#10B981',
