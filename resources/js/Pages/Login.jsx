@@ -2,7 +2,8 @@ import { useForm, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function Login() {
-    const { flash } = usePage().props;
+    const { flash, business } = usePage().props;
+    const appName = business?.name || 'MKD CaisseConnect';
     const [showPin, setShowPin] = useState(false);
     const { data, setData, post, processing, errors } = useForm({
         username: '',
@@ -39,9 +40,9 @@ export default function Login() {
                 <div className="text-center mb-8">
                     <div className="text-6xl mb-3 drop-shadow-lg">💎</div>
                     <h1 className="text-4xl font-bold text-dark tracking-tight">
-                        CaisseMobile
+                        {appName}
                     </h1>
-                    <p className="text-slate text-sm mt-1">Point de vente artisanal</p>
+                    <p className="text-slate text-sm mt-1">Votre caisse connectée</p>
                 </div>
 
                 {/* Connexion */}
@@ -124,7 +125,7 @@ export default function Login() {
 
                 {/* Version */}
                 <p className="text-center mt-6 text-xs text-slate/60">
-                    CaisseMobile · Version 1.0
+                    {appName} · Version 2.0
                 </p>
             </div>
         </div>

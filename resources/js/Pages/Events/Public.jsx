@@ -78,7 +78,7 @@ export default function Public({ evenement }) {
 
             {/* Footer */}
             <footer className="bg-dark text-white/60 text-center py-5 text-xs mt-auto">
-                Powered by CaisseMobile
+                Powered by MKD CaisseConnect
             </footer>
         </div>
     );

@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 
 // Créer la base de données IndexedDB
-const db = new Dexie('CaisseMobileDB');
+const db = new Dexie('MKDCaisseConnectDB');
 
 // Définir le schéma (version 1)
 db.version(1).stores({
@@ -23,7 +23,7 @@ db.version(1).stores({
 
 // Événement d'ouverture
 db.on('ready', () => {
-    console.log('💾 IndexedDB prête : CaisseMobileDB');
+    console.log('💾 IndexedDB prête : MKDCaisseConnectDB');
 });
 
 // Gestion des erreurs

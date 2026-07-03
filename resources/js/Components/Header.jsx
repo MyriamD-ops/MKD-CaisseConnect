@@ -1,10 +1,12 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import useOnlineStatus from '../Hooks/useOnlineStatus';
 
 export default function Header({ currentPage = 'dashboard' }) {
     const isOnline = useOnlineStatus();
     const [menuOpen, setMenuOpen] = useState(false);
+    const { business } = usePage().props;
+    const appName = business?.name || 'MKD CaisseConnect';
 
     const navItems = [
         { name: 'Dashboard',    href: '/',        key: 'dashboard' },
@@ -18,7 +20,7 @@ export default function Header({ currentPage = 'dashboard' }) {
         <header className="bg-snow border-b-2 border-slate/30 shadow-sm">
             <div className="flex items-center justify-between px-4 h-14 max-w-7xl mx-auto">
                 <Link href="/" className="text-ember font-bold text-lg tracking-tight shrink-0">
-                    CaisseMobile
+                    {appName}
                 </Link>
                 <nav className="hidden lg:flex items-center gap-6">
                     {navItems.map((item) => (

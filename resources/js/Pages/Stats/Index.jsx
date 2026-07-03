@@ -236,7 +236,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                     </div>
                 )}
 
-                <p className="text-center text-xs text-slate/40 mt-6">Données en temps réel · CaisseMobile</p>
+                <p className="text-center text-xs text-slate/40 mt-6">Données en temps réel · MKD CaisseConnect</p>
             </main>
         </div>
     );
