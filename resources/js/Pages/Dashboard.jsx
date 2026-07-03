@@ -1,6 +1,37 @@
 import { Link } from '@inertiajs/react';
 import Header from '../Components/Header';
 
+/* ── Icônes SVG neutres ────────────────────────────────────── */
+const IconBox = ({ className = "w-6 h-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+        <path d="m3.3 7 8.7 5 8.7-5" /><path d="M12 22V12" />
+    </svg>
+);
+const IconAlert = ({ className = "w-6 h-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+        <line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+);
+const IconCart = ({ className = "w-6 h-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" />
+        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+    </svg>
+);
+const IconCoins = ({ className = "w-6 h-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="8" /><path d="M12 8v8" /><path d="M8 12h8" />
+    </svg>
+);
+const IconCalendar = ({ className = "w-6 h-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
+        <rect x="8" y="14" width="3" height="3" rx="0.5" />
+    </svg>
+);
+
 export default function Dashboard({ auth, stats = {} }) {
     return (
         <div className="relative min-h-screen bg-snow">
@@ -25,10 +56,10 @@ export default function Dashboard({ auth, stats = {} }) {
                 {/* Cartes statistiques */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
                     {[
-                        { title: 'Produits',       value: stats.totalProduits ?? '—',                                          icon: '📦', accent: false },
-                        { title: 'Stock Bas',       value: stats.stockBas ?? '—',                                              icon: '⚠️', accent: true  },
-                        { title: 'Ventes du jour',  value: stats.ventesJour ?? '—',                                            icon: '🛒', accent: false },
-                        { title: 'Montant du jour', value: stats.montantJour != null ? `${stats.montantJour.toFixed(2)} €` : '—', icon: '💰', accent: false },
+                        { title: 'Produits',       value: stats.totalProduits ?? '—',                                          icon: <IconBox className="w-6 h-6" />, accent: false },
+                        { title: 'Stock Bas',       value: stats.stockBas ?? '—',                                              icon: <IconAlert className="w-6 h-6" />, accent: true  },
+                        { title: 'Ventes du jour',  value: stats.ventesJour ?? '—',                                            icon: <IconCart className="w-6 h-6" />, accent: false },
+                        { title: 'Montant du jour', value: stats.montantJour != null ? `${stats.montantJour.toFixed(2)} €` : '—', icon: <IconCoins className="w-6 h-6" />, accent: false },
                     ].map((card, index) => (
                         <div
                             key={index}
@@ -43,7 +74,7 @@ export default function Dashboard({ auth, stats = {} }) {
                                         {card.value}
                                     </p>
                                 </div>
-                                <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${card.accent ? 'bg-ruby/10' : 'bg-ember/10'}`}>
+                                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${card.accent ? 'bg-slate/10 text-slate' : 'bg-slate/10 text-dark'}`}>
                                     {card.icon}
                                 </div>
                             </div>
@@ -63,7 +94,7 @@ export default function Dashboard({ auth, stats = {} }) {
                             href="/sales/create"
                             className="bg-linear-to-r from-ember to-ember-dim rounded-2xl p-6 flex flex-col items-center gap-3 text-white shadow-lg shadow-ember/30 hover:brightness-90 hover:scale-[1.02] transition-all duration-300"
                         >
-                            <span className="text-4xl filter drop-shadow-lg">🛒</span>
+                            <IconCart className="w-10 h-10" />
                             <span className="font-bold text-lg">Nouvelle vente</span>
                         </Link>
 
@@ -72,7 +103,7 @@ export default function Dashboard({ auth, stats = {} }) {
                             href="/products/create"
                             className="bg-white/90 backdrop-blur-sm rounded-2xl border-2 border-slate/30 p-6 flex flex-col items-center gap-3 text-dark hover:bg-white hover:border-ember hover:shadow-lg transition-all duration-300"
                         >
-                            <span className="text-4xl">📦</span>
+                            <IconBox className="w-10 h-10" />
                             <span className="font-bold text-lg">Ajouter produit</span>
                         </Link>
 
@@ -81,7 +112,7 @@ export default function Dashboard({ auth, stats = {} }) {
                             href="/events/create"
                             className="bg-white/90 backdrop-blur-sm rounded-2xl border-2 border-slate/30 p-6 flex flex-col items-center gap-3 text-dark hover:bg-white hover:border-ember hover:shadow-lg transition-all duration-300"
                         >
-                            <span className="text-4xl">📅</span>
+                            <IconCalendar className="w-10 h-10" />
                             <span className="font-bold text-lg">Nouvel événement</span>
                         </Link>
                     </div>

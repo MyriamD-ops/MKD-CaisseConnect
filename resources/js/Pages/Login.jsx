@@ -38,7 +38,14 @@ export default function Login() {
             <div className="relative w-full max-w-sm z-10">
                 {/* Logo et titre */}
                 <div className="text-center mb-8">
-                    <div className="text-6xl mb-3 drop-shadow-lg">💎</div>
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-3 drop-shadow-lg">
+                        <rect x="4" y="20" width="56" height="36" rx="6" fill="#1E2D3D" />
+                        <rect x="10" y="26" width="44" height="20" rx="3" fill="#F0F4F8" />
+                        <rect x="16" y="50" width="32" height="4" rx="2" fill="#5C6B7A" opacity="0.5" />
+                        <circle cx="22" cy="14" r="4" fill="#3B82F6" />
+                        <circle cx="42" cy="14" r="4" fill="#3B82F6" />
+                        <path d="M22 14 Q32 4 42 14" stroke="#3B82F6" strokeWidth="3" fill="none" strokeLinecap="round" />
+                    </svg>
                     <h1 className="text-4xl font-bold text-dark tracking-tight">
                         {appName}
                     </h1>
