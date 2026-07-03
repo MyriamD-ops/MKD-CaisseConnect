@@ -68,16 +68,15 @@ class DemoSeeder extends Seeder
         $produitIds = [];
         foreach ($produits as $p) {
             $id = DB::table('produits')->insertGetId([
-                'nom'        => $p['nom'],
-                'prix'       => $p['prix'],
-                'stock'      => $p['stock'],
-                'tva'        => $p['tva'],
-                'categorie'  => $p['categorie'],
-                'actif'      => true,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'nom'          => $p['nom'],
+                'prix_base'    => $p['prix'],
+                'stock_actuel' => $p['stock'],
+                'categorie'    => $p['categorie'],
+                'actif'        => true,
+                'created_at'   => now(),
+                'updated_at'   => now(),
             ]);
-            $produitIds[$p['nom']] = ['id' => $id, 'prix' => $p['prix'], 'tva' => $p['tva']];
+            $produitIds[$p['nom']] = ['id' => $id, 'prix' => $p['prix']];
         }
 
         echo "✅ " . count($produits) . " produits créés (5 catégories)\n";
@@ -111,13 +110,15 @@ class DemoSeeder extends Seeder
 
             $numero   = 'V-' . $date->format('Ymd') . '-' . str_pad($i + 1, 4, '0', STR_PAD_LEFT);
             $venteId  = DB::table('ventes')->insertGetId([
-                'numero_vente'   => $numero,
-                'montant_total'  => round($total, 2),
-                'moyen_paiement' => $moyen,
-                'statut'         => 'validee',
-                'id_user'        => ($i % 2 === 0) ? $admin->id : $caissier->id,
-                'created_at'     => $date,
-                'updated_at'     => $date,
+                'numero_vente'    => $numero,
+                'montant_total'   => round($total, 2),
+                'moyen_paiement'  => $moyen,
+                'statut'          => 'Terminée',
+                'id_utilisateur'  => ($i % 2 === 0) ? $admin->id : $caissier->id,
+                'date_vente'      => $date,
+                'synchronisee'    => true,
+                'created_at'      => $date,
+                'updated_at'      => $date,
             ]);
 
             foreach ($lignes as $l) {
