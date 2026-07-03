@@ -24,14 +24,14 @@ class DemoSeeder extends Seeder
         $caissier = User::create([
             'username'       => 'demo_caisse',
             'pin_hash'       => Hash::make('5678'),
-            'role'           => 'caissier',
+            'role'           => 'vendeur',
             'fingerprint_id' => null,
             'last_login'     => null,
         ]);
 
         echo "✅ Utilisateurs créés :\n";
         echo "   → demo_admin  / PIN : 1234 (admin)\n";
-        echo "   → demo_caisse / PIN : 5678 (caissier)\n";
+        echo "   → demo_caisse / PIN : 5678 (vendeur)\n";
 
         // ── Catalogue : Commerce généraliste ──────────────────────
         $categories = [
