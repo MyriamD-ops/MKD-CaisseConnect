@@ -42,12 +42,12 @@ input:-webkit-autofill:active {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-    /* ── Palette Urban (active) ─────────────────────────────────── */
-    --color-snow:      #EEEEEE;   /* fond page, arrière-plans clairs  */
-    --color-slate:     #666C7B;   /* texte secondaire, éléments neutres */
-    --color-dark:      #3A3F43;   /* texte principal, header, éléments forts */
-    --color-ember:     #DC5F00;   /* accent principal, CTA, highlights */
-    --color-ember-dim: #B84E00;   /* accent hover / gradient end */
+    /* ── Palette Démo — Indigo/Sauge (ne pas merger sur master) ─── */
+    --color-snow:      #F0F4F8;   /* fond page, arrière-plans clairs  */
+    --color-slate:     #5C6B7A;   /* texte secondaire, éléments neutres */
+    --color-dark:      #1E2D3D;   /* texte principal, header, éléments forts */
+    --color-ember:     #3B82F6;   /* accent principal, CTA, highlights */
+    --color-ember-dim: #2563EB;   /* accent hover / gradient end */
 
     /* ── Système (succès / danger) ──────────────────────────────── */
     --color-mint:      #10B981;   /* succès */
