@@ -4,6 +4,30 @@ import Header from '../../Components/Header';
 import useOnlineStatus from '../../Hooks/useOnlineStatus';
 import { syncProduits, getProduitsLocal } from '../../utils/sync';
 
+/* ── Icônes SVG ──────────────────────────────────── */
+const IconEdit = ({ className = "w-4 h-4" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+        <path d="m15 5 4 4" />
+    </svg>
+);
+const IconTrash = ({ className = "w-4 h-4" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+    </svg>
+);
+const IconDownload = ({ className = "w-4 h-4" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+);
+const IconCheck = ({ className = "w-3 h-3" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+    </svg>
+);
+
 export default function Index({ products: serverProducts }) {
     const { flash } = usePage().props;
     const isOnline = useOnlineStatus();
@@ -54,7 +78,7 @@ export default function Index({ products: serverProducts }) {
                         <div className="flex items-center gap-2 shrink-0">
                             <a href="/products/export"
                                 className="h-9 px-3 flex items-center gap-1.5 bg-white/60 backdrop-blur-sm border border-white/60 hover:bg-white/80 text-slate-600 hover:text-slate-800 rounded-xl text-sm font-medium transition-all whitespace-nowrap">
-                                ⬇️ CSV
+                                <IconDownload className="w-4 h-4" /> CSV
                             </a>
                             <Link href="/products/create"
                                 className="h-9 px-3 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-colors whitespace-nowrap">
@@ -75,8 +99,8 @@ export default function Index({ products: serverProducts }) {
 
                 {/* Flash success */}
                 {flash?.success && (
-                    <div className="mb-5 p-4 bg-emerald-50/80 backdrop-blur-sm border border-emerald-200/60 rounded-xl text-emerald-700 text-sm flex items-center gap-2">
-                        <span>✓</span><span>{flash.success}</span>
+                    <div className="mb-5 p-4 bg-blue-50/80 backdrop-blur-sm border border-blue-200/60 rounded-xl text-blue-700 text-sm flex items-center gap-2">
+                        <IconCheck className="w-4 h-4" /><span>{flash.success}</span>
                     </div>
                 )}
 
@@ -102,8 +126,8 @@ export default function Index({ products: serverProducts }) {
                                         <Link href={`/products/${product.id_produit}`} className="flex-1 min-w-0">
                                             <h3 className="font-semibold text-slate-800 hover:text-blue-600 transition-colors truncate">{product.nom}</h3>
                                         </Link>
-                                        <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full ${stockBas ? 'bg-amber-50 text-amber-600 border border-amber-200' : 'bg-emerald-50 text-emerald-600 border border-emerald-200'}`}>
-                                            {stockBas ? '⚠ Bas' : '✓ OK'}
+                                        <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1 ${stockBas ? 'bg-slate-200/80 text-slate-600 border border-slate-300' : 'bg-blue-50 text-blue-600 border border-blue-200'}`}>
+                                            {stockBas ? '⚠ Bas' : <><IconCheck className="w-3 h-3" /> OK</>}
                                         </span>
                                     </div>
                                     <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
@@ -113,12 +137,12 @@ export default function Index({ products: serverProducts }) {
                                     </div>
                                     <div className="flex gap-2 mt-auto">
                                         <Link href={`/products/${product.id_produit}/edit`}
-                                            className="flex-1 h-11 flex items-center justify-center bg-white/50 hover:bg-white/80 text-slate-600 hover:text-slate-800 rounded-xl text-sm font-medium transition-all border border-white/60">
-                                            ✏️ Modifier
+                                            className="flex-1 h-11 flex items-center justify-center gap-2 bg-white/50 hover:bg-white/80 text-slate-600 hover:text-blue-600 rounded-xl text-sm font-medium transition-all border border-white/60">
+                                            <IconEdit className="w-4 h-4" /> Modifier
                                         </Link>
                                         <button onClick={() => handleDelete(product.id_produit, product.nom)}
-                                            className="flex-1 h-11 flex items-center justify-center bg-white/50 hover:bg-slate-100/80 text-slate-400 hover:text-slate-600 rounded-xl text-sm font-medium transition-all border border-white/60">
-                                            🗑️ Supprimer
+                                            className="flex-1 h-11 flex items-center justify-center gap-2 bg-white/50 hover:bg-slate-200/80 text-slate-400 hover:text-slate-700 rounded-xl text-sm font-medium transition-all border border-white/60">
+                                            <IconTrash className="w-4 h-4" /> Supprimer
                                         </button>
                                     </div>
                                 </div>
