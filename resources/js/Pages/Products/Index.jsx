@@ -137,11 +137,11 @@ export default function Index({ products: serverProducts }) {
                                     </div>
                                     <div className="flex gap-2 mt-auto">
                                         <Link href={`/products/${product.id_produit}/edit`}
-                                            className="flex-1 h-11 flex items-center justify-center gap-2 bg-white/50 hover:bg-white/80 text-slate-600 hover:text-blue-600 rounded-xl text-sm font-medium transition-all border border-white/60">
+                                            className="flex-1 h-11 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-blue-600 rounded-xl text-sm font-medium transition-all">
                                             <IconEdit className="w-4 h-4" /> Modifier
                                         </Link>
                                         <button onClick={() => handleDelete(product.id_produit, product.nom)}
-                                            className="flex-1 h-11 flex items-center justify-center gap-2 bg-white/50 hover:bg-slate-200/80 text-slate-400 hover:text-slate-700 rounded-xl text-sm font-medium transition-all border border-white/60">
+                                            className="flex-1 h-11 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-red-500 hover:text-red-600 rounded-xl text-sm font-medium transition-all">
                                             <IconTrash className="w-4 h-4" /> Supprimer
                                         </button>
                                     </div>
