@@ -2,8 +2,8 @@ import { Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 import Header from '../../Components/Header';
 
-const FIELD_CLASS = 'w-full h-11 px-4 bg-white border border-slate/40 rounded-xl text-dark text-sm focus:outline-none focus:border-ember focus:ring-2 focus:ring-ember/15 transition-colors';
-const LABEL_CLASS = 'block text-xs font-semibold text-dark uppercase tracking-widest mb-2';
+const FIELD_CLASS = 'w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors';
+const LABEL_CLASS = 'block text-xs font-semibold text-slate-800 uppercase tracking-widest mb-2';
 
 export default function Edit({ product }) {
     const [formData, setFormData] = useState({
@@ -36,19 +36,19 @@ export default function Edit({ product }) {
     const matieres = ['PLA', 'PETG', 'ABS', 'Résine', 'TPU/Flexible', 'Bois (PLA)', 'Métal (PLA)', 'Autre'];
 
     return (
-        <div className="min-h-screen bg-snow">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
             <Header currentPage="products" />
 
             <main className="p-4 lg:p-6 max-w-3xl mx-auto">
                 <Link
                     href="/products"
-                    className="inline-flex items-center gap-1 text-slate hover:text-dark text-sm mb-6 transition-colors"
+                    className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800 text-sm mb-6 transition-colors"
                 >
                     ← Retour aux produits
                 </Link>
 
-                <div className="bg-white rounded-2xl border border-slate/20 shadow-sm p-6 lg:p-8">
-                    <h2 className="text-2xl font-bold text-dark mb-6">Modifier le produit</h2>
+                <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-6 lg:p-8">
+                    <h2 className="text-2xl font-bold text-slate-800 mb-6">Modifier le produit</h2>
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         {/* Nom */}
@@ -60,7 +60,7 @@ export default function Edit({ product }) {
                                 onChange={(e) => handleChange('nom', e.target.value)}
                                 className={FIELD_CLASS}
                             />
-                            {errors.nom && <p className="text-ruby text-xs mt-1.5">{errors.nom}</p>}
+                            {errors.nom && <p className="text-red-500 text-xs mt-1.5">{errors.nom}</p>}
                         </div>
 
                         {/* Description */}
@@ -70,7 +70,7 @@ export default function Edit({ product }) {
                                 value={formData.description || ''}
                                 onChange={(e) => handleChange('description', e.target.value)}
                                 rows="3"
-                                className="w-full px-4 py-3 bg-white border border-slate/40 rounded-xl text-dark text-sm focus:outline-none focus:border-ember focus:ring-2 focus:ring-ember/15 transition-colors resize-none font-sans"
+                                className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors resize-none font-sans"
                             />
                         </div>
 
@@ -85,7 +85,7 @@ export default function Edit({ product }) {
                                     onChange={(e) => handleChange('prix', e.target.value)}
                                     className={FIELD_CLASS}
                                 />
-                                {errors.prix && <p className="text-ruby text-xs mt-1.5">{errors.prix}</p>}
+                                {errors.prix && <p className="text-red-500 text-xs mt-1.5">{errors.prix}</p>}
                             </div>
                             <div>
                                 <label className={LABEL_CLASS}>Catégorie *</label>
@@ -97,7 +97,7 @@ export default function Edit({ product }) {
                                     <option value="">Sélectionner...</option>
                                     {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
                                 </select>
-                                {errors.categorie && <p className="text-ruby text-xs mt-1.5">{errors.categorie}</p>}
+                                {errors.categorie && <p className="text-red-500 text-xs mt-1.5">{errors.categorie}</p>}
                             </div>
                         </div>
 
@@ -111,7 +111,7 @@ export default function Edit({ product }) {
                                     onChange={(e) => handleChange('stock_actuel', e.target.value)}
                                     className={FIELD_CLASS}
                                 />
-                                {errors.stock_actuel && <p className="text-ruby text-xs mt-1.5">{errors.stock_actuel}</p>}
+                                {errors.stock_actuel && <p className="text-red-500 text-xs mt-1.5">{errors.stock_actuel}</p>}
                             </div>
                             <div>
                                 <label className={LABEL_CLASS}>Stock minimum *</label>
@@ -121,7 +121,7 @@ export default function Edit({ product }) {
                                     onChange={(e) => handleChange('stock_minimum', e.target.value)}
                                     className={FIELD_CLASS}
                                 />
-                                {errors.stock_minimum && <p className="text-ruby text-xs mt-1.5">{errors.stock_minimum}</p>}
+                                {errors.stock_minimum && <p className="text-red-500 text-xs mt-1.5">{errors.stock_minimum}</p>}
                             </div>
                         </div>
 
@@ -139,18 +139,18 @@ export default function Edit({ product }) {
                         </div>
 
                         {/* Actions */}
-                        <div className="flex gap-3 pt-4 border-t border-slate/10">
+                        <div className="flex gap-3 pt-4 border-t border-slate-100">
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="flex-1 h-11 bg-linear-to-r from-ember to-ember-dim hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all"
+                                className="flex-1 h-11 bg-gradient-to-r from-blue-500 to-blue-700 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all"
                             >
                                 {processing && <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
                                 {processing ? 'Enregistrement...' : 'Enregistrer'}
                             </button>
                             <Link
                                 href="/products"
-                                className="flex-1 h-11 flex items-center justify-center bg-slate/10 hover:bg-slate/20 text-slate hover:text-dark border border-slate/20 rounded-xl text-sm font-medium transition-colors"
+                                className="flex-1 h-11 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 border border-slate-200 rounded-xl text-sm font-medium transition-colors"
                             >
                                 Annuler
                             </Link>

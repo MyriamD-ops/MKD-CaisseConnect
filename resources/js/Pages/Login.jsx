@@ -27,7 +27,7 @@ export default function Login() {
     };
 
     return (
-        <div className="relative min-h-screen flex items-center justify-center p-4 overflow-hidden bg-snow">
+        <div className="relative min-h-screen flex items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
             {/* Éléments décoratifs flous */}
             <div className="absolute top-0 -left-20 w-72 h-72 bg-ember rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob pointer-events-none" />
             <div className="absolute bottom-0 -right-20 w-80 h-80 bg-dark rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000 pointer-events-none" />
@@ -56,16 +56,16 @@ export default function Login() {
 
                 {/* Flash succès */}
                 {flash?.success && (
-                    <div className="mb-5 p-4 bg-mint/10 border border-mint/30 rounded-xl text-dark text-sm flex items-center gap-2">
-                        <span className="text-mint text-lg">✓</span>
+                    <div className="mb-5 p-4 bg-blue-50/80 border border-blue-200 rounded-xl text-slate-800 text-sm flex items-center gap-2">
+                        <span className="text-blue-600 text-lg">✓</span>
                         <span>{flash.success}</span>
                     </div>
                 )}
 
                 {/* Erreur */}
                 {(errors.username || errors.pin) && (
-                    <div className="mb-5 p-4 bg-ruby/5 border border-ruby/30 rounded-xl text-dark text-sm flex items-center gap-2">
-                        <span className="text-ruby text-lg">⚠</span>
+                    <div className="mb-5 p-4 bg-red-50/80 border border-red-200 rounded-xl text-slate-800 text-sm flex items-center gap-2">
+                        <span className="text-red-500 text-lg">⚠</span>
                         <span>{errors.username || errors.pin}</span>
                     </div>
                 )}

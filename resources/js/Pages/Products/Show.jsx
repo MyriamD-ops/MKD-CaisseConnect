@@ -27,59 +27,59 @@ export default function Show({ product }) {
     const stockBas = product.stock_actuel <= product.stock_minimum;
 
     return (
-        <div className="min-h-screen bg-snow">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
             <Header currentPage="products" />
 
             <main className="p-4 lg:p-6 max-w-5xl mx-auto">
                 <Link
                     href="/products"
-                    className="inline-flex items-center gap-1 text-slate hover:text-dark text-sm mb-6 transition-colors"
+                    className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800 text-sm mb-6 transition-colors"
                 >
                     ← Retour aux produits
                 </Link>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Informations produit */}
-                    <div className="bg-white rounded-2xl border border-slate/20 shadow-sm p-6">
+                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-6">
                         <div className="flex items-start justify-between gap-3 mb-5">
-                            <h2 className="text-2xl font-bold text-dark">{product.nom}</h2>
+                            <h2 className="text-2xl font-bold text-slate-800">{product.nom}</h2>
                             <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full border ${
                                 stockBas
-                                    ? 'bg-ruby/10 text-ruby border-ruby/20'
-                                    : 'bg-mint/10 text-mint border-mint/20'
+                                    ? 'bg-red-50 text-red-500 border-red-200'
+                                    : 'bg-blue-50 text-blue-600 border-blue-200'
                             }`}>
                                 {stockBas ? '⚠ Bas' : '✓ OK'}
                             </span>
                         </div>
 
                         {product.description && (
-                            <p className="text-slate text-sm mb-5 leading-relaxed">{product.description}</p>
+                            <p className=text-slate-500 text-sm mb-5 leading-relaxed">{product.description}</p>
                         )}
 
                         <div className="space-y-0 divide-y divide-slate/10">
                             <div className="flex justify-between items-center py-3">
                                 <span className="text-sm text-slate">Prix</span>
-                                <span className="text-lg font-bold text-ember">{product.prix_base}€</span>
+                                <span className="text-lg font-bold text-blue-600">{product.prix_base}€</span>
                             </div>
                             <div className="flex justify-between items-center py-3">
                                 <span className="text-sm text-slate">Catégorie</span>
-                                <span className="text-sm font-medium text-dark">{product.categorie}</span>
+                                <span className="text-sm font-medium text-slate-800">{product.categorie}</span>
                             </div>
                             {product.matiere && (
                                 <div className="flex justify-between items-center py-3">
                                     <span className="text-sm text-slate">Matériau</span>
-                                    <span className="text-sm font-medium text-dark">{product.matiere}</span>
+                                    <span className="text-sm font-medium text-slate-800">{product.matiere}</span>
                                 </div>
                             )}
                             <div className="flex justify-between items-center py-3">
                                 <span className="text-sm text-slate">Stock actuel</span>
-                                <span className={`text-sm font-semibold ${stockBas ? 'text-ruby' : 'text-dark'}`}>
+                                <span className={`text-sm font-semibold ${stockBas ? 'text-red-500' : 'text-dark'}`}>
                                     {product.stock_actuel} unités
                                 </span>
                             </div>
                             <div className="flex justify-between items-center py-3">
                                 <span className="text-sm text-slate">Stock minimum</span>
-                                <span className="text-sm font-medium text-dark">{product.stock_minimum} unités</span>
+                                <span className="text-sm font-medium text-slate-800">{product.stock_minimum} unités</span>
                             </div>
                             <div className="flex justify-between items-center py-3">
                                 <span className="text-sm text-slate">Code barre</span>
@@ -90,7 +90,7 @@ export default function Show({ product }) {
                         <div className="mt-6">
                             <Link
                                 href={`/products/${product.id_produit}/edit`}
-                                className="w-full h-11 flex items-center justify-center bg-slate/10 hover:bg-slate/20 text-slate hover:text-dark border border-slate/20 rounded-xl text-sm font-medium transition-colors"
+                                className="w-full h-11 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 border border-slate-200 rounded-xl text-sm font-medium transition-colors"
                             >
                                 ✏️ Modifier
                             </Link>
@@ -98,10 +98,10 @@ export default function Show({ product }) {
                     </div>
 
                     {/* QR Code */}
-                    <div className="bg-white rounded-2xl border border-slate/20 shadow-sm p-6 flex flex-col items-center">
-                        <h3 className="text-lg font-semibold text-dark mb-5 text-center">QR Code du produit</h3>
+                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-6 flex flex-col items-center">
+                        <h3 className="text-lg font-semibold text-slate-800 mb-5 text-center">QR Code du produit</h3>
 
-                        <div className="p-6 bg-snow rounded-xl mb-4">
+                        <div className="p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-xl mb-4">
                             <QRCodeSVG
                                 id="qr-code-barcode"
                                 value={product.code_barres}
@@ -111,23 +111,23 @@ export default function Show({ product }) {
                             />
                         </div>
 
-                        <div className="w-full px-4 py-2.5 bg-snow border border-slate/20 rounded-xl mb-4">
-                            <p className="text-xs text-slate text-center font-mono">{product.code_barres}</p>
+                        <div className="w-full px-4 py-2.5 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border border-slate-200 rounded-xl mb-4">
+                            <p className="text-xs text-slate-500 text-center font-mono">{product.code_barres}</p>
                         </div>
 
-                        <p className="text-sm text-slate text-center mb-5 leading-relaxed">
+                        <p className="text-sm text-slate-500 text-center mb-5 leading-relaxed">
                             Scannez ce code lors d'une vente pour ajouter le produit automatiquement au panier
                         </p>
 
                         <button
                             onClick={downloadQR}
-                            className="w-full h-11 bg-mint/10 hover:bg-mint/20 text-mint border border-mint/20 rounded-xl text-sm font-medium transition-colors mb-3"
+                            className="w-full h-11 bg-blue-50 hover:bg-blue-100/20 text-blue-600 border border-blue-200 rounded-xl text-sm font-medium transition-colors mb-3"
                         >
                             📥 Télécharger le QR Code
                         </button>
 
-                        <div className="w-full p-3 bg-ember/5 border border-ember/20 rounded-xl">
-                            <p className="text-xs text-ember text-center font-medium">
+                        <div className="w-full p-3 bg-blue-600/5 border border-blue-500/20 rounded-xl">
+                            <p className="text-xs text-blue-600 text-center font-medium">
                                 💡 Imprimez ce QR code pour vos étiquettes produit
                             </p>
                         </div>

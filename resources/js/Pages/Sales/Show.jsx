@@ -33,7 +33,7 @@ function SmsModal({ sale, onClose }) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-dark/50 backdrop-blur-sm px-4">
             <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6">
-                <h3 className="text-lg font-bold text-dark mb-4">Envoyer le reçu par SMS</h3>
+                <h3 className="text-lg font-bold text-slate-800 mb-4">Envoyer le reçu par SMS</h3>
 
                 {success ? (
                     <p className="text-center text-green-600 font-medium py-4">✓ SMS envoyé !</p>
@@ -45,7 +45,7 @@ function SmsModal({ sale, onClose }) {
                             onChange={e => setTelephone(e.target.value)}
                             placeholder="06 XX XX XX XX"
                             disabled={loading}
-                            className="w-full h-11 px-4 rounded-xl border border-slate/30 text-sm text-dark placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-ember/40 mb-4"
+                            className="w-full h-11 px-4 rounded-xl border border-slate-300 text-sm text-slate-800 placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-blue-500/40 mb-4"
                         />
 
                         {error && (
@@ -56,7 +56,7 @@ function SmsModal({ sale, onClose }) {
                             <button
                                 onClick={handleSend}
                                 disabled={loading || !telephone.trim()}
-                                className="flex-1 h-11 flex items-center justify-center bg-ember hover:brightness-90 disabled:opacity-50 text-white font-bold rounded-xl text-sm transition-all"
+                                className="flex-1 h-11 flex items-center justify-center bg-blue-600 hover:brightness-90 disabled:opacity-50 text-white font-bold rounded-xl text-sm transition-all"
                             >
                                 {loading ? (
                                     <>
@@ -71,7 +71,7 @@ function SmsModal({ sale, onClose }) {
                             <button
                                 onClick={onClose}
                                 disabled={loading}
-                                className="flex-1 h-11 flex items-center justify-center bg-slate/10 hover:bg-slate/20 text-slate hover:text-dark border border-slate/20 rounded-xl text-sm font-medium transition-colors"
+                                className="flex-1 h-11 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 border border-slate-200 rounded-xl text-sm font-medium transition-colors"
                             >
                                 Passer
                             </button>
@@ -88,26 +88,26 @@ export default function Show({ sale }) {
     const [showSmsModal, setShowSmsModal] = useState(false);
 
     return (
-        <div className="min-h-screen bg-snow">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
             <Header currentPage="sales" />
 
             <main className="p-4 lg:p-6 max-w-2xl mx-auto">
-                <div className="bg-white rounded-2xl border border-slate/20 shadow-sm p-6 lg:p-8 text-center">
+                <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-6 lg:p-8 text-center">
                     {/* Icône succès */}
-                    <div className="w-16 h-16 rounded-full bg-mint/10 border border-mint/20 flex items-center justify-center text-3xl mx-auto mb-4">
+                    <div className="w-16 h-16 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center text-3xl mx-auto mb-4">
                         ✓
                     </div>
-                    <h2 className="text-2xl font-bold text-dark mb-1">Vente enregistrée !</h2>
-                    <p className="text-slate text-sm mb-6">
-                        Numéro de vente : <span className="font-semibold text-dark">{sale.numero_vente}</span>
+                    <h2 className="text-2xl font-bold text-slate-800 mb-1">Vente enregistrée !</h2>
+                    <p className=text-slate-500 text-sm mb-6">
+                        Numéro de vente : <span className="font-semibold text-slate-800">{sale.numero_vente}</span>
                     </p>
 
                     {/* Récapitulatif */}
-                    <div className="bg-snow rounded-xl border border-slate/20 p-5 mb-6 text-left">
+                    <div className="bg-white/50 rounded-xl border border-slate-200 p-5 mb-6 text-left">
                         <div className="divide-y divide-slate/10">
                             <div className="flex justify-between items-center py-2.5">
                                 <span className="text-sm text-slate">Date</span>
-                                <span className="text-sm font-medium text-dark">
+                                <span className="text-sm font-medium text-slate-800">
                                     {new Date(sale.created_at).toLocaleDateString('fr-FR', {
                                         day: '2-digit', month: '2-digit', year: 'numeric',
                                         hour: '2-digit', minute: '2-digit',
@@ -116,35 +116,35 @@ export default function Show({ sale }) {
                             </div>
                             <div className="flex justify-between items-center py-2.5">
                                 <span className="text-sm text-slate">Vendeur</span>
-                                <span className="text-sm font-medium text-dark">
+                                <span className="text-sm font-medium text-slate-800">
                                     {sale.utilisateur?.username ?? sale.utilisateur?.name ?? '—'}
                                 </span>
                             </div>
                             <div className="flex justify-between items-center py-2.5">
                                 <span className="text-sm text-slate">Paiement</span>
-                                <span className="text-sm font-medium text-dark">{sale.moyen_paiement}</span>
+                                <span className="text-sm font-medium text-slate-800">{sale.moyen_paiement}</span>
                             </div>
                         </div>
 
                         {/* Articles */}
-                        <div className="mt-4 pt-4 border-t border-slate/10">
-                            <p className="text-xs font-semibold text-dark uppercase tracking-widest mb-3">Articles</p>
+                        <div className="mt-4 pt-4 border-t border-slate-100">
+                            <p className="text-xs font-semibold text-slate-800 uppercase tracking-widest mb-3">Articles</p>
                             <div className="space-y-2">
                                 {(sale.lignes ?? []).map((ligne, index) => (
                                     <div key={index} className="flex justify-between items-center text-sm">
                                         <span className="text-slate">
                                             {ligne.produit?.nom ?? `Produit #${ligne.id_produit}`} × {ligne.quantite}
                                         </span>
-                                        <span className="font-medium text-dark">{ligne.sous_total}€</span>
+                                        <span className="font-medium text-slate-800">{ligne.sous_total}€</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
                         {/* Total */}
-                        <div className="mt-4 pt-4 border-t-2 border-slate/20 flex justify-between items-center">
-                            <span className="text-base font-semibold text-dark">Total</span>
-                            <span className="text-2xl font-bold text-ember">{sale.montant_total}€</span>
+                        <div className="mt-4 pt-4 border-t-2 border-slate-200 flex justify-between items-center">
+                            <span className="text-base font-semibold text-slate-800">Total</span>
+                            <span className="text-2xl font-bold text-blue-600">{sale.montant_total}€</span>
                         </div>
                     </div>
 
@@ -152,7 +152,7 @@ export default function Show({ sale }) {
                     {auth?.user && (
                         <button
                             onClick={() => setShowSmsModal(true)}
-                            className="w-full h-11 flex items-center justify-center gap-2 bg-slate/10 hover:bg-slate/20 text-slate hover:text-dark border border-slate/20 rounded-xl text-sm font-medium transition-colors mb-3"
+                            className="w-full h-11 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 border border-slate-200 rounded-xl text-sm font-medium transition-colors mb-3"
                         >
                             📱 Envoyer le reçu par SMS
                         </button>
@@ -162,13 +162,13 @@ export default function Show({ sale }) {
                     <div className="flex gap-3">
                         <Link
                             href="/sales/create"
-                            className="flex-1 h-11 flex items-center justify-center bg-linear-to-r from-ember to-ember-dim hover:brightness-90 text-white font-bold rounded-xl text-sm transition-all"
+                            className="flex-1 h-11 flex items-center justify-center bg-gradient-to-r from-blue-500 to-blue-700 hover:brightness-90 text-white font-bold rounded-xl text-sm transition-all"
                         >
                             Nouvelle vente
                         </Link>
                         <Link
                             href="/"
-                            className="flex-1 h-11 flex items-center justify-center bg-slate/10 hover:bg-slate/20 text-slate hover:text-dark border border-slate/20 rounded-xl text-sm font-medium transition-colors"
+                            className="flex-1 h-11 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 border border-slate-200 rounded-xl text-sm font-medium transition-colors"
                         >
                             Dashboard
                         </Link>
