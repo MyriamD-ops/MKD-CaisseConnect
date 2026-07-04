@@ -19,7 +19,7 @@ export default function Header({ currentPage = 'dashboard' }) {
     return (
         <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/40 shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
             <div className="flex items-center justify-between px-4 h-14 max-w-7xl mx-auto">
-                <Link href="/" className="text-slate-800 font-extrabold text-lg tracking-tight shrink-0">
+                <Link href="/" className="text-blue-600 font-extrabold text-lg tracking-tight shrink-0">
                     {appName}
                 </Link>
                 <nav className="hidden lg:flex items-center gap-6">
