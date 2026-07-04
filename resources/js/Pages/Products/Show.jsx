@@ -53,7 +53,7 @@ export default function Show({ product }) {
                         </div>
 
                         {product.description && (
-                            <p className=text-slate-500 text-sm mb-5 leading-relaxed">{product.description}</p>
+                            <p className="text-slate-500 text-sm mb-5 leading-relaxed">{product.description}</p>
                         )}
 
                         <div className="space-y-0 divide-y divide-slate/10">

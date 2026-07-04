@@ -98,7 +98,7 @@ export default function Show({ sale }) {
                         ✓
                     </div>
                     <h2 className="text-2xl font-bold text-slate-800 mb-1">Vente enregistrée !</h2>
-                    <p className=text-slate-500 text-sm mb-6">
+                    <p className="text-slate-500 text-sm mb-6">
                         Numéro de vente : <span className="font-semibold text-slate-800">{sale.numero_vente}</span>
                     </p>
 

@@ -11,7 +11,7 @@ export default function LowStock({ lowStockProducts = [] }) {
                 <div className="flex items-start justify-between gap-4 mb-6">
                     <div>
                         <h2 className="text-2xl font-bold text-slate-800">Alertes stock</h2>
-                        <p className=text-slate-500 text-sm mt-1">
+                        <p className="text-slate-500 text-sm mt-1">
                             {lowStockProducts.length} produit{lowStockProducts.length > 1 ? 's' : ''} en stock bas
                         </p>
                     </div>
@@ -27,7 +27,7 @@ export default function LowStock({ lowStockProducts = [] }) {
                     <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-12 text-center">
                         <p className="text-5xl mb-4">✅</p>
                         <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucune alerte stock</h3>
-                        <p className=text-slate-500 text-sm">Tous vos produits ont un stock suffisant</p>
+                        <p className="text-slate-500 text-sm">Tous vos produits ont un stock suffisant</p>
                     </div>
                 ) : (
                     <div className="space-y-3">

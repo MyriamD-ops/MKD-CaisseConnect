@@ -69,7 +69,7 @@ export default function Index({ sales }) {
                             </Link>
                         </div>
                     </div>
-                    <p className=text-slate-500 text-sm">
+                    <p className="text-slate-500 text-sm">
                         {totalVentes} vente{totalVentes > 1 ? 's' : ''}
                         {ventesLocales.length > 0 && (
                             <span className="ml-1 text-blue-600">
@@ -84,7 +84,7 @@ export default function Index({ sales }) {
                     <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-12 text-center">
                         <p className="text-5xl mb-4 grayscale">🛍️</p>
                         <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucune vente</h3>
-                        <p className=text-slate-500 text-sm mb-6">Les ventes apparaîtront ici</p>
+                        <p className="text-slate-500 text-sm mb-6">Les ventes apparaîtront ici</p>
                         <Link href="/sales/create"
                             className="inline-flex items-center justify-center h-11 px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-colors">
                             Nouvelle vente

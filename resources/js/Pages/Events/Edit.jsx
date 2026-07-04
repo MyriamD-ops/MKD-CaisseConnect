@@ -183,7 +183,7 @@ export default function Edit({ evenement, produits }) {
                                 </h3>
 
                                 {selectedProduits.length === 0 ? (
-                                    <p className=text-slate-500 text-sm text-center py-8">Aucun produit</p>
+                                    <p className="text-slate-500 text-sm text-center py-8">Aucun produit</p>
                                 ) : (
                                     <div className="space-y-3 mb-5 max-h-72 overflow-y-auto pr-1">
                                         {selectedProduits.map((p) => (

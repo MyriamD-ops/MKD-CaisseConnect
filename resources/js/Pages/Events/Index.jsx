@@ -43,7 +43,7 @@ export default function Index({ evenements }) {
                             + Nouveau
                         </Link>
                     </div>
-                    <p className=text-slate-500 text-sm">
+                    <p className="text-slate-500 text-sm">
                         {evenements.length} événement{evenements.length > 1 ? 's' : ''}
                     </p>
                 </div>
@@ -53,7 +53,7 @@ export default function Index({ evenements }) {
                     <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-12 text-center">
                         <p className="text-5xl mb-4 grayscale">🎪</p>
                         <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucun événement</h3>
-                        <p className=text-slate-500 text-sm mb-6">Créez votre premier événement</p>
+                        <p className="text-slate-500 text-sm mb-6">Créez votre premier événement</p>
                         <Link
                             href="/events/create"
                             className="inline-flex items-center justify-center h-11 px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-colors"

@@ -257,9 +257,9 @@ export default function Create({ products: serverProducts }) {
                     {cart.length > 0 && (
                         showClearConfirm ? (
                             <div className="flex items-center gap-2">
-                                <span className=text-slate-500 text-xs">Vider ?</span>
+                                <span className="text-slate-500 text-xs">Vider ?</span>
                                 <button onClick={() => { setCart([]); setShowClearConfirm(false); }} className="text-red-500 text-xs font-semibold">Oui</button>
-                                <button onClick={() => setShowClearConfirm(false)} className=text-slate-500 text-xs">Non</button>
+                                <button onClick={() => setShowClearConfirm(false)} className="text-slate-500 text-xs">Non</button>
                             </div>
                         ) : (
                             <button onClick={() => setShowClearConfirm(true)} className="flex items-center gap-1 px-2.5 h-7 bg-red-50 text-red-500 text-xs font-medium rounded-lg border border-red-200">
@@ -278,7 +278,7 @@ export default function Create({ products: serverProducts }) {
                 {cart.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-12 text-center">
                         <span className="text-4xl mb-3 grayscale">🛒</span>
-                        <p className=text-slate-500 text-sm">Panier vide</p>
+                        <p className="text-slate-500 text-sm">Panier vide</p>
                         <p className="text-slate/50 text-xs mt-1">Appuyez sur un produit pour l'ajouter</p>
                     </div>
                 ) : (
@@ -347,7 +347,7 @@ export default function Create({ products: serverProducts }) {
                 <div className="p-4 border-t border-slate-200 space-y-3 overflow-y-auto max-h-[55vh]">
                     {/* Sous-total */}
                     <div className="flex justify-between items-center">
-                        <span className=text-slate-500 text-sm">Sous-total</span>
+                        <span className="text-slate-500 text-sm">Sous-total</span>
                         <span className="text-sm text-slate-800">{sousTotal.toFixed(2)}€</span>
                     </div>
 
@@ -379,7 +379,7 @@ export default function Create({ products: serverProducts }) {
 
                     {/* Total */}
                     <div className="flex justify-between items-center border-t border-slate-200 pt-2">
-                        <span className=text-slate-500 text-sm font-medium">Total</span>
+                        <span className="text-slate-500 text-sm font-medium">Total</span>
                         <span className="text-2xl font-bold text-slate-800">{total.toFixed(2)}€</span>
                     </div>
 
@@ -456,7 +456,7 @@ export default function Create({ products: serverProducts }) {
                         {notification.type === 'success' ? '✓' : '⚠'}
                     </span>
                     <span className="flex-1 leading-relaxed">{notification.message}</span>
-                    <button onClick={() => setNotification(null)} className=text-slate-500 hover:text-slate-800 font-bold text-lg leading-none shrink-0">×</button>
+                    <button onClick={() => setNotification(null)} className="text-slate-500 hover:text-slate-800 font-bold text-lg leading-none shrink-0">×</button>
                 </div>
             )}
 
@@ -476,7 +476,7 @@ export default function Create({ products: serverProducts }) {
                             {filteredProducts.length === 0 ? (
                                 <div className="flex flex-col items-center justify-center py-12 text-center">
                                     <p className="text-4xl mb-3 grayscale">📦</p>
-                                    <p className=text-slate-500 text-sm">Aucun produit trouvé</p>
+                                    <p className="text-slate-500 text-sm">Aucun produit trouvé</p>
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3">

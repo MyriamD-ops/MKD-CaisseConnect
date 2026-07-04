@@ -53,7 +53,7 @@ export default function UIPreview() {
                     <h1 className="text-4xl font-bold text-slate-800 tracking-tight">
                         Palette Urban
                     </h1>
-                    <p className=text-slate-500 mt-2 text-sm">
+                    <p className="text-slate-500 mt-2 text-sm">
                         Prévisualisation des composants avant intégration — CaisseMobile
                     </p>
                 </div>
@@ -432,9 +432,9 @@ export default function UIPreview() {
                             <span className="text-blue-600 text-lg leading-none mt-0.5">✓</span>
                             <div className="flex-1">
                                 <p className="font-semibold text-slate-800">Vente enregistrée</p>
-                                <p className=text-slate-500 mt-0.5">Vente #247 · 42.50€ · Carte bancaire</p>
+                                <p className="text-slate-500 mt-0.5">Vente #247 · 42.50€ · Carte bancaire</p>
                             </div>
-                            <button className=text-slate-500 hover:text-slate-800 text-lg leading-none">×</button>
+                            <button className="text-slate-500 hover:text-slate-800 text-lg leading-none">×</button>
                         </div>
 
                         {/* Succès hors ligne */}
@@ -442,9 +442,9 @@ export default function UIPreview() {
                             <span className="text-blue-600 text-lg leading-none mt-0.5">💾</span>
                             <div className="flex-1">
                                 <p className="font-semibold text-slate-800">Vente sauvegardée hors ligne</p>
-                                <p className=text-slate-500 mt-0.5">Synchronisation automatique au retour de la connexion.</p>
+                                <p className="text-slate-500 mt-0.5">Synchronisation automatique au retour de la connexion.</p>
                             </div>
-                            <button className=text-slate-500 hover:text-slate-800 text-lg leading-none">×</button>
+                            <button className="text-slate-500 hover:text-slate-800 text-lg leading-none">×</button>
                         </div>
 
                         {/* Erreur */}
@@ -452,9 +452,9 @@ export default function UIPreview() {
                             <span className="text-blue-600 text-lg leading-none mt-0.5">⚠</span>
                             <div className="flex-1">
                                 <p className="font-semibold text-slate-800">Stock insuffisant</p>
-                                <p className=text-slate-500 mt-0.5">Impossible d'ajouter plus que le stock disponible.</p>
+                                <p className="text-slate-500 mt-0.5">Impossible d'ajouter plus que le stock disponible.</p>
                             </div>
-                            <button className=text-slate-500 hover:text-slate-800 text-lg leading-none">×</button>
+                            <button className="text-slate-500 hover:text-slate-800 text-lg leading-none">×</button>
                         </div>
 
                         {/* Danger */}
@@ -462,17 +462,17 @@ export default function UIPreview() {
                             <span className="text-red-500 text-lg leading-none mt-0.5">✕</span>
                             <div className="flex-1">
                                 <p className="font-semibold text-slate-800">Erreur de connexion</p>
-                                <p className=text-slate-500 mt-0.5">Identifiant ou PIN incorrect. Réessayez.</p>
+                                <p className="text-slate-500 mt-0.5">Identifiant ou PIN incorrect. Réessayez.</p>
                             </div>
-                            <button className=text-slate-500 hover:text-slate-800 text-lg leading-none">×</button>
+                            <button className="text-slate-500 hover:text-slate-800 text-lg leading-none">×</button>
                         </div>
 
                         {/* Info / offline */}
                         <div className="flex items-start gap-3 p-4 bg-slate-50 border border-slate-200 rounded-xl text-sm">
-                            <span className=text-slate-500 text-lg leading-none mt-0.5">ℹ</span>
+                            <span className="text-slate-500 text-lg leading-none mt-0.5">ℹ</span>
                             <div className="flex-1">
                                 <p className="font-semibold text-slate-800">Mode hors ligne actif</p>
-                                <p className=text-slate-500 mt-0.5">Les ventes seront synchronisées automatiquement au retour de la connexion.</p>
+                                <p className="text-slate-500 mt-0.5">Les ventes seront synchronisées automatiquement au retour de la connexion.</p>
                             </div>
                         </div>
 

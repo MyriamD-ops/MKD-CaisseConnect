@@ -91,7 +91,7 @@ function BarRow({ nom, categorie, qte, ca, maxCa }) {
 
 function WeekChart({ data }) {
     if (!data || data.every(d => d.total === 0))
-        return <p className=text-slate-500 text-sm text-center py-8">Aucune donnée sur cette période</p>;
+        return <p className="text-slate-500 text-sm text-center py-8">Aucune donnée sur cette période</p>;
     const maxTotal = Math.max(...data.map(d => d.total), 1);
     return (
         <div className="flex items-end gap-2 h-32 pt-4">
@@ -140,7 +140,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                 <div className="flex items-start justify-between gap-4 mb-6">
                     <div>
                         <h2 className="text-2xl font-bold text-slate-800">Statistiques</h2>
-                        <p className=text-slate-500 text-sm mt-1">{labelPeriode}</p>
+                        <p className="text-slate-500 text-sm mt-1">{labelPeriode}</p>
                     </div>
                     <button onClick={handleExport}
                         className="no-print shrink-0 h-10 px-4 flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/60 hover:border-blue-500/40 hover:text-blue-600 text-slate-500 rounded-xl text-sm font-medium transition-colors">
@@ -210,7 +210,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                 <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 shadow-sm mb-6">
                     <h3 className="text-sm font-semibold text-slate-800 mb-4">🏆 Top 5 produits</h3>
                     {topProduits.length === 0
-                        ? <p className=text-slate-500 text-sm text-center py-8">Aucune vente sur cette période</p>
+                        ? <p className="text-slate-500 text-sm text-center py-8">Aucune vente sur cette période</p>
                         : topProduits.map((p, i) => <BarRow key={i} nom={p.nom} categorie={p.categorie} qte={p.qte_vendue} ca={p.ca_produit} maxCa={maxCa} />)
                     }
                 </div>

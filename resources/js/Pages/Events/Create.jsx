@@ -204,7 +204,7 @@ export default function Create({ produits }) {
                                 </h3>
 
                                 {selectedProduits.length === 0 ? (
-                                    <p className=text-slate-500 text-sm text-center py-8">
+                                    <p className="text-slate-500 text-sm text-center py-8">
                                         Aucun produit sélectionné
                                     </p>
                                 ) : (
