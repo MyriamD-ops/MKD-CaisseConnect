@@ -30,12 +30,12 @@ const IconCheck = ({ className = "w-3 h-3" }) => (
 
 /* ── Couleurs et icônes par catégorie ─────────────── */
 const CATEGORY_STYLES = {
-    'Boissons':    { bg: 'from-blue-400 to-blue-600',    icon: '☕' },
-    'Épicerie':    { bg: 'from-slate-400 to-slate-600',  icon: '🛒' },
-    'Hygiène':     { bg: 'from-indigo-400 to-indigo-600', icon: '✦' },
-    'Snacking':    { bg: 'from-sky-400 to-sky-600',      icon: '🍿' },
-    'Accessoires': { bg: 'from-gray-500 to-gray-700',    icon: '✏️' },
-    'default':     { bg: 'from-slate-400 to-slate-500',  icon: '📦' },
+    'Boissons':    { bg: 'from-slate-300 to-slate-500',  icon: '☕' },
+    'Épicerie':    { bg: 'from-slate-300 to-slate-500',  icon: '🛒' },
+    'Hygiène':     { bg: 'from-slate-300 to-slate-500',  icon: '✦' },
+    'Snacking':    { bg: 'from-slate-300 to-slate-500',  icon: '🍿' },
+    'Accessoires': { bg: 'from-slate-300 to-slate-500',  icon: '✏️' },
+    'default':     { bg: 'from-slate-300 to-slate-500',  icon: '📦' },
 };
 
 export default function Index({ products: serverProducts }) {
@@ -153,11 +153,11 @@ export default function Index({ products: serverProducts }) {
                                     {/* Infos produit */}
                                     <div className="p-4">
                                         <Link href={`/products/${product.id_produit}`} className="block mb-3">
-                                            <h3 className="font-bold text-slate-800 hover:text-blue-600 transition-colors text-base truncate">
+                                            <h3 className="font-bold text-slate-800 hover:text-blue-600 transition-colors text-lg truncate">
                                                 {product.nom}
                                             </h3>
                                             <div className="flex items-baseline justify-between mt-1">
-                                                <span className="text-xl font-bold text-slate-800">{product.prix_base} €</span>
+                                                <span className="text-base font-semibold text-slate-600">{product.prix_base} €</span>
                                                 <span className="text-sm text-slate-500">Stock : {product.stock_actuel}</span>
                                             </div>
                                         </Link>
@@ -169,7 +169,7 @@ export default function Index({ products: serverProducts }) {
                                                 <IconEdit className="w-4 h-4" /> Modifier
                                             </Link>
                                             <button onClick={() => handleDelete(product.id_produit, product.nom)}
-                                                className="flex-1 h-10 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-red-500 hover:text-red-600 rounded-xl text-sm font-medium transition-all">
+                                                className="flex-1 h-10 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-blue-500 hover:text-blue-700 rounded-xl text-sm font-medium transition-all">
                                                 <IconTrash className="w-4 h-4" /> Supprimer
                                             </button>
                                         </div>
