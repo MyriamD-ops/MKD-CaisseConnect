@@ -30,12 +30,12 @@ const IconCheck = ({ className = "w-3 h-3" }) => (
 
 /* ── Couleurs et icônes par catégorie ─────────────── */
 const CATEGORY_STYLES = {
-    'Boissons':    { bg: 'from-slate-300 to-slate-500',  icon: '☕' },
-    'Épicerie':    { bg: 'from-slate-300 to-slate-500',  icon: '🛒' },
-    'Hygiène':     { bg: 'from-slate-300 to-slate-500',  icon: '✦' },
-    'Snacking':    { bg: 'from-slate-300 to-slate-500',  icon: '🍿' },
-    'Accessoires': { bg: 'from-slate-300 to-slate-500',  icon: '✏️' },
-    'default':     { bg: 'from-slate-300 to-slate-500',  icon: '📦' },
+    'Boissons':    { bg: 'from-slate-600 to-slate-600',  icon: '☕' },
+    'Épicerie':    { bg: 'from-slate-600 to-slate-600',  icon: '🛒' },
+    'Hygiène':     { bg: 'from-slate-600 to-slate-600',  icon: '✦' },
+    'Snacking':    { bg: 'from-slate-600 to-slate-600',  icon: '🍿' },
+    'Accessoires': { bg: 'from-slate-600 to-slate-600',  icon: '✏️' },
+    'default':     { bg: 'from-slate-600 to-slate-600',  icon: '📦' },
 };
 
 export default function Index({ products: serverProducts }) {
