@@ -28,6 +28,16 @@ const IconCheck = ({ className = "w-3 h-3" }) => (
     </svg>
 );
 
+/* ── Couleurs et icônes par catégorie ─────────────── */
+const CATEGORY_STYLES = {
+    'Boissons':    { bg: 'from-blue-400 to-blue-600',    icon: '☕' },
+    'Épicerie':    { bg: 'from-slate-400 to-slate-600',  icon: '🛒' },
+    'Hygiène':     { bg: 'from-indigo-400 to-indigo-600', icon: '✦' },
+    'Snacking':    { bg: 'from-sky-400 to-sky-600',      icon: '🍿' },
+    'Accessoires': { bg: 'from-gray-500 to-gray-700',    icon: '✏️' },
+    'default':     { bg: 'from-slate-400 to-slate-500',  icon: '📦' },
+};
+
 export default function Index({ products: serverProducts }) {
     const { flash } = usePage().props;
     const isOnline = useOnlineStatus();
@@ -116,34 +126,53 @@ export default function Index({ products: serverProducts }) {
                         </Link>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                         {products.map((product) => {
                             const stockBas = product.stock_actuel <= product.stock_minimum;
+                            const catStyle = CATEGORY_STYLES[product.categorie] || CATEGORY_STYLES['default'];
                             return (
                                 <div key={product.id_produit}
-                                    className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 flex flex-col gap-4 hover:bg-white/90 hover:shadow-lg transition-all shadow-sm">
-                                    <div className="flex items-start justify-between gap-2">
-                                        <Link href={`/products/${product.id_produit}`} className="flex-1 min-w-0">
-                                            <h3 className="font-semibold text-slate-800 hover:text-blue-600 transition-colors truncate">{product.nom}</h3>
-                                        </Link>
-                                        <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1 ${stockBas ? 'bg-slate-200/80 text-slate-600 border border-slate-300' : 'bg-blue-50 text-blue-600 border border-blue-200'}`}>
+                                    className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 overflow-hidden hover:bg-white/90 hover:shadow-xl transition-all shadow-sm group">
+
+                                    {/* Visuel produit — placeholder catégorie */}
+                                    <Link href={`/products/${product.id_produit}`}
+                                        className={`block h-36 bg-gradient-to-br ${catStyle.bg} flex items-center justify-center relative`}>
+                                        <span className="text-5xl opacity-80 group-hover:scale-110 transition-transform duration-300">
+                                            {catStyle.icon}
+                                        </span>
+                                        {/* Badge stock */}
+                                        <span className={`absolute top-3 right-3 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm ${stockBas ? 'bg-white/30 text-white' : 'bg-white/90 text-blue-600'}`}>
                                             {stockBas ? '⚠ Bas' : <><IconCheck className="w-3 h-3" /> OK</>}
                                         </span>
-                                    </div>
-                                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                                        <span className="text-slate-800 font-bold">{product.prix_base}€</span>
-                                        <span className="text-slate-500">Stock : {product.stock_actuel}</span>
-                                        <span className="text-slate-500 truncate">{product.categorie}</span>
-                                    </div>
-                                    <div className="flex gap-2 mt-auto">
-                                        <Link href={`/products/${product.id_produit}/edit`}
-                                            className="flex-1 h-11 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-blue-600 rounded-xl text-sm font-medium transition-all">
-                                            <IconEdit className="w-4 h-4" /> Modifier
+                                        {/* Badge catégorie */}
+                                        <span className="absolute bottom-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-white/20 text-white backdrop-blur-sm">
+                                            {product.categorie}
+                                        </span>
+                                    </Link>
+
+                                    {/* Infos produit */}
+                                    <div className="p-4">
+                                        <Link href={`/products/${product.id_produit}`} className="block mb-3">
+                                            <h3 className="font-bold text-slate-800 hover:text-blue-600 transition-colors text-base truncate">
+                                                {product.nom}
+                                            </h3>
+                                            <div className="flex items-baseline justify-between mt-1">
+                                                <span className="text-xl font-bold text-slate-800">{product.prix_base} €</span>
+                                                <span className="text-sm text-slate-500">Stock : {product.stock_actuel}</span>
+                                            </div>
                                         </Link>
-                                        <button onClick={() => handleDelete(product.id_produit, product.nom)}
-                                            className="flex-1 h-11 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-red-500 hover:text-red-600 rounded-xl text-sm font-medium transition-all">
-                                            <IconTrash className="w-4 h-4" /> Supprimer
-                                        </button>
+
+                                        {/* Actions */}
+                                        <div className="flex gap-2">
+                                            <Link href={`/products/${product.id_produit}/edit`}
+                                                className="flex-1 h-10 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-blue-600 rounded-xl text-sm font-medium transition-all">
+                                                <IconEdit className="w-4 h-4" /> Modifier
+                                            </Link>
+                                            <button onClick={() => handleDelete(product.id_produit, product.nom)}
+                                                className="flex-1 h-10 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-red-500 hover:text-red-600 rounded-xl text-sm font-medium transition-all">
+                                                <IconTrash className="w-4 h-4" /> Supprimer
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             );
