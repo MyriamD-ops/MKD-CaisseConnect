@@ -399,7 +399,7 @@ export default function Create({ products: serverProducts }) {
                                     }`}
                                 >
                                     {moyen === 'Espèces' && '💵 '}
-                                    {moyen === 'Carte bancaire' && '💳 '}
+                                    {moyen === 'Carte bancaire' && ''}
                                     {moyen === 'Chèque' && '📝 '}
                                     {moyen === 'Virement' && '🏦 '}
                                     {moyen}

@@ -154,7 +154,7 @@ export default function Show({ sale }) {
                             onClick={() => setShowSmsModal(true)}
                             className="w-full h-11 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 border border-slate-200 rounded-xl text-sm font-medium transition-colors mb-3"
                         >
-                            📱 Envoyer le reçu par SMS
+                            Envoyer le reçu par SMS
                         </button>
                     )}
 

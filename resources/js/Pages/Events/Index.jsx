@@ -15,8 +15,8 @@ export default function Index({ evenements }) {
             termine:  'bg-slate-100 text-slate-500 border-slate-100',
         };
         const labels = {
-            planifie: '📅 Planifié',
-            en_cours: '✅ En cours',
+            planifie: 'Planifié',
+            en_cours: 'En cours',
             termine:  '🏁 Terminé',
         };
         return (
@@ -82,9 +82,9 @@ export default function Index({ evenements }) {
 
                                         {/* Méta */}
                                         <div className="flex flex-wrap gap-4 text-sm text-slate-500 mb-3">
-                                            <span>📍 {event.lieu || 'Non précisé'}</span>
-                                            <span>📅 Du {new Date(event.date_debut).toLocaleDateString('fr-FR')} au {new Date(event.date_fin).toLocaleDateString('fr-FR')}</span>
-                                            <span>📦 {event.produits_count} produit{event.produits_count > 1 ? 's' : ''}</span>
+                                            <span>{event.lieu || 'Non précisé'}</span>
+                                            <span>Du {new Date(event.date_debut).toLocaleDateString('fr-FR')} au {new Date(event.date_fin).toLocaleDateString('fr-FR')}</span>
+                                            <span>{event.produits_count} produit{event.produits_count > 1 ? 's' : ''}</span>
                                         </div>
 
                                         {/* Code unique */}

@@ -37,7 +37,7 @@ function FlyerTemplateModal({ onGenerate, onClose }) {
                         onClick={() => onGenerate(selected)}
                         className="flex-1 h-11 flex items-center justify-center bg-blue-600 hover:brightness-90 text-white font-bold rounded-xl text-sm transition-all"
                     >
-                        📸 Générer
+                        Générer
                     </button>
                     <button
                         onClick={onClose}
@@ -188,7 +188,7 @@ export default function Show({ evenement }) {
                                             </svg>
                                             Génération...
                                         </>
-                                    ) : '📸 Flyer Instagram'}
+                                    ) : 'Flyer Instagram'}
                                 </button>
                             )}
 

@@ -374,9 +374,9 @@ export default function UIPreview() {
                                 </span>
                             </div>
                             <div className="text-sm text-slate-500 space-y-1">
-                                <p>📍 Place de la mairie</p>
-                                <p>📅 14 déc. → 22 déc.</p>
-                                <p>📦 8 produits</p>
+                                <p>Place de la mairie</p>
+                                <p>14 déc. → 22 déc.</p>
+                                <p>8 produits</p>
                             </div>
                             <div className="flex gap-2 mt-auto">
                                 <button className="flex-1 h-11 flex items-center justify-center bg-blue-600/10 hover:bg-blue-600/20 text-blue-600 rounded-xl text-sm font-medium transition-colors border border-blue-500/20">

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Header from '../../Components/Header';
 import useOnlineStatus from '../../Hooks/useOnlineStatus';
 import { getVentesNonSync, syncVentes } from '../../utils/sync';
+import { IconReceipt, IconSearch, IconEye, IconCheck, IconRefresh, IconCreditCard, IconCart } from '../../Components/Icons';
 
 export default function Index({ sales }) {
     const isOnline = useOnlineStatus();
@@ -27,7 +28,7 @@ export default function Index({ sales }) {
         setSyncing(true);
         try {
             const count = await syncVentes();
-            if (count > 0) { alert(`✅ ${count} vente(s) synchronisée(s) !`); window.location.reload(); }
+            if (count > 0) { alert(`${count} vente(s) synchronisée(s) !`); window.location.reload(); }
         } catch (error) {
             console.error('Erreur sync:', error);
         } finally {
@@ -56,12 +57,12 @@ export default function Index({ sales }) {
                             {ventesLocales.length > 0 && isOnline && (
                                 <button onClick={handleSync} disabled={syncing}
                                     className="h-9 px-3 bg-blue-50 hover:bg-blue-100/20 text-blue-600 border border-blue-200 font-medium rounded-xl text-sm transition-colors disabled:opacity-50 whitespace-nowrap">
-                                    {syncing ? '⏳' : '🔄'}
+                                    {syncing ? <IconRefresh className="w-4 h-4 animate-spin" /> : <IconRefresh className="w-4 h-4" />}
                                 </button>
                             )}
                             <a href="/sales/export"
                                 className="h-9 px-3 flex items-center gap-1.5 bg-white/70 backdrop-blur-md border border-white/60 hover:border-slate/50 text-slate-500 hover:text-slate-800 rounded-xl text-sm font-medium transition-colors whitespace-nowrap">
-                                ⬇️ CSV
+                                CSV
                             </a>
                             <Link href="/sales/create"
                                 className="h-9 px-3 flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-colors whitespace-nowrap">
@@ -82,7 +83,7 @@ export default function Index({ sales }) {
                 {/* État vide */}
                 {totalVentes === 0 ? (
                     <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-12 text-center">
-                        <p className="text-5xl mb-4 grayscale">🛍️</p>
+                        <p className="text-5xl mb-4 grayscale"></p>
                         <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucune vente</h3>
                         <p className="text-slate-500 text-sm mb-6">Les ventes apparaîtront ici</p>
                         <Link href="/sales/create"
@@ -102,10 +103,10 @@ export default function Index({ sales }) {
                                         <span className="px-2.5 py-1 bg-blue-600/5 text-blue-600 border border-blue-500/30 rounded-full text-xs font-semibold">⏳ Non sync.</span>
                                     </div>
                                     <div className="flex flex-wrap gap-3 text-sm text-slate">
-                                        <span>📅 {new Date(vente.date_vente).toLocaleDateString('fr-FR')}</span>
-                                        <span>💳 {vente.mode_paiement}</span>
-                                        <span className="font-semibold text-slate-800">💰 {parseFloat(vente.montant_total).toFixed(2)}€</span>
-                                        <span>📦 {vente.articles?.length || 0} article{vente.articles?.length > 1 ? 's' : ''}</span>
+                                        <span>{new Date(vente.date_vente).toLocaleDateString('fr-FR')}</span>
+                                        <span>{vente.mode_paiement}</span>
+                                        <span className="font-semibold text-slate-800">{parseFloat(vente.montant_total).toFixed(2)}€</span>
+                                        <span>{vente.articles?.length || 0} article{vente.articles?.length > 1 ? 's' : ''}</span>
                                     </div>
                                 </div>
                             </div>
@@ -119,15 +120,15 @@ export default function Index({ sales }) {
                                         {sale.numero_vente}
                                     </h3>
                                     <div className="flex flex-wrap gap-3 text-sm text-slate">
-                                        <span>📅 {new Date(sale.date_vente).toLocaleDateString('fr-FR')} à {new Date(sale.date_vente).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
-                                        <span>👤 {sale.utilisateur?.username || 'N/A'}</span>
-                                        <span>💳 {sale.moyen_paiement}</span>
-                                        <span className="font-semibold text-slate-800">💰 {parseFloat(sale.montant_total).toFixed(2)}€</span>
+                                        <span>{new Date(sale.date_vente).toLocaleDateString('fr-FR')} à {new Date(sale.date_vente).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
+                                        <span>{sale.utilisateur?.username || 'N/A'}</span>
+                                        <span>{sale.moyen_paiement}</span>
+                                        <span className="font-semibold text-slate-800">{parseFloat(sale.montant_total).toFixed(2)}€</span>
                                     </div>
                                 </div>
                                 <Link href={`/sales/${sale.id_vente}`}
                                     className="shrink-0 h-9 px-4 flex items-center bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 border border-slate-200 rounded-xl text-sm font-medium transition-colors">
-                                    📄 Détails
+                                    Détails
                                 </Link>
                             </div>
                         ))}

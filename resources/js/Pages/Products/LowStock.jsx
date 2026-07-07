@@ -59,7 +59,7 @@ export default function LowStock({ lowStockProducts = [] }) {
                                                 )}
                                             </div>
                                             <div className="flex flex-wrap gap-4 text-sm text-slate-500 mb-4">
-                                                <span>💰 {product.prix_base}€</span>
+                                                <span>{product.prix_base}€</span>
                                                 <span>🏷️ {product.categorie}</span>
                                                 {product.matiere && <span>🔧 {product.matiere}</span>}
                                             </div>

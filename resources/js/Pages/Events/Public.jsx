@@ -5,7 +5,7 @@ export default function Public({ evenement }) {
             <header className="bg-dark text-white px-4 py-6 text-center">
                 <h1 className="text-2xl font-bold tracking-tight mb-1">{evenement.nom}</h1>
                 <p className="text-sm text-white/70">
-                    📍 {evenement.lieu} · 📅 {evenement.date_debut} – {evenement.date_fin}
+                    {evenement.lieu} · {evenement.date_debut} – {evenement.date_fin}
                 </p>
             </header>
 
@@ -60,7 +60,7 @@ export default function Public({ evenement }) {
                                 <div className="flex flex-col gap-1 mb-4 text-sm text-slate">
                                     {produit.categorie && <span>🏷️ {produit.categorie}</span>}
                                     {produit.matiere && <span>🔧 {produit.matiere}</span>}
-                                    {produit.disponible && <span>📦 {produit.stock_evenement} en stock</span>}
+                                    {produit.disponible && <span>{produit.stock_evenement} en stock</span>}
                                 </div>
 
                                 {/* Prix */}

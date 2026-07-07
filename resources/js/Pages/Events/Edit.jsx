@@ -133,8 +133,8 @@ export default function Edit({ evenement, produits }) {
                                             onChange={(e) => setFormData({ ...formData, statut: e.target.value })}
                                             className={FIELD_CLASS}
                                         >
-                                            <option value="planifie">📅 Planifié</option>
-                                            <option value="en_cours">✅ En cours</option>
+                                            <option value="planifie">Planifié</option>
+                                            <option value="en_cours">En cours</option>
                                             <option value="termine">🏁 Terminé</option>
                                         </select>
                                     </div>

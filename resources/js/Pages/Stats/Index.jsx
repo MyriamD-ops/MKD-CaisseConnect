@@ -144,13 +144,13 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                     </div>
                     <button onClick={handleExport}
                         className="no-print shrink-0 h-10 px-4 flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/60 hover:border-blue-500/40 hover:text-blue-600 text-slate-500 rounded-xl text-sm font-medium transition-colors">
-                        📸 Exporter
+                        Exporter
                     </button>
                 </div>
 
                 {/* Onglets */}
                 <div className="flex gap-2 mb-4 flex-wrap no-print">
-                    {[{ key: 'jour', label: '📅 Jour' }, { key: 'mois', label: '🗓️ Mois' }, { key: 'evenement', label: '🎪 Événement' }].map(({ key, label }) => (
+                    {[{ key: 'jour', label: 'Jour' }, { key: 'mois', label: '🗓️ Mois' }, { key: 'evenement', label: '🎪 Événement' }].map(({ key, label }) => (
                         <button key={key} onClick={() => naviguer(key, key === 'jour' ? { date: dateInput } : {})}
                             className={`h-10 px-5 rounded-xl text-sm font-semibold transition-colors ${periodeActive === key ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/20' : 'bg-white/70 backdrop-blur-md border border-white/60 text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}>
                             {label}
@@ -197,7 +197,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                 {/* Graphes */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                     <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 shadow-sm">
-                        <h3 className="text-sm font-semibold text-slate-800 mb-4">💳 Moyens de paiement</h3>
+                        <h3 className="text-sm font-semibold text-slate-800 mb-4">Moyens de paiement</h3>
                         <PieChart data={dataPaiement} total={totalPaiement} />
                     </div>
                     <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 shadow-sm">
@@ -218,7 +218,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                 {/* Ventes par heure (mode jour) */}
                 {periodeActive === 'jour' && ventesParHeure.length > 0 && (
                     <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 shadow-sm">
-                        <h3 className="text-sm font-semibold text-slate-800 mb-4">📈 Ventes par heure</h3>
+                        <h3 className="text-sm font-semibold text-slate-800 mb-4">Ventes par heure</h3>
                         <div className="flex items-end gap-1 h-28">
                             {ventesParHeure.map((v, i) => {
                                 const maxT = Math.max(...ventesParHeure.map(x => x.total), 1);
