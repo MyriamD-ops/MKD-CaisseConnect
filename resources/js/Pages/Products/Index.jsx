@@ -28,14 +28,49 @@ const IconCheck = ({ className = "w-3 h-3" }) => (
     </svg>
 );
 
-/* ── Couleurs et icônes par catégorie ─────────────── */
+/* ── Icônes SVG par catégorie ─────────────────────── */
+const CatIconBoissons = () => (
+    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 8h1a4 4 0 1 1 0 8h-1" /><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+        <line x1="6" y1="2" x2="6" y2="4" /><line x1="10" y1="2" x2="10" y2="4" /><line x1="14" y1="2" x2="14" y2="4" />
+    </svg>
+);
+const CatIconEpicerie = () => (
+    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" />
+        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+    </svg>
+);
+const CatIconHygiene = () => (
+    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+        <path d="m9 12 2 2 4-4" />
+    </svg>
+);
+const CatIconSnacking = () => (
+    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2a10 10 0 1 0 10 10H12Z" /><path d="M12 2a10 10 0 0 1 10 10" />
+    </svg>
+);
+const CatIconAccessoires = () => (
+    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" />
+    </svg>
+);
+const CatIconDefault = () => (
+    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+        <path d="m3.3 7 8.7 5 8.7-5" /><path d="M12 22V12" />
+    </svg>
+);
+
 const CATEGORY_STYLES = {
-    'Boissons':    { bg: 'from-slate-400 to-slate-500',  icon: '☕' },
-    'Épicerie':    { bg: 'from-slate-400 to-slate-500',  icon: '🛒' },
-    'Hygiène':     { bg: 'from-slate-400 to-slate-500',  icon: '✦' },
-    'Snacking':    { bg: 'from-slate-400 to-slate-500',  icon: '🍿' },
-    'Accessoires': { bg: 'from-slate-400 to-slate-500',  icon: '✏️' },
-    'default':     { bg: 'from-slate-400 to-slate-500',  icon: '📦' },
+    'Boissons':    { bg: 'from-slate-300 to-slate-400',  Icon: CatIconBoissons },
+    'Épicerie':    { bg: 'from-slate-300 to-slate-400',  Icon: CatIconEpicerie },
+    'Hygiène':     { bg: 'from-slate-300 to-slate-400',  Icon: CatIconHygiene },
+    'Snacking':    { bg: 'from-slate-300 to-slate-400',  Icon: CatIconSnacking },
+    'Accessoires': { bg: 'from-slate-300 to-slate-400',  Icon: CatIconAccessoires },
+    'default':     { bg: 'from-slate-300 to-slate-400',  Icon: CatIconDefault },
 };
 
 export default function Index({ products: serverProducts }) {
@@ -130,15 +165,16 @@ export default function Index({ products: serverProducts }) {
                         {products.map((product) => {
                             const stockBas = product.stock_actuel <= product.stock_minimum;
                             const catStyle = CATEGORY_STYLES[product.categorie] || CATEGORY_STYLES['default'];
+                            const CatIcon = catStyle.Icon;
                             return (
                                 <div key={product.id_produit}
-                                    className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 overflow-hidden hover:bg-white/90 hover:shadow-xl transition-all shadow-sm group">
+                                    className="bg-white/70 backdrop-blur-md rounded-lg border border-white/60 overflow-hidden hover:bg-white/90 hover:shadow-xl transition-all shadow-sm group">
 
-                                    {/* Visuel produit — placeholder catégorie */}
+                                    {/* Visuel produit */}
                                     <Link href={`/products/${product.id_produit}`}
                                         className={`block h-36 bg-gradient-to-br ${catStyle.bg} flex items-center justify-center relative`}>
-                                        <span className="text-5xl opacity-80 group-hover:scale-110 transition-transform duration-300">
-                                            {catStyle.icon}
+                                        <span className="opacity-70 group-hover:scale-110 transition-transform duration-300">
+                                            <CatIcon />
                                         </span>
                                         {/* Badge stock */}
                                         <span className={`absolute top-3 right-3 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm ${stockBas ? 'bg-white/30 text-white' : 'bg-white/90 text-blue-600'}`}>
@@ -165,11 +201,11 @@ export default function Index({ products: serverProducts }) {
                                         {/* Actions */}
                                         <div className="flex gap-2">
                                             <Link href={`/products/${product.id_produit}/edit`}
-                                                className="flex-1 h-10 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-blue-600 rounded-xl text-sm font-medium transition-all">
+                                                className="flex-1 h-10 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-blue-600 rounded-lg text-sm font-medium transition-all">
                                                 <IconEdit className="w-4 h-4" /> Modifier
                                             </Link>
                                             <button onClick={() => handleDelete(product.id_produit, product.nom)}
-                                                className="flex-1 h-10 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-blue-500 hover:text-blue-700 rounded-xl text-sm font-medium transition-all">
+                                                className="flex-1 h-10 flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-blue-500 hover:text-blue-700 rounded-lg text-sm font-medium transition-all">
                                                 <IconTrash className="w-4 h-4" /> Supprimer
                                             </button>
                                         </div>
