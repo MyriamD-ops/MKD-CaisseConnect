@@ -5,6 +5,25 @@ import useOnlineStatus from '../../Hooks/useOnlineStatus';
 import { syncProduits, getProduitsLocal } from '../../utils/sync';
 import { IconBox, IconEdit, IconTrash, IconDownload, IconCheck, IconPlus } from '../../Components/Icons';
 
+/* Mapping nom produit → image (démo) */
+const PRODUCT_IMAGES = {
+    'Eau minérale 1,5L':     '/images/products/eau-minerale.jpg',
+    'Jus d\'orange 1L':      '/images/products/jus-orange.jpg',
+    'Soda cola 33cl':        '/images/products/soda-cola.jpg',
+    'Café expresso':         '/images/products/cafe-expresso.jpg',
+    'Pain de mie nature':    '/images/products/pain-mie.jpg',
+    'Beurre doux 250g':      '/images/products/beurre.jpg',
+    'Confiture fraise 370g': '/images/products/confiture.jpg',
+    'Pâtes 500g':            '/images/products/pates.jpg',
+    'Savon mains 300ml':     '/images/products/savon.jpg',
+    'Dentifrice 75ml':       '/images/products/dentifrice.jpg',
+    'Chips nature 150g':     '/images/products/chips.jpg',
+    'Barre chocolatée':      '/images/products/chocolat.jpg',
+    'Cacahuètes grillées':   '/images/products/cacahuetes.jpg',
+    'Stylo bille bleu':      '/images/products/stylo.jpg',
+    'Carnet A5':             '/images/products/carnet.jpg',
+};
+
 export default function Index({ products: serverProducts }) {
     const { flash } = usePage().props;
     const isOnline = useOnlineStatus();
@@ -97,14 +116,20 @@ export default function Index({ products: serverProducts }) {
                         {products.map((product) => {
                             const stockBas = product.stock_actuel <= product.stock_minimum;
                             const rupture = product.stock_actuel === 0;
+                            const imgSrc = PRODUCT_IMAGES[product.nom];
                             return (
                                 <div key={product.id_produit}
                                     className="group bg-white rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-t-4 border-emerald-500 overflow-hidden flex flex-col h-full">
 
-                                    {/* Zone image — dégradé lumineux */}
+                                    {/* Zone image */}
                                     <Link href={`/products/${product.id_produit}`}
-                                        className="block h-28 bg-gradient-to-br from-emerald-50 to-blue-50 flex items-center justify-center relative">
-                                        <IconBox className="w-14 h-14 text-emerald-300/60 group-hover:text-emerald-400 transition-colors" />
+                                        className="block h-36 bg-gradient-to-br from-emerald-50 to-blue-50 flex items-center justify-center relative overflow-hidden">
+                                        {imgSrc ? (
+                                            <img src={imgSrc} alt={product.nom}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                        ) : (
+                                            <IconBox className="w-14 h-14 text-emerald-300/60 group-hover:text-emerald-400 transition-colors" />
+                                        )}
                                         <span className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full border shadow-sm ${
                                             rupture
                                                 ? 'bg-red-100 text-red-700 border-red-200'
