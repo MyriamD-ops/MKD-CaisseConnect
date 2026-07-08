@@ -143,7 +143,7 @@ export default function Index({ products: serverProducts }) {
                                                 <IconEdit className="w-4 h-4" /> Modifier
                                             </Link>
                                             <button onClick={() => handleDelete(product.id_produit, product.nom)}
-                                                className="flex-1 py-2 text-sm font-semibold text-red-600 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-1.5">
+                                                className="flex-1 py-2 text-sm font-semibold text-slate-500 bg-slate-50 border border-slate-200 rounded-lg hover:bg-red-50 hover:text-red-600 hover:border-red-200 hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-1.5">
                                                 <IconTrash className="w-4 h-4" /> Supprimer
                                             </button>
                                         </div>
