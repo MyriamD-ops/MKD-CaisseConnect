@@ -27,7 +27,7 @@ export default function Show({ product }) {
     const stockBas = product.stock_actuel <= product.stock_minimum;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="products" />
 
             <main className="p-4 lg:p-6 max-w-5xl mx-auto">
@@ -40,13 +40,13 @@ export default function Show({ product }) {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Informations produit */}
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-6">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-6">
                         <div className="flex items-start justify-between gap-3 mb-5">
                             <h2 className="text-2xl font-bold text-slate-800">{product.nom}</h2>
                             <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full border ${
                                 stockBas
                                     ? 'bg-red-50 text-red-500 border-red-200'
-                                    : 'bg-blue-50 text-blue-600 border-blue-200'
+                                    : 'bg-emerald-50 text-emerald-600 border-emerald-200'
                             }`}>
                                 {stockBas ? '⚠ Bas' : '✓ OK'}
                             </span>
@@ -59,7 +59,7 @@ export default function Show({ product }) {
                         <div className="space-y-0 divide-y divide-slate/10">
                             <div className="flex justify-between items-center py-3">
                                 <span className="text-sm text-slate">Prix</span>
-                                <span className="text-lg font-bold text-blue-600">{product.prix_base}€</span>
+                                <span className="text-lg font-bold text-emerald-600">{product.prix_base}€</span>
                             </div>
                             <div className="flex justify-between items-center py-3">
                                 <span className="text-sm text-slate">Catégorie</span>
@@ -98,10 +98,10 @@ export default function Show({ product }) {
                     </div>
 
                     {/* QR Code */}
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-6 flex flex-col items-center">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-6 flex flex-col items-center">
                         <h3 className="text-lg font-semibold text-slate-800 mb-5 text-center">QR Code du produit</h3>
 
-                        <div className="p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-xl mb-4">
+                        <div className="p-6 bg-slate-50 rounded-xl mb-4">
                             <QRCodeSVG
                                 id="qr-code-barcode"
                                 value={product.code_barres}
@@ -111,7 +111,7 @@ export default function Show({ product }) {
                             />
                         </div>
 
-                        <div className="w-full px-4 py-2.5 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border border-slate-200 rounded-xl mb-4">
+                        <div className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl mb-4">
                             <p className="text-xs text-slate-500 text-center font-mono">{product.code_barres}</p>
                         </div>
 
@@ -121,13 +121,13 @@ export default function Show({ product }) {
 
                         <button
                             onClick={downloadQR}
-                            className="w-full h-11 bg-blue-50 hover:bg-blue-100/20 text-blue-600 border border-blue-200 rounded-xl text-sm font-medium transition-colors mb-3"
+                            className="w-full h-11 bg-emerald-50 hover:bg-emerald-100/20 text-emerald-600 border border-emerald-200 rounded-xl text-sm font-medium transition-colors mb-3"
                         >
                             📥 Télécharger le QR Code
                         </button>
 
-                        <div className="w-full p-3 bg-blue-600/5 border border-blue-500/20 rounded-xl">
-                            <p className="text-xs text-blue-600 text-center font-medium">
+                        <div className="w-full p-3 bg-emerald-700/5 border border-emerald-500/20 rounded-xl">
+                            <p className="text-xs text-emerald-600 text-center font-medium">
                                 💡 Imprimez ce QR code pour vos étiquettes produit
                             </p>
                         </div>

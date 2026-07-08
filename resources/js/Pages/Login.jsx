@@ -27,7 +27,7 @@ export default function Login() {
     };
 
     return (
-        <div className="relative min-h-screen flex items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="relative min-h-screen flex items-center justify-center p-4 overflow-hidden bg-slate-50">
             {/* Éléments décoratifs flous */}
             <div className="absolute top-0 -left-20 w-72 h-72 bg-ember rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob pointer-events-none" />
             <div className="absolute bottom-0 -right-20 w-80 h-80 bg-dark rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000 pointer-events-none" />
@@ -56,8 +56,8 @@ export default function Login() {
 
                 {/* Flash succès */}
                 {flash?.success && (
-                    <div className="mb-5 p-4 bg-blue-50/80 border border-blue-200 rounded-xl text-slate-800 text-sm flex items-center gap-2">
-                        <span className="text-blue-600 text-lg">✓</span>
+                    <div className="mb-5 p-4 bg-emerald-50/80 border border-emerald-200 rounded-xl text-slate-800 text-sm flex items-center gap-2">
+                        <span className="text-emerald-600 text-lg">✓</span>
                         <span>{flash.success}</span>
                     </div>
                 )}
@@ -121,7 +121,7 @@ export default function Login() {
                         className="w-full h-12 bg-linear-to-r from-ember to-ember-dim hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-ember/30"
                     >
                         {processing && (
-                            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            <span className="w-4 h-4 border-2 border-slate-100 border-t-white rounded-full animate-spin" />
                         )}
                         {processing ? 'Connexion...' : 'Se connecter'}
                     </button>

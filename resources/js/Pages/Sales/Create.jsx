@@ -229,14 +229,14 @@ export default function Create({ products: serverProducts }) {
                 type="button"
                 onClick={() => onChange('euro')}
                 className={`w-10 h-10 text-sm font-bold transition-colors ${
-                    value === 'euro' ? 'bg-blue-600 text-white' : 'bg-white text-slate'
+                    value === 'euro' ? 'bg-emerald-700 text-white' : 'bg-white text-slate'
                 }`}
             >€</button>
             <button
                 type="button"
                 onClick={() => onChange('percent')}
                 className={`w-10 h-10 text-sm font-bold transition-colors border-l border-slate-300 ${
-                    value === 'percent' ? 'bg-blue-600 text-white' : 'bg-white text-slate'
+                    value === 'percent' ? 'bg-emerald-700 text-white' : 'bg-white text-slate'
                 }`}
             >%</button>
         </div>
@@ -249,7 +249,7 @@ export default function Create({ products: serverProducts }) {
             <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 shrink-0">
                 <h2 className="font-semibold text-slate-800">
                     Panier
-                    <span className="ml-2 px-2 py-0.5 bg-blue-600/10 text-blue-600 text-xs rounded-full font-bold">
+                    <span className="ml-2 px-2 py-0.5 bg-emerald-700/10 text-emerald-600 text-xs rounded-full font-bold">
                         {cart.length}
                     </span>
                 </h2>
@@ -291,7 +291,7 @@ export default function Create({ products: serverProducts }) {
                             : 0;
 
                         return (
-                            <div key={item.id_produit} className="bg-white/50 rounded-xl p-3 border border-slate-200">
+                            <div key={item.id_produit} className="bg-slate-50 rounded-xl p-3 border border-slate-200">
                                 {/* Nom + supprimer */}
                                 <div className="flex items-start justify-between mb-2">
                                     <div className="flex-1 min-w-0 mr-2">
@@ -303,15 +303,15 @@ export default function Create({ products: serverProducts }) {
 
                                 {/* Quantité + prix ligne */}
                                 <div className="flex items-center gap-2 mb-3">
-                                    <button onClick={() => updateQuantity(item.id_produit, item.quantite - 1)} className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-blue-600/10 hover:text-blue-600 text-slate-800 rounded-xl font-bold text-lg shrink-0">−</button>
+                                    <button onClick={() => updateQuantity(item.id_produit, item.quantite - 1)} className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl font-bold text-lg shrink-0">−</button>
                                     <input
                                         type="number"
                                         value={item.quantite}
                                         onChange={(e) => updateQuantity(item.id_produit, parseInt(e.target.value) || 0)}
-                                        className="w-14 h-11 text-center bg-white/70 backdrop-blur-md border border-white/60 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500"
+                                        className="w-14 h-11 text-center bg-white border border-slate-100 shadow-sm rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500"
                                     />
-                                    <button onClick={() => updateQuantity(item.id_produit, item.quantite + 1)} className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-blue-600/10 hover:text-blue-600 text-slate-800 rounded-xl font-bold text-lg shrink-0">+</button>
-                                    <span className="ml-auto text-sm font-bold text-blue-600 shrink-0">{getPrixLigne(item).toFixed(2)}€</span>
+                                    <button onClick={() => updateQuantity(item.id_produit, item.quantite + 1)} className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl font-bold text-lg shrink-0">+</button>
+                                    <span className="ml-auto text-sm font-bold text-emerald-600 shrink-0">{getPrixLigne(item).toFixed(2)}€</span>
                                 </div>
 
                                 {/* Remise article — design mobile optimisé */}
@@ -333,7 +333,7 @@ export default function Create({ products: serverProducts }) {
                                             placeholder="0"
                                             value={item.remise}
                                             onChange={(e) => updateRemiseLigne(item.id_produit, 'remise', e.target.value)}
-                                            className="flex-1 h-10 px-3 bg-white/70 backdrop-blur-md border border-white/60 rounded-lg text-slate-800 text-sm text-center focus:outline-none focus:border-blue-500"
+                                            className="flex-1 h-10 px-3 bg-white border border-slate-100 shadow-sm rounded-lg text-slate-800 text-sm text-center focus:outline-none focus:border-emerald-500"
                                         />
                                     </div>
                                 </div>
@@ -352,7 +352,7 @@ export default function Create({ products: serverProducts }) {
                     </div>
 
                     {/* Remise globale — design mobile optimisé */}
-                    <div className="p-3 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-xl border border-slate-200">
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                         <div className="flex items-center justify-between mb-2">
                             <span className="text-xs font-medium text-slate">Remise globale</span>
                             {remiseGlobaleVal > 0 && (
@@ -372,7 +372,7 @@ export default function Create({ products: serverProducts }) {
                                 placeholder="0"
                                 value={remiseGlobale}
                                 onChange={(e) => setRemiseGlobale(e.target.value)}
-                                className="flex-1 h-10 px-3 bg-white/70 backdrop-blur-md border border-white/60 rounded-lg text-slate-800 text-sm text-center focus:outline-none focus:border-blue-500"
+                                className="flex-1 h-10 px-3 bg-white border border-slate-100 shadow-sm rounded-lg text-slate-800 text-sm text-center focus:outline-none focus:border-emerald-500"
                             />
                         </div>
                     </div>
@@ -384,7 +384,7 @@ export default function Create({ products: serverProducts }) {
                     </div>
 
                     {/* Moyen(s) de paiement — combinables */}
-                    <div className="p-3 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-xl border border-slate-200">
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                         <span className="text-xs font-medium text-slate-500 block mb-2">Moyen(s) de paiement</span>
                         <div className="grid grid-cols-2 gap-2">
                             {['Espèces', 'Carte bancaire', 'Chèque', 'Virement'].map((moyen) => (
@@ -394,8 +394,8 @@ export default function Create({ products: serverProducts }) {
                                     onClick={() => toggleMoyenPaiement(moyen)}
                                     className={`h-11 px-3 rounded-xl text-sm font-medium transition-all border ${
                                         moyenPaiement.includes(moyen)
-                                            ? 'bg-blue-600 text-white border-blue-500 shadow-sm shadow-blue-500/20'
-                                            : 'bg-white text-slate-500 border-slate-300 hover:border-blue-500/40'
+                                            ? 'bg-emerald-700 text-white border-emerald-500 shadow-sm shadow-emerald-700/20'
+                                            : 'bg-white text-slate-500 border-slate-300 hover:border-emerald-500'
                                     }`}
                                 >
                                     {moyen === 'Espèces' && '💵 '}
@@ -419,12 +419,12 @@ export default function Create({ products: serverProducts }) {
                                             placeholder="0.00"
                                             value={ventilation[m] || ''}
                                             onChange={(e) => updateVentilation(m, e.target.value)}
-                                            className="w-28 h-9 px-3 bg-white/70 backdrop-blur-md border border-white/60 rounded-lg text-sm text-right focus:outline-none focus:border-blue-500"
+                                            className="w-28 h-9 px-3 bg-white border border-slate-100 shadow-sm rounded-lg text-sm text-right focus:outline-none focus:border-emerald-500"
                                         />
                                         <span className="text-xs text-slate">€</span>
                                     </div>
                                 ))}
-                                <p className={`text-xs font-medium text-center pt-1 ${ventilationValide ? 'text-blue-600' : 'text-red-500'}`}>
+                                <p className={`text-xs font-medium text-center pt-1 ${ventilationValide ? 'text-emerald-600' : 'text-red-500'}`}>
                                     {ventilationValide
                                         ? '✓ Répartition correcte'
                                         : `Reste à répartir : ${(total - totalVentile).toFixed(2)}€`}
@@ -434,8 +434,8 @@ export default function Create({ products: serverProducts }) {
                     </div>
 
                     {/* Valider */}
-                    <button onClick={handleSubmit} disabled={processing || !ventilationValide} className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-700 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-blue-500/20">
-                        {processing && <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
+                    <button onClick={handleSubmit} disabled={processing || !ventilationValide} className="w-full h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-emerald-700/20">
+                        {processing && <span className="w-4 h-4 border-2 border-slate-100 border-t-white rounded-full animate-spin" />}
                         {processing ? 'Traitement...' : (isOnline ? 'Valider la vente' : '💾 Sauvegarder hors ligne')}
                     </button>
                 </div>
@@ -445,14 +445,14 @@ export default function Create({ products: serverProducts }) {
     );
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="sales" />
 
             {notification && (
                 <div className={`fixed top-4 left-4 right-4 z-50 p-4 rounded-xl text-sm font-medium flex items-start gap-3 shadow-xl ${
-                    notification.type === 'success' ? 'bg-blue-50 border border-blue-200/40 text-slate-800' : 'bg-red-100/5 border border-red-200/30 text-slate-800'
+                    notification.type === 'success' ? 'bg-emerald-50 border border-emerald-200/40 text-slate-800' : 'bg-red-100/5 border border-red-200/30 text-slate-800'
                 }`}>
-                    <span className={`text-lg leading-none mt-0.5 ${notification.type === 'success' ? 'text-blue-600' : 'text-red-500'}`}>
+                    <span className={`text-lg leading-none mt-0.5 ${notification.type === 'success' ? 'text-emerald-600' : 'text-red-500'}`}>
                         {notification.type === 'success' ? '✓' : '⚠'}
                     </span>
                     <span className="flex-1 leading-relaxed">{notification.message}</span>
@@ -464,11 +464,11 @@ export default function Create({ products: serverProducts }) {
                 <div className="lg:grid lg:grid-cols-[2fr_1fr] lg:gap-6 lg:h-[calc(100vh-8rem)]">
 
                     {/* Produits */}
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm flex flex-col overflow-hidden mb-4 lg:mb-0">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm flex flex-col overflow-hidden mb-4 lg:mb-0">
                         <div className="p-4 border-b border-slate-200 shrink-0">
                             <h2 className="text-base font-semibold text-slate-800 mb-3">Produits</h2>
-                            <input type="text" placeholder="Rechercher..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full h-11 px-4 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 mb-2" />
-                            <button onClick={() => setShowScanner(true)} className="w-full h-11 bg-blue-50 text-blue-600 border border-blue-200 rounded-xl text-sm font-medium flex items-center justify-center gap-2">
+                            <input type="text" placeholder="Rechercher..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full h-11 px-4 bg-slate-50 border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 mb-2" />
+                            <button onClick={() => setShowScanner(true)} className="w-full h-11 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-xl text-sm font-medium flex items-center justify-center gap-2">
                                 📷 Scanner un produit
                             </button>
                         </div>
@@ -482,9 +482,9 @@ export default function Create({ products: serverProducts }) {
                                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3">
                                     {filteredProducts.map((product) => (
                                         <button key={product.id_produit} onClick={() => addToCart(product)} disabled={product.stock_actuel === 0}
-                                            className={`p-4 rounded-xl text-left border transition-all ${product.stock_actuel === 0 ? 'bg-white/50 border-slate-200 opacity-40 cursor-not-allowed' : 'bg-white/50 border-slate-200 hover:border-blue-500/40 hover:bg-blue-600/5 active:scale-95 cursor-pointer'}`}>
+                                            className={`p-4 rounded-xl text-left border transition-all ${product.stock_actuel === 0 ? 'bg-slate-50 border-slate-200 opacity-40 cursor-not-allowed' : 'bg-slate-50 border-slate-200 hover:border-emerald-500 hover:bg-emerald-700/5 active:scale-95 cursor-pointer'}`}>
                                             <p className="text-sm font-semibold text-slate-800 mb-1 truncate">{product.nom}</p>
-                                            <p className="text-base font-bold text-blue-600">{product.prix_base}€</p>
+                                            <p className="text-base font-bold text-emerald-600">{product.prix_base}€</p>
                                             <p className={`text-xs mt-1 ${product.stock_actuel === 0 ? 'text-red-500' : 'text-slate'}`}>Stock : {product.stock_actuel}</p>
                                         </button>
                                     ))}
@@ -494,7 +494,7 @@ export default function Create({ products: serverProducts }) {
                     </div>
 
                     {/* Panier desktop */}
-                    <div className="hidden lg:flex flex-col bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm overflow-hidden">
+                    <div className="hidden lg:flex flex-col bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm overflow-hidden">
                         {renderCartContent(null)}
                     </div>
                 </div>
@@ -503,7 +503,7 @@ export default function Create({ products: serverProducts }) {
             {/* Barre mobile */}
             {cart.length > 0 && (
                 <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur border-t border-slate-200 z-30">
-                    <button onClick={() => setShowCart(true)} className="w-full h-14 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-2xl flex items-center justify-between px-5 shadow-sm shadow-blue-500/20">
+                    <button onClick={() => setShowCart(true)} className="w-full h-14 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold rounded-2xl flex items-center justify-between px-5 shadow-sm shadow-emerald-700/20">
                         <span className="flex items-center gap-2.5">
                             <span className="bg-white/25 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0">{cart.length}</span>
                             <span>Voir le panier</span>

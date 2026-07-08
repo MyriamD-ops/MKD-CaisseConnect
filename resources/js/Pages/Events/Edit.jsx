@@ -2,7 +2,7 @@ import { Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 import Header from '../../Components/Header';
 
-const FIELD_CLASS = 'w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors';
+const FIELD_CLASS = 'w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors';
 const LABEL_CLASS = 'block text-xs font-semibold text-slate-800 uppercase tracking-widest mb-2';
 
 export default function Edit({ evenement, produits }) {
@@ -61,7 +61,7 @@ export default function Edit({ evenement, produits }) {
     const produitsDisponibles = produits.filter(p => !selectedProduits.find(sp => sp.id === p.id_produit));
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="events" />
 
             <main className="p-4 lg:p-6 max-w-7xl mx-auto">
@@ -81,7 +81,7 @@ export default function Edit({ evenement, produits }) {
                         <div className="space-y-6">
 
                             {/* Informations */}
-                            <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-5 lg:p-6">
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-5 lg:p-6">
                                 <h3 className="text-base font-semibold text-slate-800 mb-5">Informations</h3>
 
                                 <div className="space-y-4">
@@ -145,7 +145,7 @@ export default function Edit({ evenement, produits }) {
                                             value={formData.description}
                                             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                             rows="3"
-                                            className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors resize-none font-sans"
+                                            className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors resize-none font-sans"
                                         />
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@ export default function Edit({ evenement, produits }) {
 
                             {/* Produits disponibles */}
                             {produitsDisponibles.length > 0 && (
-                                <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-5 lg:p-6">
+                                <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-5 lg:p-6">
                                     <h3 className="text-base font-semibold text-slate-800 mb-4">Ajouter des produits</h3>
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-80 overflow-y-auto pr-1">
                                         {produitsDisponibles.map((produit) => (
@@ -161,7 +161,7 @@ export default function Edit({ evenement, produits }) {
                                                 key={produit.id_produit}
                                                 type="button"
                                                 onClick={() => addProduit(produit)}
-                                                className="p-4 rounded-xl text-left border border-slate-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 hover:border-blue-500/40 hover:bg-blue-600/5 cursor-pointer transition-all"
+                                                className="p-4 rounded-xl text-left border border-slate-200 bg-slate-50 hover:border-emerald-500 hover:bg-emerald-700/5 cursor-pointer transition-all"
                                             >
                                                 <p className="text-sm font-semibold text-slate-800 truncate mb-1">{produit.nom}</p>
                                                 <p className="text-xs text-slate">Stock : {produit.stock_actuel}</p>
@@ -174,10 +174,10 @@ export default function Edit({ evenement, produits }) {
 
                         {/* ── Colonne droite ── */}
                         <div className="mt-6 lg:mt-0 lg:sticky lg:top-6">
-                            <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-5 lg:p-6">
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-5 lg:p-6">
                                 <h3 className="text-base font-semibold text-slate-800 mb-4">
                                     Produits sélectionnés
-                                    <span className="ml-2 px-2 py-0.5 bg-blue-600/10 text-blue-600 text-xs rounded-full font-bold">
+                                    <span className="ml-2 px-2 py-0.5 bg-emerald-700/10 text-emerald-600 text-xs rounded-full font-bold">
                                         {selectedProduits.length}
                                     </span>
                                 </h3>
@@ -187,7 +187,7 @@ export default function Edit({ evenement, produits }) {
                                 ) : (
                                     <div className="space-y-3 mb-5 max-h-72 overflow-y-auto pr-1">
                                         {selectedProduits.map((p) => (
-                                            <div key={p.id} className="bg-white/50 rounded-xl p-3 border border-slate-200">
+                                            <div key={p.id} className="bg-slate-50 rounded-xl p-3 border border-slate-200">
                                                 <div className="flex items-center justify-between mb-2">
                                                     <span className="text-sm font-medium text-slate-800 truncate flex-1 mr-2">{p.nom}</span>
                                                     <button
@@ -200,18 +200,18 @@ export default function Edit({ evenement, produits }) {
                                                     <button
                                                         type="button"
                                                         onClick={() => updateStock(p.id, p.stock - 1)}
-                                                        className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-blue-600/10 hover:text-blue-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0"
+                                                        className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0"
                                                     >−</button>
                                                     <input
                                                         type="number"
                                                         value={p.stock}
                                                         onChange={(e) => updateStock(p.id, parseInt(e.target.value) || 0)}
-                                                        className="w-14 h-11 text-center bg-white/70 backdrop-blur-md border border-white/60 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+                                                        className="w-14 h-11 text-center bg-white border border-slate-100 shadow-sm rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                                                     />
                                                     <button
                                                         type="button"
                                                         onClick={() => updateStock(p.id, p.stock + 1)}
-                                                        className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-blue-600/10 hover:text-blue-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0"
+                                                        className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0"
                                                     >+</button>
                                                     <span className="ml-auto text-xs text-slate-500 shrink-0">Max : {p.stock_max}</span>
                                                 </div>
@@ -223,9 +223,9 @@ export default function Edit({ evenement, produits }) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-700 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-blue-500/20"
+                                    className="w-full h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-emerald-700/20"
                                 >
-                                    {processing && <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
+                                    {processing && <span className="w-4 h-4 border-2 border-slate-100 border-t-white rounded-full animate-spin" />}
                                     {processing ? 'Enregistrement...' : 'Enregistrer'}
                                 </button>
                             </div>

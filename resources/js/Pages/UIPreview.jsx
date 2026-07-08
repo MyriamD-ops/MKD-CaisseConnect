@@ -19,7 +19,7 @@ function Section({ title, children }) {
 
 function Card({ children, className = '' }) {
     return (
-        <div className={`bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm ${className}`}>
+        <div className={`bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm ${className}`}>
             {children}
         </div>
     );
@@ -40,14 +40,14 @@ export default function UIPreview() {
     const [inputVal, setInputVal] = useState('');
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="dashboard" />
 
             <main className="max-w-5xl mx-auto px-4 py-8 lg:px-10 lg:py-12">
 
                 {/* Titre de page */}
                 <div className="mb-12">
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-xs font-bold rounded-full uppercase tracking-widest mb-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-700/10 text-emerald-600 text-xs font-bold rounded-full uppercase tracking-widest mb-4">
                         Design System
                     </div>
                     <h1 className="text-4xl font-bold text-slate-800 tracking-tight">
@@ -120,8 +120,8 @@ export default function UIPreview() {
                             <p className="text-xs text-slate-500 font-mono mt-1">text-xs font-semibold uppercase tracking-widest</p>
                         </div>
                         <div>
-                            <p className="text-sm font-bold text-blue-600">Texte accent — Ember</p>
-                            <p className="text-xs text-slate-500 font-mono mt-1">text-blue-600 font-bold</p>
+                            <p className="text-sm font-bold text-emerald-600">Texte accent — Ember</p>
+                            <p className="text-xs text-slate-500 font-mono mt-1">text-emerald-600 font-bold</p>
                         </div>
                     </Card>
                 </Section>
@@ -133,7 +133,7 @@ export default function UIPreview() {
 
                             {/* Primaire — dégradé ember */}
                             <div className="flex flex-col items-center gap-2">
-                                <button className="h-11 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-xl text-sm hover:brightness-90 transition-all shadow-sm shadow-blue-500/25">
+                                <button className="h-11 px-6 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold rounded-xl text-sm hover:brightness-90 transition-all shadow-sm shadow-emerald-700/25">
                                     Se connecter
                                 </button>
                                 <span className="text-xs text-slate">Primaire</span>
@@ -157,7 +157,7 @@ export default function UIPreview() {
 
                             {/* Succès */}
                             <div className="flex flex-col items-center gap-2">
-                                <button className="h-11 px-6 bg-blue-50 hover:bg-blue-100/20 text-blue-600 font-semibold rounded-xl text-sm border border-blue-200 transition-colors">
+                                <button className="h-11 px-6 bg-emerald-50 hover:bg-emerald-100/20 text-emerald-600 font-semibold rounded-xl text-sm border border-emerald-200 transition-colors">
                                     Scanner ✓
                                 </button>
                                 <span className="text-xs text-slate">Succès</span>
@@ -173,7 +173,7 @@ export default function UIPreview() {
 
                             {/* Désactivé */}
                             <div className="flex flex-col items-center gap-2">
-                                <button disabled className="h-11 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-xl text-sm opacity-40 cursor-not-allowed">
+                                <button disabled className="h-11 px-6 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold rounded-xl text-sm opacity-40 cursor-not-allowed">
                                     Désactivé
                                 </button>
                                 <span className="text-xs text-slate">Disabled</span>
@@ -181,8 +181,8 @@ export default function UIPreview() {
 
                             {/* Chargement */}
                             <div className="flex flex-col items-center gap-2">
-                                <button disabled className="h-11 px-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-xl text-sm flex items-center gap-2 opacity-80 cursor-not-allowed">
-                                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                <button disabled className="h-11 px-6 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold rounded-xl text-sm flex items-center gap-2 opacity-80 cursor-not-allowed">
+                                    <span className="w-4 h-4 border-2 border-slate-100 border-t-white rounded-full animate-spin" />
                                     Chargement…
                                 </button>
                                 <span className="text-xs text-slate">Loading</span>
@@ -190,7 +190,7 @@ export default function UIPreview() {
 
                             {/* Icon + texte */}
                             <div className="flex flex-col items-center gap-2">
-                                <button className="h-11 px-5 bg-blue-50 hover:bg-blue-100/20 text-blue-600 font-semibold rounded-xl text-sm border border-blue-200 transition-colors flex items-center gap-2">
+                                <button className="h-11 px-5 bg-emerald-50 hover:bg-emerald-100/20 text-emerald-600 font-semibold rounded-xl text-sm border border-emerald-200 transition-colors flex items-center gap-2">
                                     📷 Scanner
                                 </button>
                                 <span className="text-xs text-slate">Icône</span>
@@ -201,7 +201,7 @@ export default function UIPreview() {
                         {/* Full width */}
                         <div className="mt-5 space-y-3">
                             <Label>Boutons pleine largeur</Label>
-                            <button className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-xl text-sm hover:brightness-90 transition-all shadow-sm shadow-blue-500/20">
+                            <button className="w-full h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold rounded-xl text-sm hover:brightness-90 transition-all shadow-sm shadow-emerald-700/20">
                                 Valider la vente — 42.50€
                             </button>
                             <button className="w-full h-12 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 font-semibold rounded-xl text-sm border border-slate-200 transition-colors">
@@ -226,7 +226,7 @@ export default function UIPreview() {
                                 value={inputVal}
                                 onChange={(e) => setInputVal(e.target.value)}
                                 placeholder="ex: sophie"
-                                className="w-full h-12 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate/50 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors"
+                                className="w-full h-12 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate/50 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors"
                             />
                         </Card>
 
@@ -239,7 +239,7 @@ export default function UIPreview() {
                             <input
                                 type="text"
                                 defaultValue="collier"
-                                className="w-full h-12 px-4 bg-white border-2 border-blue-500 rounded-xl text-slate-800 text-sm ring-2 ring-ember/15 outline-none transition-colors"
+                                className="w-full h-12 px-4 bg-white border-2 border-emerald-500 rounded-xl text-slate-800 text-sm ring-2 ring-ember/15 outline-none transition-colors"
                             />
                         </Card>
 
@@ -269,7 +269,7 @@ export default function UIPreview() {
                                 <input
                                     type={showPin ? 'text' : 'password'}
                                     defaultValue="1234"
-                                    className="w-full h-12 px-4 pr-12 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm tracking-[0.4em] font-bold focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors"
+                                    className="w-full h-12 px-4 pr-12 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm tracking-[0.4em] font-bold focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors"
                                     maxLength="6"
                                 />
                                 <button
@@ -292,7 +292,7 @@ export default function UIPreview() {
                             <textarea
                                 rows="3"
                                 defaultValue="Marché artisanal de Noël, place de la mairie. Bijoux, céramique et créations locales."
-                                className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors resize-none font-sans"
+                                className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors resize-none font-sans"
                             />
                         </Card>
 
@@ -302,7 +302,7 @@ export default function UIPreview() {
                             <label className="block text-xs font-semibold text-slate-800 uppercase tracking-widest mb-2">
                                 Moyen de paiement
                             </label>
-                            <select className="w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors">
+                            <select className="w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors">
                                 <option>Espèces</option>
                                 <option>Carte bancaire</option>
                                 <option>Chèque</option>
@@ -320,15 +320,15 @@ export default function UIPreview() {
                         {/* Card produit — stock OK */}
                         <Card className="p-5 flex flex-col gap-4">
                             <div className="flex items-start justify-between gap-2">
-                                <h3 className="font-semibold text-slate-800 hover:text-blue-600 transition-colors cursor-pointer">
+                                <h3 className="font-semibold text-slate-800 hover:text-emerald-600 transition-colors cursor-pointer">
                                     Collier Argent Étoile
                                 </h3>
-                                <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200">
+                                <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
                                     ✓ OK
                                 </span>
                             </div>
                             <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                                <span className="text-blue-600 font-bold">28.00€</span>
+                                <span className="text-emerald-600 font-bold">28.00€</span>
                                 <span className="text-slate">Stock : 14</span>
                                 <span className="text-slate">Colliers</span>
                             </div>
@@ -351,7 +351,7 @@ export default function UIPreview() {
                                 </span>
                             </div>
                             <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                                <span className="text-blue-600 font-bold">45.00€</span>
+                                <span className="text-emerald-600 font-bold">45.00€</span>
                                 <span className="text-slate">Stock : 2</span>
                                 <span className="text-slate">Bagues</span>
                             </div>
@@ -369,7 +369,7 @@ export default function UIPreview() {
                         <Card className="p-5 flex flex-col gap-4">
                             <div className="flex items-start justify-between gap-2">
                                 <h3 className="font-semibold text-slate-800">Marché de Noël 2026</h3>
-                                <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200">
+                                <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
                                     En cours
                                 </span>
                             </div>
@@ -379,7 +379,7 @@ export default function UIPreview() {
                                 <p>8 produits</p>
                             </div>
                             <div className="flex gap-2 mt-auto">
-                                <button className="flex-1 h-11 flex items-center justify-center bg-blue-600/10 hover:bg-blue-600/20 text-blue-600 rounded-xl text-sm font-medium transition-colors border border-blue-500/20">
+                                <button className="flex-1 h-11 flex items-center justify-center bg-emerald-700/10 hover:bg-emerald-700/20 text-emerald-600 rounded-xl text-sm font-medium transition-colors border border-emerald-500/20">
                                     Voir détails
                                 </button>
                             </div>
@@ -392,19 +392,19 @@ export default function UIPreview() {
                 <Section title="Badges & Tags">
                     <Card className="p-6">
                         <div className="flex flex-wrap gap-3">
-                            <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-200">
+                            <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200">
                                 ✓ Stock OK
                             </span>
                             <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-red-50 text-red-500 border border-red-200">
                                 ⚠ Stock bas
                             </span>
-                            <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-200">
+                            <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200">
                                 🟢 En ligne
                             </span>
                             <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-red-50 text-red-500 border border-red-200">
                                 🔴 Hors ligne
                             </span>
-                            <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-blue-600/10 text-blue-600 border border-blue-500/20">
+                            <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-700/10 text-emerald-600 border border-emerald-500/20">
                                 En cours
                             </span>
                             <span className="px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-500 border border-slate-200">
@@ -428,8 +428,8 @@ export default function UIPreview() {
                     <div className="space-y-3">
 
                         {/* Succès */}
-                        <div className="flex items-start gap-3 p-4 bg-[#EEFAF5] border border-blue-200/40 rounded-xl text-sm">
-                            <span className="text-blue-600 text-lg leading-none mt-0.5">✓</span>
+                        <div className="flex items-start gap-3 p-4 bg-[#EEFAF5] border border-emerald-200/40 rounded-xl text-sm">
+                            <span className="text-emerald-600 text-lg leading-none mt-0.5">✓</span>
                             <div className="flex-1">
                                 <p className="font-semibold text-slate-800">Vente enregistrée</p>
                                 <p className="text-slate-500 mt-0.5">Vente #247 · 42.50€ · Carte bancaire</p>
@@ -438,8 +438,8 @@ export default function UIPreview() {
                         </div>
 
                         {/* Succès hors ligne */}
-                        <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-xl text-sm">
-                            <span className="text-blue-600 text-lg leading-none mt-0.5">💾</span>
+                        <div className="flex items-start gap-3 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-sm">
+                            <span className="text-emerald-600 text-lg leading-none mt-0.5">💾</span>
                             <div className="flex-1">
                                 <p className="font-semibold text-slate-800">Vente sauvegardée hors ligne</p>
                                 <p className="text-slate-500 mt-0.5">Synchronisation automatique au retour de la connexion.</p>
@@ -448,8 +448,8 @@ export default function UIPreview() {
                         </div>
 
                         {/* Erreur */}
-                        <div className="flex items-start gap-3 p-4 bg-[#FFF0E8] border border-blue-500/40 rounded-xl text-sm">
-                            <span className="text-blue-600 text-lg leading-none mt-0.5">⚠</span>
+                        <div className="flex items-start gap-3 p-4 bg-[#FFF0E8] border border-emerald-500/40 rounded-xl text-sm">
+                            <span className="text-emerald-600 text-lg leading-none mt-0.5">⚠</span>
                             <div className="flex-1">
                                 <p className="font-semibold text-slate-800">Stock insuffisant</p>
                                 <p className="text-slate-500 mt-0.5">Impossible d'ajouter plus que le stock disponible.</p>
@@ -492,18 +492,18 @@ export default function UIPreview() {
                             </button>
                         </div>
                         <div className="flex items-center gap-2">
-                            <button className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-blue-600/10 hover:text-blue-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0">
+                            <button className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0">
                                 −
                             </button>
                             <input
                                 type="number"
                                 defaultValue="3"
-                                className="w-14 h-11 text-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+                                className="w-14 h-11 text-center bg-slate-50 border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                             />
-                            <button className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-blue-600/10 hover:text-blue-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0">
+                            <button className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0">
                                 +
                             </button>
-                            <span className="ml-auto text-base font-bold text-blue-600 shrink-0">84.00€</span>
+                            <span className="ml-auto text-base font-bold text-emerald-600 shrink-0">84.00€</span>
                         </div>
                     </Card>
                 </Section>
@@ -524,7 +524,7 @@ export default function UIPreview() {
                                         <input
                                             type="text"
                                             placeholder="ex: sophie"
-                                            className="w-full h-12 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors"
+                                            className="w-full h-12 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors"
                                         />
                                     </div>
                                     <div>
@@ -534,10 +534,10 @@ export default function UIPreview() {
                                         <input
                                             type="password"
                                             defaultValue="1234"
-                                            className="w-full h-12 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm tracking-[0.4em] font-bold focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors"
+                                            className="w-full h-12 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm tracking-[0.4em] font-bold focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors"
                                         />
                                     </div>
-                                    <button className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold rounded-xl flex items-center justify-center text-sm hover:brightness-90 transition-all shadow-sm shadow-blue-500/20">
+                                    <button className="w-full h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold rounded-xl flex items-center justify-center text-sm hover:brightness-90 transition-all shadow-sm shadow-emerald-700/20">
                                         Se connecter
                                     </button>
                                 </div>

@@ -24,30 +24,18 @@ input:-webkit-autofill:active {
     transition: background-color 9999s ease-in-out 0s;
 }
 
-/* ── Animation blob (Dashboard) ─────────────────────────────── */
-@keyframes blob {
-    0%   { transform: translate(0px, 0px) scale(1); }
-    33%  { transform: translate(30px, -50px) scale(1.1); }
-    66%  { transform: translate(-20px, 20px) scale(0.9); }
-    100% { transform: translate(0px, 0px) scale(1); }
-}
-.animate-blob {
-    animation: blob 10s infinite;
-}
-.animation-delay-2000 {
-    animation-delay: 2s;
-}
+/* ── Animation blob supprimée (plus utilisée avec le nouveau design) ── */
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-    /* ── Palette Démo — Indigo/Sauge (ne pas merger sur master) ─── */
-    --color-snow:      #F0F4F8;   /* fond page, arrière-plans clairs  */
-    --color-slate:     #5C6B7A;   /* texte secondaire, éléments neutres */
-    --color-dark:      #1E2D3D;   /* texte principal, header, éléments forts */
-    --color-ember:     #3B82F6;   /* accent principal, CTA, highlights */
-    --color-ember-dim: #2563EB;   /* accent hover / gradient end */
+    /* ── Palette Démo — Ancre Financière / Émeraude ────────────── */
+    --color-snow:      #F8FAFC;   /* fond page (slate-50)              */
+    --color-slate:     #5C6B7A;   /* texte secondaire                  */
+    --color-dark:      #0F172A;   /* texte principal                   */
+    --color-ember:     #059669;   /* accent principal (emerald-600)    */
+    --color-ember-dim: #047857;   /* accent hover (emerald-700)        */
 
     /* ── Système (succès / danger) ──────────────────────────────── */
     --color-mint:      #10B981;   /* succès */

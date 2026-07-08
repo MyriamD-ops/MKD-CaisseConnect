@@ -11,7 +11,7 @@ export default function Index({ evenements }) {
     const getStatutBadge = (statut) => {
         const styles = {
             planifie: 'bg-slate-100 text-slate-500 border-slate-200',
-            en_cours: 'bg-blue-50 text-blue-600 border-blue-200',
+            en_cours: 'bg-emerald-50 text-emerald-600 border-emerald-200',
             termine:  'bg-slate-100 text-slate-500 border-slate-100',
         };
         const labels = {
@@ -27,7 +27,7 @@ export default function Index({ evenements }) {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="events" />
 
             <main className="p-4 lg:p-6 max-w-7xl mx-auto">
@@ -38,7 +38,7 @@ export default function Index({ evenements }) {
                         <h2 className="text-2xl font-bold text-slate-800">Événements</h2>
                         <Link
                             href="/events/create"
-                            className="shrink-0 h-9 px-3 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-colors whitespace-nowrap"
+                            className="shrink-0 h-9 px-3 flex items-center justify-center bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-sm transition-colors whitespace-nowrap"
                         >
                             + Nouveau
                         </Link>
@@ -50,13 +50,13 @@ export default function Index({ evenements }) {
 
                 {/* État vide */}
                 {evenements.length === 0 ? (
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-12 text-center">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md p-12 text-center">
                         <p className="text-5xl mb-4 grayscale">🎪</p>
                         <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucun événement</h3>
                         <p className="text-slate-500 text-sm mb-6">Créez votre premier événement</p>
                         <Link
                             href="/events/create"
-                            className="inline-flex items-center justify-center h-11 px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-colors"
+                            className="inline-flex items-center justify-center h-11 px-6 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-sm transition-colors"
                         >
                             Créer un événement
                         </Link>
@@ -66,14 +66,14 @@ export default function Index({ evenements }) {
                         {evenements.map((event) => (
                             <div
                                 key={event.id_evenement}
-                                className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 hover:border-slate-300 hover:shadow-sm transition-all"
+                                className="bg-white rounded-2xl border border-slate-100 shadow-md p-5 hover:border-slate-300 hover:shadow-sm transition-all"
                             >
                                 <div className="flex flex-col gap-4">
                                     <div className="flex-1 min-w-0">
                                         {/* Nom + statut */}
                                         <div className="flex items-start gap-3 mb-2 flex-wrap">
                                             <Link href={`/events/${event.id_evenement}/admin`}>
-                                                <h3 className="text-base font-bold text-slate-800 hover:text-blue-600 transition-colors">
+                                                <h3 className="text-base font-bold text-slate-800 hover:text-emerald-600 transition-colors">
                                                     {event.nom}
                                                 </h3>
                                             </Link>

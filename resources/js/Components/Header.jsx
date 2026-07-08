@@ -17,15 +17,15 @@ export default function Header({ currentPage = 'dashboard' }) {
     ];
 
     return (
-        <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/40 shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
+        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200">
             <div className="flex items-center justify-between px-4 h-14 max-w-7xl mx-auto">
-                <Link href="/" className="text-blue-600 font-extrabold text-lg tracking-tight shrink-0">
+                <Link href="/" className="text-emerald-600 font-extrabold text-lg tracking-tight shrink-0">
                     {appName}
                 </Link>
                 <nav className="hidden lg:flex items-center gap-6">
                     {navItems.map((item) => (
                         <Link key={item.key} href={item.href}
-                            className={`text-sm font-semibold transition-colors ${currentPage === item.key ? 'text-blue-600' : 'text-slate-500 hover:text-slate-800'}`}>
+                            className={`text-sm font-semibold transition-colors ${currentPage === item.key ? 'text-slate-900' : 'text-slate-400 hover:text-slate-700'}`}>
                             {item.name}
                         </Link>
                     ))}
@@ -36,7 +36,7 @@ export default function Header({ currentPage = 'dashboard' }) {
                         {isOnline ? 'En ligne' : 'Hors ligne'}
                     </div>
                     <Link href="/logout" method="post" as="button"
-                        className="hidden lg:flex items-center justify-center h-9 px-4 bg-white/50 hover:bg-white/80 text-slate-600 hover:text-slate-800 border border-white/60 rounded-lg text-sm font-medium transition-all">
+                        className="hidden lg:flex items-center justify-center h-9 px-4 bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-800 border border-slate-200 rounded-lg text-sm font-medium transition-all">
                         Déconnexion
                     </Link>
                     <button onClick={() => setMenuOpen(!menuOpen)}

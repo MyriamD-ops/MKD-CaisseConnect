@@ -1,7 +1,7 @@
 import { Link, useForm } from '@inertiajs/react';
 import Header from '../../Components/Header';
 
-const FIELD_CLASS = 'w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors';
+const FIELD_CLASS = 'w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors';
 const LABEL_CLASS = 'block text-xs font-semibold text-slate-800 uppercase tracking-widest mb-2';
 
 export default function Create() {
@@ -24,7 +24,7 @@ export default function Create() {
     const matieres = ['PLA', 'PETG', 'ABS', 'Résine', 'TPU/Flexible', 'Bois (PLA)', 'Métal (PLA)', 'Autre'];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="products" />
 
             <main className="p-4 lg:p-6 max-w-3xl mx-auto">
@@ -35,7 +35,7 @@ export default function Create() {
                     ← Retour aux produits
                 </Link>
 
-                <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-6 lg:p-8">
+                <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-6 lg:p-8">
                     <h2 className="text-2xl font-bold text-slate-800 mb-6">Nouveau produit</h2>
 
                     <form onSubmit={handleSubmit} className="space-y-5">
@@ -60,7 +60,7 @@ export default function Create() {
                                 onChange={(e) => setData('description', e.target.value)}
                                 rows="3"
                                 placeholder="Dimensions, couleurs, finitions..."
-                                className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors resize-none font-sans"
+                                className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors resize-none font-sans"
                             />
                         </div>
 
@@ -134,9 +134,9 @@ export default function Create() {
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="flex-1 h-11 bg-gradient-to-r from-blue-500 to-blue-700 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all"
+                                className="flex-1 h-11 bg-gradient-to-r from-emerald-700 to-emerald-800 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all"
                             >
-                                {processing && <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
+                                {processing && <span className="w-4 h-4 border-2 border-slate-100 border-t-white rounded-full animate-spin" />}
                                 {processing ? 'Création...' : 'Créer le produit'}
                             </button>
                             <Link

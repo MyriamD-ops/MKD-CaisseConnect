@@ -10,7 +10,7 @@ function FlyerTemplateModal({ onGenerate, onClose }) {
     const [selected, setSelected] = useState('prestige');
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-dark/50 backdrop-blur-sm px-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-dark/50 px-4">
             <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
                 <h3 className="text-lg font-bold text-slate-800 mb-5">Choisir un template</h3>
 
@@ -22,7 +22,7 @@ function FlyerTemplateModal({ onGenerate, onClose }) {
                             style={{ backgroundColor: tpl.previewBg, color: tpl.previewText }}
                             className={`h-24 rounded-xl flex flex-col items-center justify-center gap-2 transition-all border-2 ${
                                 selected === tpl.id
-                                    ? 'border-blue-500 scale-105 shadow-md'
+                                    ? 'border-emerald-500 scale-105 shadow-md'
                                     : 'border-transparent opacity-80 hover:opacity-100'
                             }`}
                         >
@@ -35,7 +35,7 @@ function FlyerTemplateModal({ onGenerate, onClose }) {
                 <div className="flex gap-3">
                     <button
                         onClick={() => onGenerate(selected)}
-                        className="flex-1 h-11 flex items-center justify-center bg-blue-600 hover:brightness-90 text-white font-bold rounded-xl text-sm transition-all"
+                        className="flex-1 h-11 flex items-center justify-center bg-emerald-700 hover:brightness-90 text-white font-bold rounded-xl text-sm transition-all"
                     >
                         Générer
                     </button>
@@ -123,7 +123,7 @@ export default function Show({ evenement }) {
     const eventUrl = window.location.origin + '/events/' + evenement.code_unique;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="events" />
 
             <main className="p-4 lg:p-6 max-w-5xl mx-auto">
@@ -136,7 +136,7 @@ export default function Show({ evenement }) {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Informations événement */}
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-6">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-6">
                         <h2 className="text-2xl font-bold text-slate-800 mb-5">{evenement.nom}</h2>
 
                         <div className="divide-y divide-slate/10">
@@ -161,7 +161,7 @@ export default function Show({ evenement }) {
                         </div>
 
                         {/* URL publique */}
-                        <div className="mt-5 p-3 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border border-slate-200 rounded-xl">
+                        <div className="mt-5 p-3 bg-slate-50 border border-slate-200 rounded-xl">
                             <p className="text-xs font-semibold text-slate-800 uppercase tracking-widest mb-1.5">URL d'accès public</p>
                             <p className="text-xs text-slate-500 font-mono break-all">{eventUrl}</p>
                         </div>
@@ -178,7 +178,7 @@ export default function Show({ evenement }) {
                                 <button
                                     onClick={() => setShowModal(true)}
                                     disabled={generating}
-                                    className="w-full h-11 flex items-center justify-center bg-blue-600 hover:bg-blue-600/90 disabled:opacity-60 text-white rounded-xl text-sm font-medium transition-colors"
+                                    className="w-full h-11 flex items-center justify-center bg-emerald-700 hover:bg-emerald-700/90 disabled:opacity-60 text-white rounded-xl text-sm font-medium transition-colors"
                                 >
                                     {generating ? (
                                         <>
@@ -199,10 +199,10 @@ export default function Show({ evenement }) {
                     </div>
 
                     {/* QR Code clients */}
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-6 flex flex-col items-center">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-6 flex flex-col items-center">
                         <h3 className="text-lg font-semibold text-slate-800 mb-5 text-center">QR Code pour vos clients</h3>
 
-                        <div className="p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-xl mb-4">
+                        <div className="p-6 bg-slate-50 rounded-xl mb-4">
                             <QRCodeSVG
                                 id="qr-code-event"
                                 value={eventUrl}
@@ -223,8 +223,8 @@ export default function Show({ evenement }) {
                             📥 Télécharger le QR Code
                         </button>
 
-                        <div className="w-full p-3 bg-blue-600/5 border border-blue-500/20 rounded-xl">
-                            <p className="text-xs text-blue-600 text-center font-medium">
+                        <div className="w-full p-3 bg-emerald-700/5 border border-emerald-500/20 rounded-xl">
+                            <p className="text-xs text-emerald-600 text-center font-medium">
                                 💡 Affichez ce QR code sur votre stand !
                             </p>
                         </div>

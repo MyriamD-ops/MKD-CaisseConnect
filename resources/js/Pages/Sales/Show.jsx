@@ -31,7 +31,7 @@ function SmsModal({ sale, onClose }) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-dark/50 backdrop-blur-sm px-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-dark/50 px-4">
             <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6">
                 <h3 className="text-lg font-bold text-slate-800 mb-4">Envoyer le reçu par SMS</h3>
 
@@ -45,7 +45,7 @@ function SmsModal({ sale, onClose }) {
                             onChange={e => setTelephone(e.target.value)}
                             placeholder="06 XX XX XX XX"
                             disabled={loading}
-                            className="w-full h-11 px-4 rounded-xl border border-slate-300 text-sm text-slate-800 placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-blue-500/40 mb-4"
+                            className="w-full h-11 px-4 rounded-xl border border-slate-300 text-sm text-slate-800 placeholder-slate/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 mb-4"
                         />
 
                         {error && (
@@ -56,7 +56,7 @@ function SmsModal({ sale, onClose }) {
                             <button
                                 onClick={handleSend}
                                 disabled={loading || !telephone.trim()}
-                                className="flex-1 h-11 flex items-center justify-center bg-blue-600 hover:brightness-90 disabled:opacity-50 text-white font-bold rounded-xl text-sm transition-all"
+                                className="flex-1 h-11 flex items-center justify-center bg-emerald-700 hover:brightness-90 disabled:opacity-50 text-white font-bold rounded-xl text-sm transition-all"
                             >
                                 {loading ? (
                                     <>
@@ -88,13 +88,13 @@ export default function Show({ sale }) {
     const [showSmsModal, setShowSmsModal] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="sales" />
 
             <main className="p-4 lg:p-6 max-w-2xl mx-auto">
-                <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-6 lg:p-8 text-center">
+                <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-6 lg:p-8 text-center">
                     {/* Icône succès */}
-                    <div className="w-16 h-16 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center text-3xl mx-auto mb-4">
+                    <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-3xl mx-auto mb-4">
                         ✓
                     </div>
                     <h2 className="text-2xl font-bold text-slate-800 mb-1">Vente enregistrée !</h2>
@@ -103,7 +103,7 @@ export default function Show({ sale }) {
                     </p>
 
                     {/* Récapitulatif */}
-                    <div className="bg-white/50 rounded-xl border border-slate-200 p-5 mb-6 text-left">
+                    <div className="bg-slate-50 rounded-xl border border-slate-200 p-5 mb-6 text-left">
                         <div className="divide-y divide-slate/10">
                             <div className="flex justify-between items-center py-2.5">
                                 <span className="text-sm text-slate">Date</span>
@@ -144,7 +144,7 @@ export default function Show({ sale }) {
                         {/* Total */}
                         <div className="mt-4 pt-4 border-t-2 border-slate-200 flex justify-between items-center">
                             <span className="text-base font-semibold text-slate-800">Total</span>
-                            <span className="text-2xl font-bold text-blue-600">{sale.montant_total}€</span>
+                            <span className="text-2xl font-bold text-emerald-600">{sale.montant_total}€</span>
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@ export default function Show({ sale }) {
                     <div className="flex gap-3">
                         <Link
                             href="/sales/create"
-                            className="flex-1 h-11 flex items-center justify-center bg-gradient-to-r from-blue-500 to-blue-700 hover:brightness-90 text-white font-bold rounded-xl text-sm transition-all"
+                            className="flex-1 h-11 flex items-center justify-center bg-gradient-to-r from-emerald-700 to-emerald-800 hover:brightness-90 text-white font-bold rounded-xl text-sm transition-all"
                         >
                             Nouvelle vente
                         </Link>

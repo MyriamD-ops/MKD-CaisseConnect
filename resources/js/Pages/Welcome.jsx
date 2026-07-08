@@ -1,6 +1,6 @@
 export default function Welcome() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+        <div className="min-h-screen bg-slate-50 flex items-center justify-center">
             <div className="text-center">
                 <h1 className="text-5xl mb-4">🎉</h1>
                 <p className="text-xl font-semibold text-slate-800 mb-2">Inertia.js fonctionne !</p>

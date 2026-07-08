@@ -3,7 +3,7 @@ import Header from '../../Components/Header';
 
 export default function LowStock({ lowStockProducts = [] }) {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="products" />
 
             <main className="p-4 lg:p-6 max-w-5xl mx-auto">
@@ -24,7 +24,7 @@ export default function LowStock({ lowStockProducts = [] }) {
                 </div>
 
                 {lowStockProducts.length === 0 ? (
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-12 text-center">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md p-12 text-center">
                         <p className="text-5xl mb-4">✅</p>
                         <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucune alerte stock</h3>
                         <p className="text-slate-500 text-sm">Tous vos produits ont un stock suffisant</p>
@@ -68,7 +68,7 @@ export default function LowStock({ lowStockProducts = [] }) {
                                                     <p className="text-xs text-red-500 font-semibold uppercase tracking-widest mb-0.5">Stock actuel</p>
                                                     <p className="text-2xl font-bold text-red-500">{product.stock_actuel}</p>
                                                 </div>
-                                                <div className="px-4 py-2.5 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 border border-slate-200 rounded-xl">
+                                                <div className="px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl">
                                                     <p className="text-xs text-slate-500 font-semibold uppercase tracking-widest mb-0.5">Stock minimum</p>
                                                     <p className="text-2xl font-bold text-slate-800">{product.stock_minimum}</p>
                                                 </div>

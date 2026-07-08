@@ -55,7 +55,7 @@ export default function Create({ produits }) {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="events" />
 
             <main className="p-4 lg:p-6 max-w-7xl mx-auto">
@@ -75,7 +75,7 @@ export default function Create({ produits }) {
                         <div className="space-y-6">
 
                             {/* Bloc informations */}
-                            <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-5 lg:p-6">
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-5 lg:p-6">
                                 <h3 className="text-base font-semibold text-slate-800 mb-5">Informations</h3>
 
                                 <div className="space-y-4">
@@ -89,7 +89,7 @@ export default function Create({ produits }) {
                                             value={data.nom}
                                             onChange={(e) => setData('nom', e.target.value)}
                                             placeholder="Marché de Noël 2026"
-                                            className="w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors"
+                                            className="w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors"
                                         />
                                         {errors.nom && (
                                             <p className="text-red-500 text-xs mt-1.5">{errors.nom}</p>
@@ -106,7 +106,7 @@ export default function Create({ produits }) {
                                             value={data.lieu}
                                             onChange={(e) => setData('lieu', e.target.value)}
                                             placeholder="Place du marché"
-                                            className="w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors"
+                                            className="w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors"
                                         />
                                     </div>
 
@@ -120,7 +120,7 @@ export default function Create({ produits }) {
                                                 type="date"
                                                 value={data.date_debut}
                                                 onChange={(e) => setData('date_debut', e.target.value)}
-                                                className="w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors"
+                                                className="w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors"
                                             />
                                             {errors.date_debut && (
                                                 <p className="text-red-500 text-xs mt-1.5">{errors.date_debut}</p>
@@ -134,7 +134,7 @@ export default function Create({ produits }) {
                                                 type="date"
                                                 value={data.date_fin}
                                                 onChange={(e) => setData('date_fin', e.target.value)}
-                                                className="w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors"
+                                                className="w-full h-11 px-4 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors"
                                             />
                                             {errors.date_fin && (
                                                 <p className="text-red-500 text-xs mt-1.5">{errors.date_fin}</p>
@@ -151,14 +151,14 @@ export default function Create({ produits }) {
                                             value={data.description}
                                             onChange={(e) => setData('description', e.target.value)}
                                             rows="3"
-                                            className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/15 transition-colors resize-none font-sans"
+                                            className="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15 transition-colors resize-none font-sans"
                                         />
                                     </div>
                                 </div>
                             </div>
 
                             {/* Bloc produits disponibles */}
-                            <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-5 lg:p-6">
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-5 lg:p-6">
                                 <h3 className="text-base font-semibold text-slate-800 mb-4">
                                     Produits disponibles
                                 </h3>
@@ -173,8 +173,8 @@ export default function Create({ produits }) {
                                                 disabled={dejaSel}
                                                 className={`p-4 rounded-xl text-left border transition-all ${
                                                     dejaSel
-                                                        ? 'bg-blue-600/5 border-blue-500/30 cursor-not-allowed'
-                                                        : 'bg-white/50 border-slate-200 hover:border-blue-500/40 hover:bg-blue-600/5 cursor-pointer'
+                                                        ? 'bg-emerald-700/5 border-emerald-500/30 cursor-not-allowed'
+                                                        : 'bg-slate-50 border-slate-200 hover:border-emerald-500 hover:bg-emerald-700/5 cursor-pointer'
                                                 }`}
                                             >
                                                 <p className="text-sm font-semibold text-slate-800 truncate mb-1">
@@ -184,7 +184,7 @@ export default function Create({ produits }) {
                                                     Stock : {produit.stock_actuel}
                                                 </p>
                                                 {dejaSel && (
-                                                    <p className="text-xs text-blue-600 mt-1 font-medium">✓ Ajouté</p>
+                                                    <p className="text-xs text-emerald-600 mt-1 font-medium">✓ Ajouté</p>
                                                 )}
                                             </button>
                                         );
@@ -195,10 +195,10 @@ export default function Create({ produits }) {
 
                         {/* ── Colonne droite : sélection + submit ── */}
                         <div className="mt-6 lg:mt-0 lg:sticky lg:top-6">
-                            <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm p-5 lg:p-6">
+                            <div className="bg-white rounded-2xl border border-slate-100 shadow-md shadow-sm p-5 lg:p-6">
                                 <h3 className="text-base font-semibold text-slate-800 mb-4">
                                     Produits sélectionnés
-                                    <span className="ml-2 px-2 py-0.5 bg-blue-600/10 text-blue-600 text-xs rounded-full font-bold">
+                                    <span className="ml-2 px-2 py-0.5 bg-emerald-700/10 text-emerald-600 text-xs rounded-full font-bold">
                                         {selectedProduits.length}
                                     </span>
                                 </h3>
@@ -210,7 +210,7 @@ export default function Create({ produits }) {
                                 ) : (
                                     <div className="space-y-3 mb-5 max-h-72 overflow-y-auto pr-1">
                                         {selectedProduits.map((p) => (
-                                            <div key={p.id} className="bg-white/50 rounded-xl p-3 border border-slate-200">
+                                            <div key={p.id} className="bg-slate-50 rounded-xl p-3 border border-slate-200">
                                                 <div className="flex items-center justify-between mb-2">
                                                     <span className="text-sm font-medium text-slate-800 truncate flex-1 mr-2">
                                                         {p.nom}
@@ -225,18 +225,18 @@ export default function Create({ produits }) {
                                                     <button
                                                         type="button"
                                                         onClick={() => updateStock(p.id, p.stock - 1)}
-                                                        className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-blue-600/10 hover:text-blue-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0"
+                                                        className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0"
                                                     >−</button>
                                                     <input
                                                         type="number"
                                                         value={p.stock}
                                                         onChange={(e) => updateStock(p.id, parseInt(e.target.value) || 0)}
-                                                        className="w-14 h-11 text-center bg-white/70 backdrop-blur-md border border-white/60 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+                                                        className="w-14 h-11 text-center bg-white border border-slate-100 shadow-sm rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                                                     />
                                                     <button
                                                         type="button"
                                                         onClick={() => updateStock(p.id, p.stock + 1)}
-                                                        className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-blue-600/10 hover:text-blue-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0"
+                                                        className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl transition-colors font-bold text-lg shrink-0"
                                                     >+</button>
                                                     <span className="ml-auto text-xs text-slate-500 shrink-0">
                                                         Max : {p.stock_max}
@@ -250,10 +250,10 @@ export default function Create({ produits }) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-700 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-blue-500/20"
+                                    className="w-full h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-emerald-700/20"
                                 >
                                     {processing && (
-                                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        <span className="w-4 h-4 border-2 border-slate-100 border-t-white rounded-full animate-spin" />
                                     )}
                                     {processing ? 'Création...' : "Créer l'événement"}
                                 </button>

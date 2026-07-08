@@ -7,7 +7,7 @@ const PALETTE = ['#DC5F00', '#2C3E50', '#24B753', '#F29E1A', '#6C757D', '#C53030
 const PRINT_STYLES = `
 @media print {
     header, .no-print { display: none !important; }
-    body, .bg-white/50 { background: white !important; }
+    body, .bg-slate-50 { background: white !important; }
     main { padding: 0 !important; max-width: 100% !important; }
     .shadow-sm { box-shadow: none !important; }
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
@@ -59,11 +59,11 @@ function PieChart({ data, total }) {
 function KpiCard({ label, value, tendance, unite = '' }) {
     const hausse = tendance > 0, baisse = tendance < 0;
     return (
-        <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 shadow-sm">
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-md p-5 shadow-sm">
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">{label}</p>
             <p className="text-3xl font-bold text-slate-800">{value}{unite && <span className="text-lg ml-1">{unite}</span>}</p>
             {tendance !== null && tendance !== undefined ? (
-                <div className={`mt-2 inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${hausse ? 'bg-blue-50 text-blue-600' : baisse ? 'bg-red-50 text-red-500' : 'bg-slate-100 text-slate'}`}>
+                <div className={`mt-2 inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${hausse ? 'bg-emerald-50 text-emerald-600' : baisse ? 'bg-red-50 text-red-500' : 'bg-slate-100 text-slate'}`}>
                     {hausse ? '↑' : baisse ? '↓' : '→'} {Math.abs(tendance)}% vs période préc.
                 </div>
             ) : <p className="mt-2 text-xs text-slate">Première période</p>}
@@ -80,10 +80,10 @@ function BarRow({ nom, categorie, qte, ca, maxCa }) {
                     <p className="text-sm font-semibold text-slate-800 truncate">{nom}</p>
                     <p className="text-xs text-slate">{categorie} · {qte} vendu{qte > 1 ? 's' : ''}</p>
                 </div>
-                <span className="text-sm font-bold text-blue-600 shrink-0">{ca.toFixed(2)}€</span>
+                <span className="text-sm font-bold text-emerald-600 shrink-0">{ca.toFixed(2)}€</span>
             </div>
             <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                <div className="h-full bg-blue-600 rounded-full" style={{ width: `${pct}%` }} />
+                <div className="h-full bg-emerald-700 rounded-full" style={{ width: `${pct}%` }} />
             </div>
         </div>
     );
@@ -99,9 +99,9 @@ function WeekChart({ data }) {
                 const pct = (d.total / maxTotal) * 100;
                 return (
                     <div key={i} className="flex-1 flex flex-col items-center gap-1">
-                        {d.total > 0 && <span className="text-xs text-blue-600 font-semibold">{d.total}€</span>}
+                        {d.total > 0 && <span className="text-xs text-emerald-600 font-semibold">{d.total}€</span>}
                         <div className="w-full flex items-end justify-center" style={{ height: '72px' }}>
-                            <div className={`w-full rounded-t-md ${d.total > 0 ? 'bg-blue-600' : 'bg-slate-100'}`} style={{ height: `${Math.max(pct, 4)}%` }} />
+                            <div className={`w-full rounded-t-md ${d.total > 0 ? 'bg-emerald-700' : 'bg-slate-100'}`} style={{ height: `${Math.max(pct, 4)}%` }} />
                         </div>
                         <span className={`text-xs font-medium ${d.total > 0 ? 'text-dark' : 'text-slate-400'}`}>{d.jour}</span>
                     </div>
@@ -132,7 +132,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
         : `Du ${debut} au ${fin}`;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="stats" />
             <main className="p-4 lg:p-6 max-w-5xl mx-auto">
 
@@ -143,7 +143,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                         <p className="text-slate-500 text-sm mt-1">{labelPeriode}</p>
                     </div>
                     <button onClick={handleExport}
-                        className="no-print shrink-0 h-10 px-4 flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/60 hover:border-blue-500/40 hover:text-blue-600 text-slate-500 rounded-xl text-sm font-medium transition-colors">
+                        className="no-print shrink-0 h-10 px-4 flex items-center gap-2 bg-white border border-slate-100 shadow-sm hover:border-emerald-500 hover:text-emerald-600 text-slate-500 rounded-xl text-sm font-medium transition-colors">
                         Exporter
                     </button>
                 </div>
@@ -152,7 +152,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                 <div className="flex gap-2 mb-4 flex-wrap no-print">
                     {[{ key: 'jour', label: 'Jour' }, { key: 'mois', label: '🗓️ Mois' }, { key: 'evenement', label: '🎪 Événement' }].map(({ key, label }) => (
                         <button key={key} onClick={() => naviguer(key, key === 'jour' ? { date: dateInput } : {})}
-                            className={`h-10 px-5 rounded-xl text-sm font-semibold transition-colors ${periodeActive === key ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/20' : 'bg-white/70 backdrop-blur-md border border-white/60 text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}>
+                            className={`h-10 px-5 rounded-xl text-sm font-semibold transition-colors ${periodeActive === key ? 'bg-emerald-700 text-white shadow-sm shadow-emerald-700/20' : 'bg-white border border-slate-100 shadow-sm text-slate-500 hover:text-slate-800 hover:border-slate-300'}`}>
                             {label}
                         </button>
                     ))}
@@ -163,7 +163,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                     <div className="mb-6 flex items-center gap-3 flex-wrap no-print">
                         <input type="date" value={dateInput} max={new Date().toISOString().split('T')[0]}
                             onChange={(e) => { setDateInput(e.target.value); naviguer('jour', { date: e.target.value }); }}
-                            className="h-11 px-4 bg-white/70 backdrop-blur-md border border-white/60 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 transition-colors" />
+                            className="h-11 px-4 bg-white border border-slate-100 shadow-sm rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors" />
                         <span className="text-sm text-slate">
                             {new Date(dateInput + 'T00:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
                         </span>
@@ -175,7 +175,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                     <div className="mb-6 no-print">
                         <select value={evenementSel}
                             onChange={(e) => { setEvenementSel(e.target.value); naviguer('evenement', { evenement_id: e.target.value }); }}
-                            className="w-full h-11 px-4 bg-white/70 backdrop-blur-md border border-white/60 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-blue-500 transition-colors">
+                            className="w-full h-11 px-4 bg-white border border-slate-100 shadow-sm rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500 transition-colors">
                             <option value="">— Sélectionner un événement —</option>
                             {evenements.map(ev => (
                                 <option key={ev.id_evenement} value={ev.id_evenement}>
@@ -196,18 +196,18 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
 
                 {/* Graphes */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 shadow-sm">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md p-5 shadow-sm">
                         <h3 className="text-sm font-semibold text-slate-800 mb-4">Moyens de paiement</h3>
                         <PieChart data={dataPaiement} total={totalPaiement} />
                     </div>
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 shadow-sm">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md p-5 shadow-sm">
                         <h3 className="text-sm font-semibold text-slate-800 mb-2">📆 CA par jour de la semaine</h3>
                         <WeekChart data={parJour} />
                     </div>
                 </div>
 
                 {/* Top 5 */}
-                <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 shadow-sm mb-6">
+                <div className="bg-white rounded-2xl border border-slate-100 shadow-md p-5 shadow-sm mb-6">
                     <h3 className="text-sm font-semibold text-slate-800 mb-4">🏆 Top 5 produits</h3>
                     {topProduits.length === 0
                         ? <p className="text-slate-500 text-sm text-center py-8">Aucune vente sur cette période</p>
@@ -217,7 +217,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
 
                 {/* Ventes par heure (mode jour) */}
                 {periodeActive === 'jour' && ventesParHeure.length > 0 && (
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 shadow-sm">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md p-5 shadow-sm">
                         <h3 className="text-sm font-semibold text-slate-800 mb-4">Ventes par heure</h3>
                         <div className="flex items-end gap-1 h-28">
                             {ventesParHeure.map((v, i) => {
@@ -226,7 +226,7 @@ export default function Index({ periode, evenementId, dateChoisie, evenements, k
                                 return (
                                     <div key={i} className="flex-1 flex flex-col items-center gap-1">
                                         <div className="w-full flex items-end justify-center" style={{ height: '80px' }}>
-                                            <div className="w-full bg-blue-600/80 rounded-t-md" style={{ height: `${Math.max(pct, 4)}%` }} title={`${v.heure} : ${v.total.toFixed(2)}€`} />
+                                            <div className="w-full bg-emerald-700/80 rounded-t-md" style={{ height: `${Math.max(pct, 4)}%` }} title={`${v.heure} : ${v.total.toFixed(2)}€`} />
                                         </div>
                                         <span className="text-xs text-slate">{v.heure}</span>
                                     </div>

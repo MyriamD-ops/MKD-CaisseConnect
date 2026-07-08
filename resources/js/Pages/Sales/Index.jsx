@@ -40,7 +40,7 @@ export default function Index({ sales }) {
     const totalVentes = serverSales.length + ventesLocales.length;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="min-h-screen bg-slate-50">
             <Header currentPage="sales" />
 
             <main className="p-4 lg:p-6 max-w-7xl mx-auto">
@@ -56,16 +56,16 @@ export default function Index({ sales }) {
                         <div className="flex items-center gap-2 shrink-0">
                             {ventesLocales.length > 0 && isOnline && (
                                 <button onClick={handleSync} disabled={syncing}
-                                    className="h-9 px-3 bg-blue-50 hover:bg-blue-100/20 text-blue-600 border border-blue-200 font-medium rounded-xl text-sm transition-colors disabled:opacity-50 whitespace-nowrap">
+                                    className="h-9 px-3 bg-emerald-50 hover:bg-emerald-100/20 text-emerald-600 border border-emerald-200 font-medium rounded-xl text-sm transition-colors disabled:opacity-50 whitespace-nowrap">
                                     {syncing ? <IconRefresh className="w-4 h-4 animate-spin" /> : <IconRefresh className="w-4 h-4" />}
                                 </button>
                             )}
                             <a href="/sales/export"
-                                className="h-9 px-3 flex items-center gap-1.5 bg-white/70 backdrop-blur-md border border-white/60 hover:border-slate/50 text-slate-500 hover:text-slate-800 rounded-xl text-sm font-medium transition-colors whitespace-nowrap">
+                                className="h-9 px-3 flex items-center gap-1.5 bg-white border border-slate-100 shadow-sm hover:border-slate/50 text-slate-500 hover:text-slate-800 rounded-xl text-sm font-medium transition-colors whitespace-nowrap">
                                 CSV
                             </a>
                             <Link href="/sales/create"
-                                className="h-9 px-3 flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-colors whitespace-nowrap">
+                                className="h-9 px-3 flex items-center bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-sm transition-colors whitespace-nowrap">
                                 + Vente
                             </Link>
                         </div>
@@ -73,7 +73,7 @@ export default function Index({ sales }) {
                     <p className="text-slate-500 text-sm">
                         {totalVentes} vente{totalVentes > 1 ? 's' : ''}
                         {ventesLocales.length > 0 && (
-                            <span className="ml-1 text-blue-600">
+                            <span className="ml-1 text-emerald-600">
                                 • {ventesLocales.length} non synchronisée{ventesLocales.length > 1 ? 's' : ''}
                             </span>
                         )}
@@ -82,12 +82,12 @@ export default function Index({ sales }) {
 
                 {/* État vide */}
                 {totalVentes === 0 ? (
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-12 text-center">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md p-12 text-center">
                         <p className="text-5xl mb-4 grayscale"></p>
                         <h3 className="text-lg font-semibold text-slate-800 mb-2">Aucune vente</h3>
                         <p className="text-slate-500 text-sm mb-6">Les ventes apparaîtront ici</p>
                         <Link href="/sales/create"
-                            className="inline-flex items-center justify-center h-11 px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm transition-colors">
+                            className="inline-flex items-center justify-center h-11 px-6 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-sm transition-colors">
                             Nouvelle vente
                         </Link>
                     </div>
@@ -96,11 +96,11 @@ export default function Index({ sales }) {
 
                         {/* Ventes locales */}
                         {ventesLocales.map((vente) => (
-                            <div key={`local-${vente.id}`} className="bg-white rounded-2xl border-2 border-blue-500/40 p-5 flex justify-between items-center shadow-sm">
+                            <div key={`local-${vente.id}`} className="bg-white rounded-2xl border-2 border-emerald-500/40 p-5 flex justify-between items-center shadow-sm">
                                 <div className="flex-1">
                                     <div className="flex gap-3 items-center mb-2 flex-wrap">
                                         <h3 className="text-base font-semibold text-slate-800">Vente locale #{vente.id}</h3>
-                                        <span className="px-2.5 py-1 bg-blue-600/5 text-blue-600 border border-blue-500/30 rounded-full text-xs font-semibold">⏳ Non sync.</span>
+                                        <span className="px-2.5 py-1 bg-emerald-700/5 text-emerald-600 border border-emerald-500/30 rounded-full text-xs font-semibold">⏳ Non sync.</span>
                                     </div>
                                     <div className="flex flex-wrap gap-3 text-sm text-slate">
                                         <span>{new Date(vente.date_vente).toLocaleDateString('fr-FR')}</span>
@@ -114,7 +114,7 @@ export default function Index({ sales }) {
 
                         {/* Ventes serveur */}
                         {serverSales.map((sale) => (
-                            <div key={sale.id_vente} className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 flex justify-between items-center hover:border-slate-300 hover:shadow-sm transition-all">
+                            <div key={sale.id_vente} className="bg-white rounded-2xl border border-slate-100 shadow-md p-5 flex justify-between items-center hover:border-slate-300 hover:shadow-sm transition-all">
                                 <div className="flex-1 min-w-0 mr-3">
                                     <h3 className="text-base font-semibold text-slate-800 mb-2 truncate">
                                         {sale.numero_vente}
@@ -141,7 +141,7 @@ export default function Index({ sales }) {
                         {sales.links.map((link, index) => (
                             link.url ? (
                                 <Link key={index} href={link.url}
-                                    className={`px-3 py-2 rounded-lg text-sm border transition-colors ${link.active ? 'bg-blue-600 text-white border-blue-500' : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300'}`}
+                                    className={`px-3 py-2 rounded-lg text-sm border transition-colors ${link.active ? 'bg-emerald-700 text-white border-emerald-500' : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300'}`}
                                     dangerouslySetInnerHTML={{ __html: link.label }} />
                             ) : (
                                 <span key={index} className="px-3 py-2 rounded-lg text-sm border border-slate-200 bg-white text-slate-400"

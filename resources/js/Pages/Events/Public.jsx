@@ -1,6 +1,6 @@
 export default function Public({ evenement }) {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex flex-col">
+        <div className="min-h-screen bg-slate-50 flex flex-col">
             {/* Header public — pas de nav admin */}
             <header className="bg-dark text-white px-4 py-6 text-center">
                 <h1 className="text-2xl font-bold tracking-tight mb-1">{evenement.nom}</h1>
@@ -13,7 +13,7 @@ export default function Public({ evenement }) {
             <main className="flex-1 px-4 py-8 max-w-5xl mx-auto w-full">
                 {/* Description */}
                 {evenement.description && (
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 mb-6 shadow-sm">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md p-5 mb-6 shadow-sm">
                         <p className="text-sm text-slate-500 leading-relaxed">{evenement.description}</p>
                     </div>
                 )}
@@ -24,7 +24,7 @@ export default function Public({ evenement }) {
                 </h2>
 
                 {evenement.produits.length === 0 ? (
-                    <div className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-12 text-center">
+                    <div className="bg-white rounded-2xl border border-slate-100 shadow-md p-12 text-center">
                         <p className="text-5xl mb-4 grayscale">📦</p>
                         <p className="text-slate">Aucun produit disponible pour le moment</p>
                     </div>
@@ -33,12 +33,12 @@ export default function Public({ evenement }) {
                         {evenement.produits.map((produit) => (
                             <div
                                 key={produit.id}
-                                className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/60 p-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200"
+                                className="bg-white rounded-2xl border border-slate-100 shadow-md p-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200"
                             >
                                 {/* Badge disponibilité */}
                                 <div className="mb-3">
                                     {produit.disponible ? (
-                                        <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-600 border border-blue-200">
+                                        <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200">
                                             ✓ Disponible
                                         </span>
                                     ) : (
@@ -65,7 +65,7 @@ export default function Public({ evenement }) {
 
                                 {/* Prix */}
                                 <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                                    <span className="text-2xl font-bold text-blue-600">{produit.prix}€</span>
+                                    <span className="text-2xl font-bold text-emerald-600">{produit.prix}€</span>
                                     {!produit.disponible && (
                                         <span className="text-xs text-red-500 font-medium">Plus disponible</span>
                                     )}
