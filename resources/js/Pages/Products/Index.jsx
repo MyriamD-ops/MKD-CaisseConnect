@@ -96,51 +96,55 @@ export default function Index({ products: serverProducts }) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {products.map((product) => {
                             const stockBas = product.stock_actuel <= product.stock_minimum;
+                            const rupture = product.stock_actuel === 0;
                             return (
                                 <div key={product.id_produit}
-                                    className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 border-emerald-500 overflow-hidden">
+                                    className="group bg-white rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-t-4 border-emerald-500 overflow-hidden flex flex-col h-full">
 
-                                    {/* Zone image / placeholder */}
+                                    {/* Zone image — dégradé lumineux */}
                                     <Link href={`/products/${product.id_produit}`}
-                                        className="block bg-slate-100 h-32 flex items-center justify-center relative">
-                                        <IconBox className="w-14 h-14 text-slate-300 group-hover:scale-110 transition-transform duration-300" />
-                                        <span className={`absolute top-2 right-2 text-[10px] font-bold px-2 py-0.5 rounded-full border ${
-                                            stockBas
-                                                ? 'bg-amber-100 text-amber-700 border-amber-200'
-                                                : 'bg-emerald-100 text-emerald-700 border-emerald-200'
+                                        className="block h-28 bg-gradient-to-br from-emerald-50 to-blue-50 flex items-center justify-center relative">
+                                        <IconBox className="w-14 h-14 text-emerald-300/60 group-hover:text-emerald-400 transition-colors" />
+                                        <span className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full border shadow-sm ${
+                                            rupture
+                                                ? 'bg-red-100 text-red-700 border-red-200'
+                                                : stockBas
+                                                    ? 'bg-amber-100 text-amber-700 border-amber-200'
+                                                    : 'bg-emerald-100 text-emerald-700 border-emerald-200'
                                         }`}>
-                                            {stockBas ? 'Stock bas' : 'En stock'}
+                                            {rupture ? 'Rupture' : stockBas ? 'Stock bas' : 'En stock'}
                                         </span>
                                     </Link>
 
                                     {/* Corps */}
-                                    <div className="p-5">
-                                        <div className="flex justify-between items-start mb-2">
+                                    <div className="p-5 flex flex-col flex-1">
+                                        <div className="flex justify-between items-start mb-1">
                                             <Link href={`/products/${product.id_produit}`}>
-                                                <h3 className="text-base font-bold text-slate-800 hover:text-emerald-600 transition-colors truncate">
+                                                <h3 className="text-base font-bold text-slate-800 hover:text-emerald-600 transition-colors truncate pr-2">
                                                     {product.nom}
                                                 </h3>
                                             </Link>
-                                            <span className="font-bold text-emerald-700 text-lg shrink-0 ml-2">
+                                            <span className="font-bold text-emerald-600 text-lg whitespace-nowrap">
                                                 {product.prix_base} €
                                             </span>
                                         </div>
 
-                                        <div className="flex items-center justify-between text-xs text-slate-500 mb-4">
-                                            <span>{product.categorie}</span>
-                                            <span className="bg-slate-100 px-2 py-1 rounded text-slate-600">
-                                                Stock : {product.stock_actuel}
+                                        <div className="flex justify-between items-center text-xs text-slate-500 mb-4 mt-1">
+                                            <span className="bg-slate-100 px-2 py-1 rounded text-slate-600 font-medium">
+                                                {product.categorie}
                                             </span>
+                                            <span>Stock : {product.stock_actuel}</span>
                                         </div>
 
-                                        <div className="flex gap-2">
+                                        {/* Boutons colorés */}
+                                        <div className="mt-auto flex gap-3">
                                             <Link href={`/products/${product.id_produit}/edit`}
-                                                className="flex-1 py-2 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition-colors flex items-center justify-center gap-1.5">
-                                                <IconEdit className="w-3.5 h-3.5" /> Modifier
+                                                className="flex-1 py-2 text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-1.5">
+                                                <IconEdit className="w-4 h-4" /> Modifier
                                             </Link>
                                             <button onClick={() => handleDelete(product.id_produit, product.nom)}
-                                                className="flex-1 py-2 text-sm font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-lg hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors flex items-center justify-center gap-1.5">
-                                                <IconTrash className="w-3.5 h-3.5" /> Supprimer
+                                                className="flex-1 py-2 text-sm font-semibold text-red-600 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-1.5">
+                                                <IconTrash className="w-4 h-4" /> Supprimer
                                             </button>
                                         </div>
                                     </div>
