@@ -453,7 +453,7 @@ export default function Create({ products: serverProducts }) {
                                         notify('success', `Paiement Stripe réussi (${paymentIntent.id})`);
                                         // Soumettre la vente avec le moyen de paiement Stripe
                                         router.post('/sales', {
-                                            articles: cart.map(item => ({
+                                            items: cart.map(item => ({
                                                 id_produit: item.id_produit,
                                                 quantite: item.quantite,
                                                 prix_unitaire: item.prix_base,

@@ -37,7 +37,7 @@ class SaleController extends Controller
             'moyen_paiement'     => 'required',
         ]);
 
-        $allowed = ['Espèces', 'Carte bancaire', 'Chèque', 'Virement'];
+        $allowed = ['Espèces', 'Carte bancaire', 'Chèque', 'Virement', 'Carte (Stripe)'];
         $raw = $request->input('moyen_paiement');
         $moyens = is_array($raw) ? $raw : [$raw];
         foreach ($moyens as $m) {
