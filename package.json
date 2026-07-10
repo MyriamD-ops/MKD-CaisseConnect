@@ -17,6 +17,8 @@
     "dependencies": {
         "@inertiajs/react": "^2.3.14",
         "@reduxjs/toolkit": "^2.11.2",
+        "@stripe/react-stripe-js": "^6.7.0",
+        "@stripe/stripe-js": "^9.9.0",
         "@vitejs/plugin-react": "^4.3.4",
         "dexie": "^4.3.0",
         "html2canvas": "^1.4.1",

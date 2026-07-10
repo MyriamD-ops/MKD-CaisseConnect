@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\StatsController;
+use App\Http\Controllers\StripeController;
 
 // Preview Design System (accessible sans auth)
 Route::get('/ui', function (ResponseFactory $inertia) {
@@ -67,9 +68,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/events/{evenement}/delete', [EvenementController::class, 'destroy'])->name('events.destroy');
     Route::get('/events/{evenement}/admin', [EvenementController::class, 'showAdmin'])->name('events.showAdmin');
     
+    // Stripe — PaymentIntent
+    Route::post('/stripe/create-payment-intent', [StripeController::class, 'createPaymentIntent'])->name('stripe.createPaymentIntent');
+
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 // Page publique - Catalogue client événement (APRÈS les routes admin)
 Route::get('/events/{code}', [EvenementController::class, 'show'])->name('events.public');
+
+// Webhook Stripe — hors CSRF (POST externe)
+Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->name('stripe.webhook');
