@@ -2,6 +2,7 @@ import { router } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import Header from '../../Components/Header';
 import QRScanner from '../../Components/QRScanner';
+import StripePayment from '../../Components/StripePayment';
 import useOnlineStatus from '../../Hooks/useOnlineStatus';
 import { saveVenteLocal, getProduitsLocal, syncProduits } from '../../utils/sync';
 
@@ -17,6 +18,7 @@ export default function Create({ products: serverProducts }) {
     const [showCart, setShowCart] = useState(false);
     const [notification, setNotification] = useState(null);
     const [showClearConfirm, setShowClearConfirm] = useState(false);
+    const [showStripePayment, setShowStripePayment] = useState(false);
 
     const [remiseGlobale, setRemiseGlobale] = useState('');
     const [remiseGlobaleType, setRemiseGlobaleType] = useState('euro');
@@ -391,17 +393,13 @@ export default function Create({ products: serverProducts }) {
                                 <button
                                     key={moyen}
                                     type="button"
-                                    onClick={() => toggleMoyenPaiement(moyen)}
+                                    onClick={() => { toggleMoyenPaiement(moyen); setShowStripePayment(false); }}
                                     className={`h-11 px-3 rounded-xl text-sm font-medium transition-all border ${
                                         moyenPaiement.includes(moyen)
                                             ? 'bg-emerald-700 text-white border-emerald-500 shadow-sm shadow-emerald-700/20'
                                             : 'bg-white text-slate-500 border-slate-300 hover:border-emerald-500'
                                     }`}
                                 >
-                                    {moyen === 'Espèces' && '💵 '}
-                                    {moyen === 'Carte bancaire' && ''}
-                                    {moyen === 'Chèque' && '📝 '}
-                                    {moyen === 'Virement' && '🏦 '}
                                     {moyen}
                                 </button>
                             ))}
@@ -433,11 +431,54 @@ export default function Create({ products: serverProducts }) {
                         )}
                     </div>
 
-                    {/* Valider */}
-                    <button onClick={handleSubmit} disabled={processing || !ventilationValide} className="w-full h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-emerald-700/20">
-                        {processing && <span className="w-4 h-4 border-2 border-slate-100 border-t-white rounded-full animate-spin" />}
-                        {processing ? 'Traitement...' : (isOnline ? 'Valider la vente' : '💾 Sauvegarder hors ligne')}
-                    </button>
+                    {/* Paiement Stripe (si en ligne et panier non vide) */}
+                    {isOnline && cart.length > 0 && total >= 0.50 && (
+                        <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            {!showStripePayment ? (
+                                <button
+                                    type="button"
+                                    onClick={() => { setMoyenPaiement(['Carte (Stripe)']); setShowStripePayment(true); }}
+                                    className="w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-110 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-blue-600/20"
+                                >
+                                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                        <rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" />
+                                    </svg>
+                                    Payer {total.toFixed(2)} € avec Stripe
+                                </button>
+                            ) : (
+                                <StripePayment
+                                    amount={total}
+                                    onSuccess={(paymentIntent) => {
+                                        setShowStripePayment(false);
+                                        notify('success', `Paiement Stripe réussi (${paymentIntent.id})`);
+                                        // Soumettre la vente avec le moyen de paiement Stripe
+                                        router.post('/sales', {
+                                            articles: cart.map(item => ({
+                                                id_produit: item.id_produit,
+                                                quantite: item.quantite,
+                                                prix_unitaire: item.prix_base,
+                                                remise: item.remise || 0,
+                                                remise_type: item.remise_type || 'euro',
+                                            })),
+                                            moyen_paiement: 'Carte (Stripe)',
+                                            stripe_payment_intent: paymentIntent.id,
+                                            remise_globale: remiseGlobale ? parseFloat(remiseGlobale) : 0,
+                                            remise_globale_type: remiseGlobaleType,
+                                        });
+                                    }}
+                                    onCancel={() => { setShowStripePayment(false); setMoyenPaiement(['Espèces']); }}
+                                />
+                            )}
+                        </div>
+                    )}
+
+                    {/* Valider (paiement classique, hors Stripe) */}
+                    {!showStripePayment && (
+                        <button onClick={handleSubmit} disabled={processing || !ventilationValide} className="w-full h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-emerald-700/20">
+                            {processing && <span className="w-4 h-4 border-2 border-slate-100 border-t-white rounded-full animate-spin" />}
+                            {processing ? 'Traitement...' : (isOnline ? 'Valider la vente' : 'Sauvegarder hors ligne')}
+                        </button>
+                    )}
                 </div>
             )}
             </div>
