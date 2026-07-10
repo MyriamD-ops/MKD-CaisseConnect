@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import axios from 'axios';
 
 // Charger Stripe avec la clé publique (injectée via Vite)
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE);
@@ -99,21 +100,10 @@ export default function StripePayment({ amount, onSuccess, onCancel }) {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch('/stripe/create-payment-intent', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content,
-                },
-                body: JSON.stringify({ amount }),
-            });
-
-            if (!res.ok) throw new Error('Erreur lors de la création du paiement');
-
-            const data = await res.json();
+            const { data } = await axios.post('/stripe/create-payment-intent', { amount });
             setClientSecret(data.clientSecret);
         } catch (err) {
-            setError(err.message);
+            setError(err.response?.data?.message || 'Erreur lors de la création du paiement');
         } finally {
             setLoading(false);
         }
