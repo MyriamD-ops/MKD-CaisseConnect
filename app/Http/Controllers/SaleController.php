@@ -17,7 +17,7 @@ class SaleController extends Controller
     {
         $products = Produit::where('actif', true)
             ->where('stock_actuel', '>', 0)
-            ->get(['id_produit', 'nom', 'prix_base', 'stock_actuel', 'categorie']);
+            ->get(['id_produit', 'nom', 'prix_base', 'stock_actuel', 'categorie', 'code_barres']);
 
         return $inertia->render('Sales/Create', [
             'products' => $products
