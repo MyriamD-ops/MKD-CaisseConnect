@@ -143,6 +143,146 @@ class DemoSeeder extends Seeder
         }
 
         echo "✅ 7 ventes fictives créées (7 derniers jours)\n";
-        echo "\n🎯 Démo prête — connectez-vous sur la landing page avec demo_admin / 1234\n";
+
+        // ── Clients professionnels ────────────────────────────────
+        if (DB::table('clients_pro')->count() === 0) {
+            $clientsPro = [
+                [
+                    'raison_sociale' => 'Restaurant Le Marché',
+                    'siret'          => '12345678901234',
+                    'numero_tva'     => 'FR12345678901',
+                    'adresse'        => '15 Rue de la Liberté',
+                    'code_postal'    => '97200',
+                    'ville'          => 'Fort-de-France',
+                    'email'          => 'contact@lemarche.mq',
+                    'telephone'      => '0596 70 12 34',
+                ],
+                [
+                    'raison_sociale' => 'Hôtel Plein Soleil',
+                    'siret'          => '98765432109876',
+                    'numero_tva'     => 'FR98765432109',
+                    'adresse'        => '3 Boulevard du Front de Mer',
+                    'code_postal'    => '97233',
+                    'ville'          => 'Schoelcher',
+                    'email'          => 'direction@pleinsoleil.mq',
+                    'telephone'      => '0596 61 45 67',
+                ],
+                [
+                    'raison_sociale' => 'SARL Tropical Services',
+                    'siret'          => '45678901234567',
+                    'numero_tva'     => 'FR45678901234',
+                    'adresse'        => '8 Zone Industrielle La Lézarde',
+                    'code_postal'    => '97232',
+                    'ville'          => 'Le Lamentin',
+                    'email'          => 'commandes@tropicalservices.mq',
+                    'telephone'      => '0596 50 89 01',
+                ],
+            ];
+
+            foreach ($clientsPro as $cp) {
+                DB::table('clients_pro')->insert(array_merge($cp, [
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]));
+            }
+            echo "✅ 3 clients professionnels créés\n";
+
+            // ── Ventes B2B + Factures fictives ────────────────────
+            $clientIds = DB::table('clients_pro')->pluck('id_client')->toArray();
+
+            $ventesB2B = [
+                [
+                    'client_idx' => 0,
+                    'items'      => [['Café expresso' => 10], ['Chips nature 150g' => 20]],
+                    'moyen'      => 'Virement',
+                    'days_ago'   => 5,
+                    'facture_statut' => 'Acceptée',
+                ],
+                [
+                    'client_idx' => 1,
+                    'items'      => [['Eau minérale 1,5L' => 24], ['Jus d\'orange 1L' => 12]],
+                    'moyen'      => 'Carte (Stripe)',
+                    'days_ago'   => 3,
+                    'facture_statut' => 'Transmise PA',
+                ],
+                [
+                    'client_idx' => 2,
+                    'items'      => [['Savon mains 300ml' => 15], ['Dentifrice 75ml' => 10]],
+                    'moyen'      => 'Carte bancaire',
+                    'days_ago'   => 1,
+                    'facture_statut' => 'Émise',
+                ],
+            ];
+
+            $facNum = 1;
+            foreach ($ventesB2B as $vb) {
+                $date  = Carbon::now()->subDays($vb['days_ago'])->setHour(rand(9, 17));
+                $total = 0;
+                $lignesB2B = [];
+
+                foreach ($vb['items'] as $items) {
+                    foreach ($items as $nom => $qte) {
+                        if (!isset($produitIds[$nom])) continue;
+                        $pu     = $produitIds[$nom]['prix'];
+                        $total += $pu * $qte;
+                        $lignesB2B[] = ['nom' => $nom, 'qte' => $qte, 'pu' => $pu];
+                    }
+                }
+
+                $numero  = 'V-' . $date->format('Ymd') . '-B2B-' . str_pad($facNum, 3, '0', STR_PAD_LEFT);
+                $venteId = DB::table('ventes')->insertGetId([
+                    'numero_vente'    => $numero,
+                    'montant_total'   => round($total, 2),
+                    'moyen_paiement'  => $vb['moyen'],
+                    'statut'          => 'Terminée',
+                    'type_client'     => 'B2B',
+                    'id_client_pro'   => $clientIds[$vb['client_idx']],
+                    'id_utilisateur'  => $admin->id,
+                    'date_vente'      => $date,
+                    'synchronisee'    => true,
+                    'created_at'      => $date,
+                    'updated_at'      => $date,
+                ]);
+
+                foreach ($lignesB2B as $l) {
+                    DB::table('lignes_vente')->insert([
+                        'id_vente'       => $venteId,
+                        'id_produit'     => $produitIds[$l['nom']]['id'],
+                        'quantite'       => $l['qte'],
+                        'prix_unitaire'  => $l['pu'],
+                        'sous_total'     => round($l['pu'] * $l['qte'], 2),
+                        'created_at'     => $date,
+                        'updated_at'     => $date,
+                    ]);
+                }
+
+                // Créer la facture associée
+                $montantTTC = round($total, 2);
+                $montantHT  = round($montantTTC / 1.20, 2);
+                $montantTVA = round($montantTTC - $montantHT, 2);
+
+                DB::table('factures')->insert([
+                    'numero_facture'  => 'FAC-2026-' . str_pad($facNum, 4, '0', STR_PAD_LEFT),
+                    'id_vente'        => $venteId,
+                    'id_client'       => $clientIds[$vb['client_idx']],
+                    'montant_ht'      => $montantHT,
+                    'montant_tva'     => $montantTVA,
+                    'montant_ttc'     => $montantTTC,
+                    'date_emission'   => $date,
+                    'date_echeance'   => $date->copy()->addDays(30),
+                    'statut'          => $vb['facture_statut'],
+                    'format'          => 'Factur-X',
+                    'transmitted_at'  => in_array($vb['facture_statut'], ['Transmise PA', 'Acceptée']) ? $date->copy()->addHours(2) : null,
+                    'created_at'      => $date,
+                    'updated_at'      => $date,
+                ]);
+
+                $facNum++;
+            }
+
+            echo "✅ 3 ventes B2B + 3 factures électroniques créées\n";
+        }
+
+        echo "\n🎯 Démo prête — connectez-vous avec demo_admin / 1234\n";
     }
 }

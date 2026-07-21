@@ -15,6 +15,7 @@ export default function Header({ currentPage = 'dashboard' }) {
         { name: 'Dashboard',    href: '/',        key: 'dashboard' },
         { name: 'Produits',     href: '/products', key: 'products'  },
         { name: 'Ventes',       href: '/sales',    key: 'sales'     },
+        { name: 'Factures',     href: '/factures', key: 'factures'  },
         { name: 'Statistiques', href: '/stats',    key: 'stats'     },
     ];
 
