@@ -61,7 +61,6 @@ class ProductController extends Controller
 
         $validated['prix_base'] = $validated['prix'];
         unset($validated['prix']);
-        $validated['code_barres'] = 'PRD-' . strtoupper(uniqid());
         $validated['actif'] = true;
 
         Produit::create($validated);

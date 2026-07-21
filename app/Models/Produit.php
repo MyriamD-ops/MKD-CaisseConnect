@@ -36,6 +36,15 @@ class Produit extends Model
         'actif' => 'boolean',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function (Produit $produit) {
+            if (empty($produit->code_barres)) {
+                $produit->code_barres = 'PRD-' . strtoupper(uniqid());
+            }
+        });
+    }
+
     public function variantes(): HasMany
     {
         return $this->hasMany(Variante::class, 'id_produit', 'id_produit');
