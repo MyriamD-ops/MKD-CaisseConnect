@@ -56,6 +56,21 @@ class Vente extends Model
         return $this->hasMany(LigneVente::class, 'id_vente', 'id_vente');
     }
 
+    public function lignes(): HasMany
+    {
+        return $this->hasMany(LigneVente::class, 'id_vente', 'id_vente');
+    }
+
+    public function clientPro(): BelongsTo
+    {
+        return $this->belongsTo(ClientPro::class, 'id_client_pro', 'id_client');
+    }
+
+    public function facture()
+    {
+        return $this->hasOne(Facture::class, 'id_vente', 'id_vente');
+    }
+
     // Génération automatique du numéro de vente
     protected static function boot()
     {

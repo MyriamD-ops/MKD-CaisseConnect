@@ -8,6 +8,7 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\FactureController;
 
 // Preview Design System (accessible sans auth)
 Route::get('/ui', function (ResponseFactory $inertia) {
@@ -70,6 +71,13 @@ Route::middleware('auth')->group(function () {
     
     // Stripe — PaymentIntent
     Route::post('/stripe/create-payment-intent', [StripeController::class, 'createPaymentIntent'])->name('stripe.createPaymentIntent');
+
+    // Factures électroniques
+    Route::get('/factures', [FactureController::class, 'index'])->name('factures.index');
+    Route::get('/factures/{facture}', [FactureController::class, 'show'])->name('factures.show');
+    Route::post('/factures/generate/{vente}', [FactureController::class, 'generate'])->name('factures.generate');
+    Route::post('/factures/{facture}/transmit', [FactureController::class, 'transmit'])->name('factures.transmit');
+    Route::get('/factures/{facture}/pdf', [FactureController::class, 'pdf'])->name('factures.pdf');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
