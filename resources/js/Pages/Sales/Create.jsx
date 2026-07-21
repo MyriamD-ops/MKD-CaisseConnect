@@ -16,6 +16,7 @@ export default function Create({ products: serverProducts }) {
     const [showScanner, setShowScanner] = useState(false);
 
     const [showCart, setShowCart] = useState(false);
+    const [cartStep, setCartStep] = useState('items');
     const [notification, setNotification] = useState(null);
     const [showClearConfirm, setShowClearConfirm] = useState(false);
     const [showStripePayment, setShowStripePayment] = useState(false);
@@ -184,6 +185,7 @@ export default function Create({ products: serverProducts }) {
                 await saveVenteLocal(venteData);
                 setCart([]);
                 setShowCart(false);
+                setCartStep('items');
                 setProcessing(false);
                 notify('success', 'Vente sauvegardée hors ligne — synchronisation automatique au retour de la connexion.');
             } catch (error) {
@@ -211,6 +213,7 @@ export default function Create({ products: serverProducts }) {
             onSuccess: () => {
                 setCart([]);
                 setShowCart(false);
+                setCartStep('items');
                 setRemiseGlobale('');
                 setVentilation({});
                 setProcessing(false);
@@ -245,9 +248,7 @@ export default function Create({ products: serverProducts }) {
     );
 
     // ── JSX du contenu panier ──────────────────────────────────────────────────
-    const renderCartContent = (onClose) => (
-        <div className="flex flex-col flex-1 min-h-0">
-            {/* En-tête panier */}
+    const renderCartHeader = (onClose) => (
             <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200 shrink-0">
                 <h2 className="font-semibold text-slate-800">
                     Panier
@@ -274,213 +275,227 @@ export default function Create({ products: serverProducts }) {
                     )}
                 </div>
             </div>
+    );
 
-            {/* Items */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3">
-                {cart.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-12 text-center">
-                        <span className="text-4xl mb-3 grayscale">🛒</span>
-                        <p className="text-slate-500 text-sm">Panier vide</p>
-                        <p className="text-slate/50 text-xs mt-1">Appuyez sur un produit pour l'ajouter</p>
-                    </div>
-                ) : (
-                    cart.map((item) => {
-                        const remiseVal = parseFloat(item.remise) || 0;
-                        const economie = remiseVal > 0
-                            ? item.remise_type === 'percent'
-                                ? (item.prix_unitaire * item.quantite) * (remiseVal / 100)
-                                : remiseVal
-                            : 0;
+    // ── Liste des articles du panier ────────────────────────────────────────────
+    const renderCartItemsSection = () => (
+        cart.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+                <span className="text-4xl mb-3 grayscale">🛒</span>
+                <p className="text-slate-500 text-sm">Panier vide</p>
+                <p className="text-slate/50 text-xs mt-1">Appuyez sur un produit pour l'ajouter</p>
+            </div>
+        ) : (
+            cart.map((item) => {
+                const remiseVal = parseFloat(item.remise) || 0;
+                const economie = remiseVal > 0
+                    ? item.remise_type === 'percent'
+                        ? (item.prix_unitaire * item.quantite) * (remiseVal / 100)
+                        : remiseVal
+                    : 0;
 
-                        return (
-                            <div key={item.id_produit} className="bg-slate-50 rounded-xl p-3 border border-slate-200">
-                                {/* Nom + supprimer */}
-                                <div className="flex items-start justify-between mb-2">
-                                    <div className="flex-1 min-w-0 mr-2">
-                                        <p className="text-sm font-medium text-slate-800 truncate">{item.nom}</p>
-                                        <p className="text-xs text-slate-500 mt-0.5">{item.prix_unitaire}€ × {item.quantite}</p>
-                                    </div>
-                                    <button onClick={() => removeFromCart(item.id_produit)} className="w-7 h-7 flex items-center justify-center rounded-lg text-red-500 hover:bg-red-50 text-lg leading-none shrink-0">×</button>
-                                </div>
-
-                                {/* Quantité + prix ligne */}
-                                <div className="flex items-center gap-2 mb-3">
-                                    <button onClick={() => updateQuantity(item.id_produit, item.quantite - 1)} className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl font-bold text-lg shrink-0">−</button>
-                                    <input
-                                        type="number"
-                                        value={item.quantite}
-                                        onChange={(e) => updateQuantity(item.id_produit, parseInt(e.target.value) || 0)}
-                                        className="w-14 h-11 text-center bg-white border border-slate-100 shadow-sm rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500"
-                                    />
-                                    <button onClick={() => updateQuantity(item.id_produit, item.quantite + 1)} className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl font-bold text-lg shrink-0">+</button>
-                                    <span className="ml-auto text-sm font-bold text-emerald-600 shrink-0">{getPrixLigne(item).toFixed(2)}€</span>
-                                </div>
-
-                                {/* Remise article — design mobile optimisé */}
-                                <div className="pt-2 border-t border-slate-100">
-                                    <div className="flex items-center justify-between mb-2">
-                                        <span className="text-xs text-slate-500 font-medium">Remise article</span>
-                                        {economie > 0 && (
-                                            <span className="text-xs font-semibold text-red-500">−{economie.toFixed(2)}€</span>
-                                        )}
-                                    </div>
-                                    <div className="flex gap-2 items-center overflow-hidden">
-                                        <TypeToggle
-                                            value={item.remise_type}
-                                            onChange={(val) => updateRemiseLigne(item.id_produit, 'remise_type', val)}
-                                        />
-                                        <input
-                                            type="number"
-                                            min="0"
-                                            placeholder="0"
-                                            value={item.remise}
-                                            onChange={(e) => updateRemiseLigne(item.id_produit, 'remise', e.target.value)}
-                                            className="flex-1 h-10 px-3 bg-white border border-slate-100 shadow-sm rounded-lg text-slate-800 text-sm text-center focus:outline-none focus:border-emerald-500"
-                                        />
-                                    </div>
-                                </div>
+                return (
+                    <div key={item.id_produit} className="bg-slate-50 rounded-xl p-3 border border-slate-200">
+                        {/* Nom + supprimer */}
+                        <div className="flex items-start justify-between mb-2">
+                            <div className="flex-1 min-w-0 mr-2">
+                                <p className="text-sm font-medium text-slate-800 truncate">{item.nom}</p>
+                                <p className="text-xs text-slate-500 mt-0.5">{item.prix_unitaire}€ × {item.quantite}</p>
                             </div>
-                        );
-                    })
-                )}
-
-            {/* Pied panier */}
-            {cart.length > 0 && (
-                <div className="p-4 border-t border-slate-200 space-y-3 overflow-y-auto max-h-[55vh]">
-                    {/* Sous-total */}
-                    <div className="flex justify-between items-center">
-                        <span className="text-slate-500 text-sm">Sous-total</span>
-                        <span className="text-sm text-slate-800">{sousTotal.toFixed(2)}€</span>
-                    </div>
-
-                    {/* Remise globale — design mobile optimisé */}
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                        <div className="flex items-center justify-between mb-2">
-                            <span className="text-xs font-medium text-slate">Remise globale</span>
-                            {remiseGlobaleVal > 0 && (
-                                <span className="text-xs font-semibold text-red-500">
-                                    −{(remiseGlobaleType === 'percent'
-                                        ? sousTotal * (remiseGlobaleVal / 100)
-                                        : remiseGlobaleVal
-                                    ).toFixed(2)}€
-                                </span>
-                            )}
+                            <button onClick={() => removeFromCart(item.id_produit)} className="w-7 h-7 flex items-center justify-center rounded-lg text-red-500 hover:bg-red-50 text-lg leading-none shrink-0">×</button>
                         </div>
-                        <div className="flex gap-2 items-center overflow-hidden">
-                            <TypeToggle value={remiseGlobaleType} onChange={setRemiseGlobaleType} />
+
+                        {/* Quantité + prix ligne */}
+                        <div className="flex items-center gap-2 mb-3">
+                            <button onClick={() => updateQuantity(item.id_produit, item.quantite - 1)} className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl font-bold text-lg shrink-0">−</button>
                             <input
                                 type="number"
-                                min="0"
-                                placeholder="0"
-                                value={remiseGlobale}
-                                onChange={(e) => setRemiseGlobale(e.target.value)}
-                                className="flex-1 h-10 px-3 bg-white border border-slate-100 shadow-sm rounded-lg text-slate-800 text-sm text-center focus:outline-none focus:border-emerald-500"
+                                value={item.quantite}
+                                onChange={(e) => updateQuantity(item.id_produit, parseInt(e.target.value) || 0)}
+                                className="w-14 h-11 text-center bg-white border border-slate-100 shadow-sm rounded-xl text-slate-800 text-sm focus:outline-none focus:border-emerald-500"
                             />
+                            <button onClick={() => updateQuantity(item.id_produit, item.quantite + 1)} className="w-11 h-11 flex items-center justify-center bg-slate-100 hover:bg-emerald-700/10 hover:text-emerald-600 text-slate-800 rounded-xl font-bold text-lg shrink-0">+</button>
+                            <span className="ml-auto text-sm font-bold text-emerald-600 shrink-0">{getPrixLigne(item).toFixed(2)}€</span>
                         </div>
-                    </div>
 
-                    {/* Total */}
-                    <div className="flex justify-between items-center border-t border-slate-200 pt-2">
-                        <span className="text-slate-500 text-sm font-medium">Total</span>
-                        <span className="text-2xl font-bold text-slate-800">{total.toFixed(2)}€</span>
-                    </div>
-
-                    {/* Moyen(s) de paiement — combinables */}
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                        <span className="text-xs font-medium text-slate-500 block mb-2">Moyen(s) de paiement</span>
-                        <div className="grid grid-cols-2 gap-2">
-                            {['Espèces', 'Carte bancaire', 'Chèque', 'Virement'].map((moyen) => (
-                                <button
-                                    key={moyen}
-                                    type="button"
-                                    onClick={() => { toggleMoyenPaiement(moyen); setShowStripePayment(false); }}
-                                    className={`h-11 px-3 rounded-xl text-sm font-medium transition-all border ${
-                                        moyenPaiement.includes(moyen)
-                                            ? 'bg-emerald-700 text-white border-emerald-500 shadow-sm shadow-emerald-700/20'
-                                            : 'bg-white text-slate-500 border-slate-300 hover:border-emerald-500'
-                                    }`}
-                                >
-                                    {moyen}
-                                </button>
-                            ))}
-                        </div>
-                        {moyenPaiement.length > 1 && (
-                            <div className="mt-3 space-y-2 pt-3 border-t border-slate-100">
-                                <span className="text-xs font-medium text-slate">Répartition du montant</span>
-                                {moyenPaiement.map((m) => (
-                                    <div key={m} className="flex items-center gap-2">
-                                        <span className="text-xs text-slate-800 flex-1 truncate">{m}</span>
-                                        <input
-                                            type="number"
-                                            min="0"
-                                            step="0.01"
-                                            placeholder="0.00"
-                                            value={ventilation[m] || ''}
-                                            onChange={(e) => updateVentilation(m, e.target.value)}
-                                            className="w-28 h-9 px-3 bg-white border border-slate-100 shadow-sm rounded-lg text-sm text-right focus:outline-none focus:border-emerald-500"
-                                        />
-                                        <span className="text-xs text-slate">€</span>
-                                    </div>
-                                ))}
-                                <p className={`text-xs font-medium text-center pt-1 ${ventilationValide ? 'text-emerald-600' : 'text-red-500'}`}>
-                                    {ventilationValide
-                                        ? '✓ Répartition correcte'
-                                        : `Reste à répartir : ${(total - totalVentile).toFixed(2)}€`}
-                                </p>
+                        {/* Remise article — design mobile optimisé */}
+                        <div className="pt-2 border-t border-slate-100">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-xs text-slate-500 font-medium">Remise article</span>
+                                {economie > 0 && (
+                                    <span className="text-xs font-semibold text-red-500">−{economie.toFixed(2)}€</span>
+                                )}
                             </div>
-                        )}
-                    </div>
-
-                    {/* Paiement Stripe (si en ligne et panier non vide) */}
-                    {isOnline && cart.length > 0 && total >= 0.50 && (
-                        <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                            {!showStripePayment ? (
-                                <button
-                                    type="button"
-                                    onClick={() => { setMoyenPaiement(['Carte (Stripe)']); setShowStripePayment(true); }}
-                                    className="w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-110 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-blue-600/20"
-                                >
-                                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                                        <rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" />
-                                    </svg>
-                                    Payer {total.toFixed(2)} € avec Stripe
-                                </button>
-                            ) : (
-                                <StripePayment
-                                    amount={total}
-                                    onSuccess={(paymentIntent) => {
-                                        setShowStripePayment(false);
-                                        notify('success', `Paiement Stripe réussi (${paymentIntent.id})`);
-                                        // Soumettre la vente avec le moyen de paiement Stripe
-                                        router.post('/sales', {
-                                            items: cart.map(item => ({
-                                                id_produit: item.id_produit,
-                                                quantite: item.quantite,
-                                                prix_unitaire: item.prix_base,
-                                                remise: item.remise || 0,
-                                                remise_type: item.remise_type || 'euro',
-                                            })),
-                                            moyen_paiement: 'Carte (Stripe)',
-                                            stripe_payment_intent: paymentIntent.id,
-                                            remise_globale: remiseGlobale ? parseFloat(remiseGlobale) : 0,
-                                            remise_globale_type: remiseGlobaleType,
-                                        });
-                                    }}
-                                    onCancel={() => { setShowStripePayment(false); setMoyenPaiement(['Espèces']); }}
+                            <div className="flex gap-2 items-center overflow-hidden">
+                                <TypeToggle
+                                    value={item.remise_type}
+                                    onChange={(val) => updateRemiseLigne(item.id_produit, 'remise_type', val)}
                                 />
-                            )}
+                                <input
+                                    type="number"
+                                    min="0"
+                                    placeholder="0"
+                                    value={item.remise}
+                                    onChange={(e) => updateRemiseLigne(item.id_produit, 'remise', e.target.value)}
+                                    className="flex-1 h-10 px-3 bg-white border border-slate-100 shadow-sm rounded-lg text-slate-800 text-sm text-center focus:outline-none focus:border-emerald-500"
+                                />
+                            </div>
                         </div>
-                    )}
+                    </div>
+                );
+            })
+        )
+    );
 
-                    {/* Valider (paiement classique, hors Stripe) */}
-                    {!showStripePayment && (
-                        <button onClick={handleSubmit} disabled={processing || !ventilationValide} className="w-full h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-emerald-700/20">
-                            {processing && <span className="w-4 h-4 border-2 border-slate-100 border-t-white rounded-full animate-spin" />}
-                            {processing ? 'Traitement...' : (isOnline ? 'Valider la vente' : 'Sauvegarder hors ligne')}
+    // ── Récapitulatif + validation du paiement ──────────────────────────────────
+    const renderPaymentSection = () => (
+        <>
+            {/* Sous-total */}
+            <div className="flex justify-between items-center">
+                <span className="text-slate-500 text-sm">Sous-total</span>
+                <span className="text-sm text-slate-800">{sousTotal.toFixed(2)}€</span>
+            </div>
+
+            {/* Remise globale — design mobile optimisé */}
+            <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-medium text-slate">Remise globale</span>
+                    {remiseGlobaleVal > 0 && (
+                        <span className="text-xs font-semibold text-red-500">
+                            −{(remiseGlobaleType === 'percent'
+                                ? sousTotal * (remiseGlobaleVal / 100)
+                                : remiseGlobaleVal
+                            ).toFixed(2)}€
+                        </span>
+                    )}
+                </div>
+                <div className="flex gap-2 items-center overflow-hidden">
+                    <TypeToggle value={remiseGlobaleType} onChange={setRemiseGlobaleType} />
+                    <input
+                        type="number"
+                        min="0"
+                        placeholder="0"
+                        value={remiseGlobale}
+                        onChange={(e) => setRemiseGlobale(e.target.value)}
+                        className="flex-1 h-10 px-3 bg-white border border-slate-100 shadow-sm rounded-lg text-slate-800 text-sm text-center focus:outline-none focus:border-emerald-500"
+                    />
+                </div>
+            </div>
+
+            {/* Total */}
+            <div className="flex justify-between items-center border-t border-slate-200 pt-2">
+                <span className="text-slate-500 text-sm font-medium">Total</span>
+                <span className="text-2xl font-bold text-slate-800">{total.toFixed(2)}€</span>
+            </div>
+
+            {/* Moyen(s) de paiement — combinables */}
+            <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <span className="text-xs font-medium text-slate-500 block mb-2">Moyen(s) de paiement</span>
+                <div className="grid grid-cols-2 gap-2">
+                    {['Espèces', 'Carte bancaire', 'Chèque', 'Virement'].map((moyen) => (
+                        <button
+                            key={moyen}
+                            type="button"
+                            onClick={() => { toggleMoyenPaiement(moyen); setShowStripePayment(false); }}
+                            className={`h-11 px-3 rounded-xl text-sm font-medium transition-all border ${
+                                moyenPaiement.includes(moyen)
+                                    ? 'bg-emerald-700 text-white border-emerald-500 shadow-sm shadow-emerald-700/20'
+                                    : 'bg-white text-slate-500 border-slate-300 hover:border-emerald-500'
+                            }`}
+                        >
+                            {moyen}
                         </button>
+                    ))}
+                </div>
+                {moyenPaiement.length > 1 && (
+                    <div className="mt-3 space-y-2 pt-3 border-t border-slate-100">
+                        <span className="text-xs font-medium text-slate">Répartition du montant</span>
+                        {moyenPaiement.map((m) => (
+                            <div key={m} className="flex items-center gap-2">
+                                <span className="text-xs text-slate-800 flex-1 truncate">{m}</span>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0.00"
+                                    value={ventilation[m] || ''}
+                                    onChange={(e) => updateVentilation(m, e.target.value)}
+                                    className="w-28 h-9 px-3 bg-white border border-slate-100 shadow-sm rounded-lg text-sm text-right focus:outline-none focus:border-emerald-500"
+                                />
+                                <span className="text-xs text-slate">€</span>
+                            </div>
+                        ))}
+                        <p className={`text-xs font-medium text-center pt-1 ${ventilationValide ? 'text-emerald-600' : 'text-red-500'}`}>
+                            {ventilationValide
+                                ? '✓ Répartition correcte'
+                                : `Reste à répartir : ${(total - totalVentile).toFixed(2)}€`}
+                        </p>
+                    </div>
+                )}
+            </div>
+
+            {/* Paiement Stripe (si en ligne et panier non vide) */}
+            {isOnline && cart.length > 0 && total >= 0.50 && (
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    {!showStripePayment ? (
+                        <button
+                            type="button"
+                            onClick={() => { setMoyenPaiement(['Carte (Stripe)']); setShowStripePayment(true); }}
+                            className="w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 hover:brightness-110 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-blue-600/20"
+                        >
+                            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" />
+                            </svg>
+                            Payer {total.toFixed(2)} € avec Stripe
+                        </button>
+                    ) : (
+                        <StripePayment
+                            amount={total}
+                            onSuccess={(paymentIntent) => {
+                                setShowStripePayment(false);
+                                notify('success', `Paiement Stripe réussi (${paymentIntent.id})`);
+                                // Soumettre la vente avec le moyen de paiement Stripe
+                                router.post('/sales', {
+                                    items: cart.map(item => ({
+                                        id_produit: item.id_produit,
+                                        quantite: item.quantite,
+                                        prix_unitaire: item.prix_base,
+                                        remise: item.remise || 0,
+                                        remise_type: item.remise_type || 'euro',
+                                    })),
+                                    moyen_paiement: 'Carte (Stripe)',
+                                    stripe_payment_intent: paymentIntent.id,
+                                    remise_globale: remiseGlobale ? parseFloat(remiseGlobale) : 0,
+                                    remise_globale_type: remiseGlobaleType,
+                                });
+                            }}
+                            onCancel={() => { setShowStripePayment(false); setMoyenPaiement(['Espèces']); }}
+                        />
                     )}
                 </div>
             )}
+
+            {/* Valider (paiement classique, hors Stripe) */}
+            {!showStripePayment && (
+                <button onClick={handleSubmit} disabled={processing || !ventilationValide} className="w-full h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 hover:brightness-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm shadow-emerald-700/20">
+                    {processing && <span className="w-4 h-4 border-2 border-slate-100 border-t-white rounded-full animate-spin" />}
+                    {processing ? 'Traitement...' : (isOnline ? 'Valider la vente' : 'Sauvegarder hors ligne')}
+                </button>
+            )}
+        </>
+    );
+
+    // ── Contenu complet du panier (utilisé par le panneau desktop) ─────────────
+    const renderCartContent = (onClose) => (
+        <div className="flex flex-col flex-1 min-h-0">
+            {renderCartHeader(onClose)}
+            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                {renderCartItemsSection()}
+                {cart.length > 0 && (
+                    <div className="p-4 border-t border-slate-200 space-y-3 overflow-y-auto max-h-[55vh]">
+                        {renderPaymentSection()}
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -544,7 +559,7 @@ export default function Create({ products: serverProducts }) {
             {/* Barre mobile */}
             {cart.length > 0 && (
                 <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur border-t border-slate-200 z-30">
-                    <button onClick={() => setShowCart(true)} className="w-full h-14 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold rounded-2xl flex items-center justify-between px-5 shadow-sm shadow-emerald-700/20">
+                    <button onClick={() => { setCartStep('items'); setShowCart(true); }} className="w-full h-14 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold rounded-2xl flex items-center justify-between px-5 shadow-sm shadow-emerald-700/20">
                         <span className="flex items-center gap-2.5">
                             <span className="bg-white/25 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0">{cart.length}</span>
                             <span>Voir le panier</span>
@@ -554,7 +569,7 @@ export default function Create({ products: serverProducts }) {
                 </div>
             )}
 
-            {/* Bottom sheet */}
+            {/* Bottom sheet — étape 1 : contenu du panier uniquement, étape 2 : validation du paiement */}
             {showCart && (
                 <div className="lg:hidden fixed inset-0 z-40">
                     <div className="absolute inset-0 bg-black/50" onClick={() => setShowCart(false)} />
@@ -562,7 +577,35 @@ export default function Create({ products: serverProducts }) {
                         <div className="flex justify-center pt-3 pb-1 shrink-0">
                             <div className="w-10 h-1 bg-slate/20 rounded-full" />
                         </div>
-                        {renderCartContent(() => setShowCart(false))}
+                        {cartStep === 'items' ? (
+                            <div className="flex flex-col flex-1 min-h-0">
+                                {renderCartHeader(() => setShowCart(false))}
+                                <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                                    {renderCartItemsSection()}
+                                </div>
+                                {cart.length > 0 && (
+                                    <div className="p-4 border-t border-slate-200 shrink-0">
+                                        <button
+                                            onClick={() => setCartStep('payment')}
+                                            className="w-full h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-sm shadow-emerald-700/20"
+                                        >
+                                            Continuer vers le paiement — {total.toFixed(2)}€
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="flex flex-col flex-1 min-h-0">
+                                <div className="flex items-center px-4 py-3 border-b border-slate-200 shrink-0">
+                                    <button onClick={() => setCartStep('items')} className="flex items-center gap-1.5 text-sm font-semibold text-emerald-700">
+                                        <span aria-hidden="true">←</span> Retour au panier
+                                    </button>
+                                </div>
+                                <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                                    {renderPaymentSection()}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             )}

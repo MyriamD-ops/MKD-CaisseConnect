@@ -16,7 +16,7 @@ export default function Dashboard({ auth, stats = {} }) {
                 </div>
 
                 {/* Carte maîtresse — Chiffre d'affaires du jour */}
-                <div className="bg-gradient-to-br from-emerald-700 to-emerald-900 rounded-2xl p-8 sm:p-10 mb-6 text-white shadow-xl shadow-emerald-700/25 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+                <div className="bg-gradient-to-br from-emerald-700 to-emerald-900 rounded-2xl p-8 sm:p-10 mb-6 text-white shadow-xl shadow-emerald-700/25 flex flex-col items-center text-center sm:flex-row sm:items-center sm:justify-between sm:text-left gap-6">
                     <div>
                         <p className="text-emerald-200 text-xs font-bold uppercase tracking-widest">Chiffre d'affaires du jour</p>
                         <p className="text-5xl font-black mt-2 leading-none">
