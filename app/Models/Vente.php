@@ -15,6 +15,8 @@ class Vente extends Model
         'numero_vente',
         'id_utilisateur',
         'id_evenement',
+        'id_client_pro',
+        'type_client',
         'montant_total',
         'mode_paiement',
         'moyen_paiement',
@@ -27,12 +29,6 @@ class Vente extends Model
     public function getRouteKeyName()
     {
         return 'id_vente';
-    }
-    
-    // Alias pour lignes() au lieu de lignesVente()
-    public function lignes()
-    {
-        return $this->hasMany(LigneVente::class, 'id_vente', 'id_vente');
     }
 
     protected $casts = [
@@ -49,11 +45,6 @@ class Vente extends Model
     public function evenement(): BelongsTo
     {
         return $this->belongsTo(Evenement::class, 'id_evenement', 'id_evenement');
-    }
-
-    public function lignesVente(): HasMany
-    {
-        return $this->hasMany(LigneVente::class, 'id_vente', 'id_vente');
     }
 
     public function lignes(): HasMany
