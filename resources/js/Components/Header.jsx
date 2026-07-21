@@ -1,12 +1,15 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import useOnlineStatus from '../Hooks/useOnlineStatus';
+import { IconCart } from './Icons';
 
 export default function Header({ currentPage = 'dashboard' }) {
     const isOnline = useOnlineStatus();
     const [menuOpen, setMenuOpen] = useState(false);
-    const { business } = usePage().props;
+    const { props, url: currentUrl } = usePage();
+    const { business } = props;
     const appName = business?.name || 'MKD CaisseConnect';
+    const hideNewSaleFab = currentUrl?.startsWith('/sales/create');
 
     const navItems = [
         { name: 'Dashboard',    href: '/',        key: 'dashboard' },
@@ -16,6 +19,7 @@ export default function Header({ currentPage = 'dashboard' }) {
     ];
 
     return (
+        <>
         <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200">
             <div className="flex items-center justify-between px-4 h-14 max-w-7xl mx-auto">
                 <Link href="/" className="text-emerald-600 font-extrabold text-lg tracking-tight shrink-0">
@@ -76,5 +80,16 @@ export default function Header({ currentPage = 'dashboard' }) {
                 </div>
             )}
         </header>
+
+        {!hideNewSaleFab && !menuOpen && (
+            <Link
+                href="/sales/create"
+                className="lg:hidden fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white shadow-xl shadow-emerald-700/40 flex items-center justify-center transition-all active:scale-95"
+                aria-label="Nouvelle vente"
+            >
+                <IconCart className="w-6 h-6" />
+            </Link>
+        )}
+        </>
     );
 }

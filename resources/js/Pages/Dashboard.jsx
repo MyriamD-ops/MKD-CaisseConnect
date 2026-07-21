@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
 import Header from '../Components/Header';
-import { IconBox, IconCart, IconAlert, IconCalendar, IconCoins } from '../Components/Icons';
+import { IconBox, IconCart, IconAlert } from '../Components/Icons';
 
 export default function Dashboard({ auth, stats = {} }) {
     return (
@@ -62,7 +62,7 @@ export default function Dashboard({ auth, stats = {} }) {
                 {/* Actions rapides */}
                 <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
                     <h2 className="text-lg font-extrabold text-slate-800 mb-6">Actions rapides</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <Link href="/sales/create"
                             className="flex flex-col items-center gap-3 p-7 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-base shadow-lg shadow-emerald-700/30 hover:-translate-y-1 transition-all">
                             <IconCart className="w-9 h-9" />
@@ -72,11 +72,6 @@ export default function Dashboard({ auth, stats = {} }) {
                             className="flex flex-col items-center gap-3 p-7 rounded-xl bg-white border-2 border-slate-200 hover:border-emerald-500 text-slate-800 font-bold text-base transition-all">
                             <IconBox className="w-9 h-9" />
                             Ajouter produit
-                        </Link>
-                        <Link href="/events/create"
-                            className="flex flex-col items-center gap-3 p-7 rounded-xl bg-white border-2 border-slate-200 hover:border-emerald-500 text-slate-800 font-bold text-base transition-all">
-                            <IconCalendar className="w-9 h-9" />
-                            Nouvel événement
                         </Link>
                     </div>
                 </div>
