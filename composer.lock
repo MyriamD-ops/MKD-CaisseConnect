@@ -4,8 +4,66 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "695b456fd97d0fc891fcc678086818b8",
+    "content-hash": "e819538b1c519cbbc41afc0536878d11",
     "packages": [
+        {
+            "name": "b2brouter/b2brouter-php",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/B2Brouter/b2brouter-php.git",
+                "reference": "37a1c9c763664c6de2898eb4819e6b0034830acc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/B2Brouter/b2brouter-php/zipball/37a1c9c763664c6de2898eb4819e6b0034830acc",
+                "reference": "37a1c9c763664c6de2898eb4819e6b0034830acc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.0",
+                "phpunit/phpunit": "^9.0",
+                "squizlabs/php_codesniffer": "^3.0",
+                "vlucas/phpdotenv": "^5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "B2BRouter\\": "lib/B2BRouter/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "B2Brouter",
+                    "email": "sdk@b2brouter.net"
+                }
+            ],
+            "description": "B2Brouter PHP SDK - Official library for the B2Brouter API",
+            "homepage": "https://developer.b2brouter.net",
+            "keywords": [
+                "api",
+                "b2brouter",
+                "electronic documents",
+                "invoice",
+                "sdk",
+                "tax report"
+            ],
+            "support": {
+                "issues": "https://github.com/B2Brouter/b2brouter-php/issues",
+                "source": "https://github.com/B2Brouter/b2brouter-php/tree/v1.3.0"
+            },
+            "time": "2026-05-25T10:22:36+00:00"
+        },
         {
             "name": "barryvdh/laravel-dompdf",
             "version": "v3.1.2",

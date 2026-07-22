@@ -88,3 +88,6 @@ Route::get('/events/{code}', [EvenementController::class, 'show'])->name('events
 
 // Webhook Stripe — hors CSRF (POST externe)
 Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->name('stripe.webhook');
+
+// Webhook B2Brouter — hors CSRF (POST externe)
+Route::post('/b2brouter/webhook', [FactureController::class, 'b2brouterWebhook'])->name('b2brouter.webhook');

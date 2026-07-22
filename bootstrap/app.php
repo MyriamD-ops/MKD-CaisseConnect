@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->validateCsrfTokens(except: [
             'stripe/webhook',
+            'b2brouter/webhook',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

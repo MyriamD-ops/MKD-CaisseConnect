@@ -15,7 +15,7 @@ class Facture extends Model
         'montant_ht', 'montant_tva', 'montant_ttc',
         'date_emission', 'date_echeance', 'statut',
         'format', 'pdf_path', 'stripe_payment_intent',
-        'transmitted_at',
+        'transmitted_at', 'b2brouter_id', 'b2brouter_status',
     ];
 
     protected $casts = [
