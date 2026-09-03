@@ -2,8 +2,18 @@
 import './bootstrap';
 import '../css/app.css';
 import { createRoot } from 'react-dom/client';
-import { createInertiaApp } from '@inertiajs/react';
+import { createInertiaApp, router } from '@inertiajs/react';
+import OfflineToast from './Components/OfflineToast';
 import { syncVentes } from './utils/sync';
+
+router.on('before', (event) => {
+    const destination = new URL(event.detail.visit.url, window.location.origin);
+
+    if (!navigator.onLine && destination.pathname !== '/sales/create') {
+        event.preventDefault();
+        window.dispatchEvent(new CustomEvent('offline-navigation'));
+    }
+});
 
 // Synchronisation automatique au retour de la connexion
 let syncTimeout;
@@ -34,6 +44,11 @@ createInertiaApp({
         return pages[`./Pages/${name}.jsx`];
     },
     setup({ el, App, props }) {
-        createRoot(el).render(<App {...props} />);
+        createRoot(el).render(
+            <>
+                <App {...props} />
+                <OfflineToast />
+            </>
+        );
     },
 });
