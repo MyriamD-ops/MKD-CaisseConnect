@@ -80,16 +80,19 @@ class SaleController extends Controller
                 }
             }
 
-            // Créer la vente
-            $vente = Vente::create([
-                'id_utilisateur' => auth()->id(),
-                'montant_total' => collect($validated['items'])->sum(function ($item) {
-                    return $item['quantite'] * $item['prix_unitaire'];
-                }),
-                'moyen_paiement' => $validated['moyen_paiement'],
-                'statut' => 'Terminée',
-                'date_vente' => now(),
-            ]);
+            // Créer la vente (ou récupérer si rejeu avec même request_id)
+            $vente = Vente::updateOrCreate(
+                ['request_id' => $validated['request_id'] ?? null],
+                [
+                    'id_utilisateur' => auth()->id(),
+                    'montant_total' => collect($validated['items'])->sum(function ($item) {
+                        return $item['quantite'] * $item['prix_unitaire'];
+                    }),
+                    'moyen_paiement' => $validated['moyen_paiement'],
+                    'statut' => 'Terminée',
+                    'date_vente' => now(),
+                ]
+            );
             
             \Log::info('Vente créée:', ['id' => $vente->id_vente]);
 
@@ -105,10 +108,10 @@ class SaleController extends Controller
                     'remise' => 0,
                 ]);
 
-                // Décrémenter le stock sans jamais descendre sous 0
-                $produit = Produit::find($item['id_produit']);
-                $nouveauStock = max(0, $produit->stock_actuel - $item['quantite']);
-                $produit->update(['stock_actuel' => $nouveauStock]);
+                // Décrémenter le stock avec verrou pessimiste pour éviter race condition
+                Produit::where('id_produit', $item['id_produit'])
+                    ->lockForUpdate()
+                    ->decrement('stock_actuel', $item['quantite']);
                 
                 \Log::info('Stock mis à jour pour produit:', ['id' => $item['id_produit']]);
             }

@@ -135,8 +135,9 @@ export async function syncVentes() {
                     prix_unitaire: article.prix_unitaire
                 }));
 
-                // Envoyer la vente au serveur
+                // Envoyer la vente au serveur avec request_id pour idempotence
                 await axios.post('/sales', {
+                    request_id: crypto.randomUUID(),
                     items: items,
                     moyen_paiement: vente.mode_paiement
                 });

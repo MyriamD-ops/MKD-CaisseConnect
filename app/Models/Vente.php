@@ -13,6 +13,7 @@ class Vente extends Model
 
     protected $fillable = [
         'numero_vente',
+        'request_id',
         'id_utilisateur',
         'id_evenement',
         'id_client_pro',
