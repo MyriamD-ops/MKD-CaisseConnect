@@ -80,6 +80,7 @@ class DemoSeeder extends Seeder
                 'prix_base'    => $p['prix'],
                 'stock_actuel' => $p['stock'],
                 'categorie'    => $p['categorie'],
+                'code_barres'  => 'PRD-' . strtoupper(uniqid()),
                 'actif'        => true,
                 'created_at'   => now(),
                 'updated_at'   => now(),
