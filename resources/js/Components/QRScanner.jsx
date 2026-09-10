@@ -19,11 +19,13 @@ export default function QRScanner({ onScan, onClose }) {
         );
 
         qrScanner.render(
-            (decodedText) => {
+            (decodedText, decodedResult) => {
                 // QR code scanné avec succès
-                console.log('✅ QR scanné:', decodedText);
+                // decodedResult = { text: "...", format: "QR_CODE" }
+                const qrText = decodedResult?.text || decodedText;
+                console.log('✅ QR scanné:', qrText);
                 qrScanner.clear();
-                onScan(decodedText);
+                onScan(qrText);
             },
             (error) => {
                 // Erreur de scan (normal pendant le scan)
